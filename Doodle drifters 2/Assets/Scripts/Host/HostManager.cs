@@ -100,7 +100,7 @@ public class HostManager : MonoBehaviour
 
             var player = _currentRoom.Players.ContainsKey(playerId) ? _currentRoom.Players[playerId] : null;
             if (player != null)
-                GameLogger.Log($"Player {player.Name} disconnected");
+                GameLogger.Info($"Player {player.Name} disconnected");
         }
     }
 
@@ -180,7 +180,7 @@ public class HostManager : MonoBehaviour
                     });
                     _server.Broadcast("playerConnectionChanged", reconnectJson);
                     UI.UpdatePlayerConnectionStatus(request.playerId, true);
-                    GameLogger.Log($"Player {normalizedName} reconnected");
+                    GameLogger.Info($"Player {normalizedName} reconnected");
                 }
                 else if (Config.DrawOwnCar)
                 {
@@ -210,7 +210,7 @@ public class HostManager : MonoBehaviour
                     if (playerCount == 1 || string.IsNullOrEmpty(_leaderName))
                         _leaderName = normalizedName;
 
-                    GameLogger.Log($"Player {normalizedName} joined");
+                    GameLogger.Info($"Player {normalizedName} joined");
                 }
             }
         }
@@ -266,7 +266,7 @@ public class HostManager : MonoBehaviour
                 // Update host UI
                 UI.ShowDrawingPhase(_currentRoom.GameState.Round);
 
-                GameLogger.Log("Game started");
+                GameLogger.Info("Game started");
                 SendResponse(connectionId, true);
             }
             else
@@ -298,7 +298,7 @@ public class HostManager : MonoBehaviour
             // Analyze image with AI
             OpenAIService.Instance.AnalyzeDrawing(request.drawingBase64, (itemLabel) =>
             {
-                GameLogger.Log($"Analyzed image for {player.Name}: {itemLabel}");
+                GameLogger.Info($"Analyzed image for {player.Name}: {itemLabel}");
 
                 if (_currentRoom.GameState.SubmitDrawing(request.playerId, request.drawingBase64, itemLabel))
                 {
@@ -438,7 +438,7 @@ public class HostManager : MonoBehaviour
                 UI.RemovePlayerFromLobby(request.playerId);
                 UpdateLobbyStatus();
 
-                GameLogger.Log($"Player {result.playerName} left");
+                GameLogger.Info($"Player {result.playerName} left");
                 SendResponse(connectionId, true);
             }
             else
@@ -532,7 +532,7 @@ public class HostManager : MonoBehaviour
                 updateMsg.positionsJson = SerializePositions(_currentRoom.GameState.Positions);
                 _server.Broadcast("updateState", JsonUtility.ToJson(updateMsg));
                 UI.ShowGameOver(_currentRoom.GameState.Positions);
-                GameLogger.Log("Game finished");
+                GameLogger.Info("Game finished");
                 break;
 
             default:
@@ -649,7 +649,7 @@ public class HostManager : MonoBehaviour
         var timerMsg = new TimerStartMessage { phase = "drawing", seconds = Config.DrawingTimerSeconds };
         _server.Broadcast("timerStart", JsonUtility.ToJson(timerMsg));
         _activeTimer = StartCoroutine(RunTimer(Config.DrawingTimerSeconds, OnDrawingTimerExpired));
-        GameLogger.Log($"Drawing timer started: {Config.DrawingTimerSeconds}s");
+        GameLogger.Info($"Drawing timer started: {Config.DrawingTimerSeconds}s");
     }
 
     private void StartVotingTimer()
@@ -658,7 +658,7 @@ public class HostManager : MonoBehaviour
         var timerMsg = new TimerStartMessage { phase = "voting", seconds = Config.VotingTimerSeconds };
         _server.Broadcast("timerStart", JsonUtility.ToJson(timerMsg));
         _activeTimer = StartCoroutine(RunTimer(Config.VotingTimerSeconds, OnVotingTimerExpired));
-        GameLogger.Log($"Voting timer started: {Config.VotingTimerSeconds}s");
+        GameLogger.Info($"Voting timer started: {Config.VotingTimerSeconds}s");
     }
 
     private void StopTimer()
@@ -684,7 +684,7 @@ public class HostManager : MonoBehaviour
 
     private void OnDrawingTimerExpired()
     {
-        GameLogger.Log("Drawing timer expired");
+        GameLogger.Info("Drawing timer expired");
         if (_currentRoom.GameState.Status == GameState.Phase.Drawing)
         {
             AdvanceToVoting();
@@ -693,7 +693,7 @@ public class HostManager : MonoBehaviour
 
     private void OnVotingTimerExpired()
     {
-        GameLogger.Log("Voting timer expired");
+        GameLogger.Info("Voting timer expired");
         if (_currentRoom.GameState.Status == GameState.Phase.Voting)
         {
             _server.Broadcast("timerStop", "{}");
@@ -726,12 +726,12 @@ public class HostManager : MonoBehaviour
 
     private void LogVotingResults(List<VotingResult> results)
     {
-        GameLogger.Log("=== VOTING RESULTS ===");
+        GameLogger.Info("=== VOTING RESULTS ===");
         foreach (var r in results)
         {
             string name = _currentRoom.Players.ContainsKey(r.PlayerId)
                 ? _currentRoom.Players[r.PlayerId].Name : r.PlayerId;
-            GameLogger.Log($"{name}: {r.VotesReceived} votes, score {r.PreviousScore} -> {r.NewScore}");
+            GameLogger.Info($"{name}: {r.VotesReceived} votes, score {r.PreviousScore} -> {r.NewScore}");
         }
     }
 

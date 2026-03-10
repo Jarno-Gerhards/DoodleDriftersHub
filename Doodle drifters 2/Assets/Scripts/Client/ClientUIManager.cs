@@ -168,16 +168,17 @@ public class ClientUIManager : MonoBehaviour
 
         if (drawings == null || VotingCardPrefab == null || VotingGridParent == null) return;
 
+        int cardNumber = 1;
         foreach (var drawing in drawings)
         {
             // Don't show own drawing
-            if (drawing.playerId == myPlayerId) continue;
+            if (drawing.PlayerId == myPlayerId) continue;
 
             GameObject card = Instantiate(VotingCardPrefab, VotingGridParent);
             var cardUI = card.GetComponent<VotingCardUI>();
             if (cardUI != null)
             {
-                cardUI.Setup(drawing.playerId, drawing.playerName, drawing.drawingBase64);
+                cardUI.Setup(cardNumber, drawing);
             }
 
             // Add vote button listener
@@ -185,9 +186,10 @@ public class ClientUIManager : MonoBehaviour
             if (btn == null) btn = card.GetComponentInChildren<Button>();
             if (btn != null)
             {
-                string targetId = drawing.playerId;
+                string targetId = drawing.PlayerId;
                 btn.onClick.AddListener(() => manager.SubmitVote(targetId));
             }
+            cardNumber++;
         }
     }
 
