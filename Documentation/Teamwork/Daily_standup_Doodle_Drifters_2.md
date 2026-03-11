@@ -22,4 +22,14 @@ Elke dag worden dezelfde 3 vragen gesteld. Wat heb je gisteren gedaan, wat ga je
 | Jarno   | Bezig geweest met PCG sidequest.                                                                                                  | Werken aan content in de game.                                                             | Voelt zich een beetje beroerd.                            |
 | Vincent | Gewerkt aan TTS.                                                                                                                  | Verder werken aan een TTS voor de game.                                                    | -                                                         |
 
+#### 11/03/2026
+
+|         | Gedaan                                                                                                                            | Doen                                                                                       | Obstakels                                                 |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------- |
+| Bart    | Verder gewerkt aan de model tweaken voor prototype en in Unity geplaatst. |   Model werkt nog niet goed dus dat verbeteren.                                                  | - |
+| Daan    |                    -                                  | - | Afwezig                          |
+| Elias   | -                                                                                                                                 | -                                                                                          | Afwezig                                                   |
+| Jarno   | Werken aan content in de game                                                                                                  | Werken aan content in de game.                                                             | Beetje tijdsdruk maar komt wel goed.                            |
+| Vincent | TTS in Unity werkende gekregen.                                                                                                                  | Kijken hoe de TTS gecustomized kan worden.                                                    | -                                                         |
+
 
