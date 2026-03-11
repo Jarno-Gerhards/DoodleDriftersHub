@@ -7,6 +7,7 @@ public class DoodleInference : MonoBehaviour
     public Texture2D inputImage;
 
     private Worker worker;
+    private string[] classLabels = new string[] { "Bandage" , "Compass" , "Hammer" , "Ladder" , "Lantern" , "Sword" };
 
     void Start()
     {
@@ -35,7 +36,7 @@ public class DoodleInference : MonoBehaviour
         
         output.Dispose();
 
-        Debug.Log("Predicted class: " + predictedClass);
+        Debug.Log("Predicted class: " + classLabels[predictedClass]);
 
         inputTensor.Dispose();
         output.Dispose();
@@ -56,7 +57,7 @@ public class DoodleInference : MonoBehaviour
         {
             for (int x = 0; x < width; x++)
             {
-                float grayscale = pixels[y * width + x].grayscale;
+                float grayscale = 1f - pixels[y * width + x].grayscale;
                 tensor[0, y, x, 0] = grayscale;
             }
         }
