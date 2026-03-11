@@ -13,6 +13,7 @@ public class HostManager : MonoBehaviour
 {
     [Header("References")]
     public HostUIManager UI;
+    public GameServer Server;
 
     [Header("Config")]
     public GameConfig Config;
@@ -42,7 +43,7 @@ public class HostManager : MonoBehaviour
 
     private void Start()
     {
-        _server = new GameServer();
+        _server = Server;
         _roomManager = new RoomManager();
 
         _server.OnClientConnected += OnClientConnected;

@@ -15,7 +15,7 @@ using UnityEngine;
 /// 
 /// Message protocol: 4-byte little-endian length prefix + UTF-8 JSON string.
 /// </summary>
-public class GameServer
+public class GameServer : MonoBehaviour
 {
     public event Action<int> OnClientConnected;
     public event Action<int> OnClientDisconnected;
