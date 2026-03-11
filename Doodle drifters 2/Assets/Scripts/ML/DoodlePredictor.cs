@@ -1,29 +1,29 @@
 using UnityEngine;
 using Unity.InferenceEngine;
+using TMPro;
 
 public class DoodleInference : MonoBehaviour
 {
     public ModelAsset modelAsset;
     public Texture2D inputImage;
+    public DoodleDrawer drawingInput;
+    public TextMeshProUGUI resultText;
 
     private Worker worker;
     private string[] classLabels = new string[] { "Bandage" , "Compass" , "Hammer" , "Ladder" , "Lantern" , "Sword" };
 
     void Start()
     {
-        RunModel();
+        //RunModel();
+        Model model = ModelLoader.Load(modelAsset);
+        worker = new Worker(model, BackendType.GPUCompute);
     }
 
-    void RunModel()
+    public void Predict()
     {
-        // Load the model
-        Model model = ModelLoader.Load(modelAsset);
-
-        // Create worker
-        worker = new Worker(model, BackendType.GPUCompute);
-
+        Texture2D drawing = drawingInput.GetTexture();
         // Convert image to tensor
-        Tensor<float> inputTensor = TextureToTensor(inputImage);
+        Tensor<float> inputTensor = TextureToTensor(drawing);
 
         // Run inference
         worker.Schedule(inputTensor);
@@ -36,7 +36,8 @@ public class DoodleInference : MonoBehaviour
         
         output.Dispose();
 
-        Debug.Log("Predicted class: " + classLabels[predictedClass]);
+        //Debug.Log("Predicted class: " + classLabels[predictedClass]);
+        resultText.text = $"I think this is a {classLabels[predictedClass]}";
 
         inputTensor.Dispose();
         output.Dispose();
