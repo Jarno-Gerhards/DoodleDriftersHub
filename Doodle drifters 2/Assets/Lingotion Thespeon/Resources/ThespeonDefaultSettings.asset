@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e85b6dfb209bb944da141bce5f041e7b, type: 3}
+  m_Name: ThespeonDefaultSettings
+  m_EditorClassIdentifier: lingotion.thespeon.Runtime::Lingotion.Thespeon.Core.ThespeonDefaultSettings
+  PreferredBackendType: 512
+  DesktopTargetBudgetTime: 0.005
+  DesktopTargetFrameTime: 0.0167
+  MobileTargetBudgetTime: 0.01
+  MobileTargetFrameTime: 0.0333
+  BufferSeconds: 0.5
+  UseAdaptiveScheduling: 1
+  OvershootMargin: 1.4
+  MaxSkipLayers: 20
+  ModuleType: 4
+  FallbackEmotion: 24
+  FallbackLanguageCode: eng
+  Verbosity: 2

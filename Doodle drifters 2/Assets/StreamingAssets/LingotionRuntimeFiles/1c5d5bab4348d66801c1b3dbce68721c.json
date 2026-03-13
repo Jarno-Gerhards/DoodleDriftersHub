@@ -1,0 +1,594 @@
+{
+  "type": "lara",
+  "tags": {
+    "module_type": "mid"
+  },
+  "model_options": {
+    "languages": [
+      {
+        "languagekey": 1,
+        "emotions": [
+          {
+            "emotionkey": 1,
+            "total_rows": 380,
+            "total_chars": 33279
+          },
+          {
+            "emotionkey": 2,
+            "total_rows": 328,
+            "total_chars": 30505
+          },
+          {
+            "emotionkey": 3,
+            "total_rows": 294,
+            "total_chars": 28953
+          },
+          {
+            "emotionkey": 4,
+            "total_rows": 352,
+            "total_chars": 30268
+          },
+          {
+            "emotionkey": 5,
+            "total_rows": 278,
+            "total_chars": 27969
+          },
+          {
+            "emotionkey": 6,
+            "total_rows": 293,
+            "total_chars": 30040
+          },
+          {
+            "emotionkey": 7,
+            "total_rows": 332,
+            "total_chars": 31267
+          },
+          {
+            "emotionkey": 8,
+            "total_rows": 253,
+            "total_chars": 30029
+          },
+          {
+            "emotionkey": 9,
+            "total_rows": 313,
+            "total_chars": 31596
+          },
+          {
+            "emotionkey": 10,
+            "total_rows": 299,
+            "total_chars": 27336
+          },
+          {
+            "emotionkey": 11,
+            "total_rows": 344,
+            "total_chars": 35075
+          },
+          {
+            "emotionkey": 12,
+            "total_rows": 308,
+            "total_chars": 29798
+          },
+          {
+            "emotionkey": 13,
+            "total_rows": 262,
+            "total_chars": 25250
+          },
+          {
+            "emotionkey": 14,
+            "total_rows": 283,
+            "total_chars": 30101
+          },
+          {
+            "emotionkey": 15,
+            "total_rows": 459,
+            "total_chars": 32221
+          },
+          {
+            "emotionkey": 16,
+            "total_rows": 382,
+            "total_chars": 31563
+          },
+          {
+            "emotionkey": 17,
+            "total_rows": 227,
+            "total_chars": 27002
+          },
+          {
+            "emotionkey": 18,
+            "total_rows": 348,
+            "total_chars": 35323
+          },
+          {
+            "emotionkey": 19,
+            "total_rows": 285,
+            "total_chars": 29714
+          },
+          {
+            "emotionkey": 20,
+            "total_rows": 250,
+            "total_chars": 26270
+          },
+          {
+            "emotionkey": 21,
+            "total_rows": 240,
+            "total_chars": 25057
+          },
+          {
+            "emotionkey": 22,
+            "total_rows": 303,
+            "total_chars": 25007
+          },
+          {
+            "emotionkey": 23,
+            "total_rows": 344,
+            "total_chars": 35010
+          },
+          {
+            "emotionkey": 24,
+            "total_rows": 290,
+            "total_chars": 31568
+          },
+          {
+            "emotionkey": 25,
+            "total_rows": 317,
+            "total_chars": 34026
+          },
+          {
+            "emotionkey": 26,
+            "total_rows": 328,
+            "total_chars": 35750
+          },
+          {
+            "emotionkey": 27,
+            "total_rows": 271,
+            "total_chars": 24734
+          },
+          {
+            "emotionkey": 28,
+            "total_rows": 327,
+            "total_chars": 32644
+          },
+          {
+            "emotionkey": 29,
+            "total_rows": 282,
+            "total_chars": 31312
+          },
+          {
+            "emotionkey": 30,
+            "total_rows": 275,
+            "total_chars": 28748
+          },
+          {
+            "emotionkey": 31,
+            "total_rows": 252,
+            "total_chars": 30075
+          },
+          {
+            "emotionkey": 32,
+            "total_rows": 253,
+            "total_chars": 29144
+          },
+          {
+            "emotionkey": 33,
+            "total_rows": 352,
+            "total_chars": 34348
+          }
+        ]
+      }
+    ]
+  },
+  "character": {
+    "actoruserkey": 21,
+    "charactername": "Aaron Archer",
+    "characterkey": 1
+  },
+  "languages": [
+    {
+      "iso639_2": "eng",
+      "iso639_3": null,
+      "glottocode": null,
+      "customdialect": null,
+      "iso3166_1": "US",
+      "iso3166_2": "US-IN",
+      "nameinenglish": "English",
+      "autonym": "English",
+      "languagekey": 1
+    }
+  ],
+  "emotionsets": [
+    {
+      "emotionsetkey": 1,
+      "emotionsetname": "Ecstasy",
+      "emotionsetguide": "Similar words: Delighted, Giddy. Typical sensations: Abundance of energy. What is Ecstacy telling you: This is better than I imagined. Example: You are feeling happiness that you have only imagined in your wildest dreams. Things cannot be better than it is right now and life is perfect in this moment."
+    },
+    {
+      "emotionsetkey": 2,
+      "emotionsetname": "Admiration",
+      "emotionsetguide": "Similar words: Connected, Proud. Typical sensations: Glowing. What is Admiration telling you: I want to support the person or thing. Example: You are meeting your hero in life and you want to show how much you appreciate him or her. Nothing your hero says or does is bad because your hero is absolutely perfect."
+    },
+    {
+      "emotionsetkey": 3,
+      "emotionsetname": "Terror",
+      "emotionsetguide": "Similar words: Alarmed, Petrified. Typical sensations: Hard to breathe. What is Terror telling you: There is big danger. Example: You are so afraid you can hardly breathe. You fear for your own life or the life of your loved ones. Someone is hunting you and your heart is racing. You keep looking around and trying to find the person who is hunting you and cannot find the person, but you know person is close and can kill you any second now."
+    },
+    {
+      "emotionsetkey": 4,
+      "emotionsetname": "Amazement",
+      "emotionsetguide": "Similar words: Inspired, WOWed. Typical sensations: Heart stopping. What is Amazement telling you: Something is totally unexpected. Example: You are exploring an abondoned old building and entering a room filled with old antiques and big chest containing gold and jewlery. You recognize one of the items as a historical important object that was lost during a recent war."
+    },
+    {
+      "emotionsetkey": 5,
+      "emotionsetname": "Grief",
+      "emotionsetguide": "Similar words: Heartbroken, Distraught. Typical sensations: Hard to get up. What is Grief telling you: Love is lost. Example: You just found out that your child or close family member was killed in a traffic accident an hour ago."
+    },
+    {
+      "emotionsetkey": 6,
+      "emotionsetname": "Loathing",
+      "emotionsetguide": "Similar words: Disturbed, Horrified. Typical sensations: Bileous & vehement. What is Loathing telling you: Fundamental values are violated. Example: You meet a horrible person that take advantage of people in need, by taking their money in exchange for false promises and then dumps them in the middle of the desert so they die of thirst."
+    },
+    {
+      "emotionsetkey": 7,
+      "emotionsetname": "Rage",
+      "emotionsetguide": "Similar words: Overwhelmed, Furious. Typical sensations: Pounding heart, see red. What is Rage telling you: I am blocked from something vital. Example: Somebody has stolen your most valuable and prized possession. Not only have you lost your possession, but the thief claims in front of the police that he or she has always been the owner and the police believes the thief and thinks you are a liar."
+    },
+    {
+      "emotionsetkey": 8,
+      "emotionsetname": "Vigilance",
+      "emotionsetguide": "Similar words: Intense, Focused. Typical sensations: Highly focused. What is Vigilance telling you: Something big is coming. Example: Your small child has climed high up a tree and is currently climbing down on unsteady legs and the child has almost slipped out of the tree a few times. You stand below the tree ready to catch your child in case the child loses the grip and falls from the tree."
+    },
+    {
+      "emotionsetkey": 9,
+      "emotionsetname": "Joy",
+      "emotionsetguide": "Similar words: Excited, Pleased. Typical sensations: Sense of energy and possibility. What is Joy telling you: Life is going well. Example: You are happy. Nobody and no comment ever brings you down and you answer everbody happily and perky. There is like a lite a happy spring in your answer and they are often upbeat. You talk with a smile on you face and like the topic that you are discussing. You would honestly also like to hear more and discuss this topic further."
+    },
+    {
+      "emotionsetkey": 10,
+      "emotionsetname": "Trust",
+      "emotionsetguide": "Similar words: Accepting, Safe. Typical sensations: Warm. What is Joy telling you: This is safe. Example: You trust someone not to hurt you. That person will be loyal to you and not abuse your relationship or do something behind you back"
+    },
+    {
+      "emotionsetkey": 11,
+      "emotionsetname": "Fear",
+      "emotionsetguide": "Similar words: Stressed, Scared. Typical sensations: Agitated. What is Fear telling you: Something I care about is at risk. Example: You suddenly remember that tomorrow you will present something infront of a lot of people. You have totally forgotten to prepare for the presentation and you feel that you will make a fool out of yourself tomorrow during the presentation."
+    },
+    {
+      "emotionsetkey": 12,
+      "emotionsetname": "Surprise",
+      "emotionsetguide": "Similar words: Shocked, Unexpected. Typical sensations: Heart pounding. What is Surprise telling you: Something new happened. Example: You come home one day as any other day and when you enter the living room suddenly your friends and family jumps out and screams surprise because they have arranged a surprise birthday party for you."
+    },
+    {
+      "emotionsetkey": 13,
+      "emotionsetname": "Sadness",
+      "emotionsetguide": "Similar words: Bummed, Loss. Typical sensations: Heavy. What is Sadness telling you: Love is going away. Guide: You are feeling blue. Whatever anybody says you only see the negative side. Nothing is fun and everything is sooo much work and effort. It feels like there is hardly any reason go out of bed every morning. Nothing good will happen today."
+    },
+    {
+      "emotionsetkey": 14,
+      "emotionsetname": "Disgust",
+      "emotionsetguide": "Similar words: Distrust, Rejecting. Typical sensations: Bitter & unwanted. What is Disgust telling you: Wrong; rules are violated. Example: You are sitting in a restaurant when you see the person at the table next to you open a box, take out a cockroach and place it their own food. The person then starts screaming at the waiters that they will not to pay because there is a disgusting bug in the food."
+    },
+    {
+      "emotionsetkey": 15,
+      "emotionsetname": "Anger",
+      "emotionsetguide": "Similar words: Mad, Fierce. Typical sensations: Strong and heated. What is Anger telling you: Something is in the way. Example: You are currently shopping in the city and need to leave because you have an important meeting that you cannot miss. When you reach you car you see that somebody has double parked and blocked your car and thereby prevented you from leaving. Your anger rises as you realize that the idiot that has double parked has left their car and is nowhere in sight which means that you will miss your important meeting."
+    },
+    {
+      "emotionsetkey": 16,
+      "emotionsetname": "Anticipation",
+      "emotionsetguide": "Similar words: Curious, Considering. Typical sensations: Alert and exploring. What is Anticipation telling you: Change is happening. Example: You are waiting for something that you really want. Somebody has promised you something that you like and they will soon come and deliver it. You can hardly wait to get it. It is something you have been waiting for a long time and been daydreaming about."
+    },
+    {
+      "emotionsetkey": 17,
+      "emotionsetname": "Serenity",
+      "emotionsetguide": "Similar words: Calm, Peaceful. Typical sensations: Relaxed, open hearted. What is Serenity telling you: Something is happening that is essential, pure, or purposeful. Example: You are spending time with your loved ones and you feel no stress for the time, money or anything else. You feel that your are satisfied with life right now and everything is OK."
+    },
+    {
+      "emotionsetkey": 18,
+      "emotionsetname": "Acceptance",
+      "emotionsetguide": "Similar words: Open, Welcoming. Typical sensations: Peaceful. What is Acceptance telling you: We are in this together. Example: Your group of friends has invited a new person to the group. After talking to the new person you find that the person shares similar values and you believe that the person would fit well in your group."
+    },
+    {
+      "emotionsetkey": 19,
+      "emotionsetname": "Apprehension",
+      "emotionsetguide": "Similar words: Worried, Anxious. Typical sensations: Cannot relax. What is Apprehension telling you: There could be a problem. Example: During work you hear your boss or manager say a negative comment about something related to you or your work, then an hour later you are called into a non-scheduled meeting with your manager. While you are walking to the meeting you are worried what the meeting is about and how it could impact you negatively."
+    },
+    {
+      "emotionsetkey": 20,
+      "emotionsetname": "Distraction",
+      "emotionsetguide": "Similar words: Scattered, Uncertain. Typical sensations: Unfocused. What is Distraction telling you: I do not know what to prioritize. Example: You are bit confused. You cannot fully remember what somebody just asked you because you were thinking about something else at the time. You only hear part of what is being said and when you answer you are very uncertain if you are giving the right answer, but you are so focused on something else so you answer automatically without any deeper thought, meaning or feeling."
+    },
+    {
+      "emotionsetkey": 21,
+      "emotionsetname": "Pensiveness",
+      "emotionsetguide": "Similar words: Blue, Unhappy. Typical sensations: Slow & disconnected. What is Pensiveness telling you? Love is distant. Example: You feel like you only have bad luck and when somebody suggests doing different activities together you feel that all suggestions are boring. There is something wrong with each suggestion that takes all the fun out of it."
+    },
+    {
+      "emotionsetkey": 22,
+      "emotionsetname": "Boredom",
+      "emotionsetguide": "Similar words: Tired, Uninterested. Typical sensations: Drained, low energy. What is Boredom telling you: The potential for this situation is not being met. Example: You cannot think of anything fun to do right now. Everything you are able to do or allowed to do right now is trivial and gives you no meaning in life."
+    },
+    {
+      "emotionsetkey": 23,
+      "emotionsetname": "Annoyance",
+      "emotionsetguide": "Similar words: Frustrated, Prickly. Typical sensations: Slightly agitated. What is Annoyance telling you: Something is unresolved. Example: Someone keeps doing something that irritates you all the time and it interrupts your thoughts. Even when you ask them to stop they continue."
+    },
+    {
+      "emotionsetkey": 24,
+      "emotionsetname": "Interest",
+      "emotionsetguide": "Similar words: Open, Looking. Typical sensations: Mild sense of curiosity. What is Interest telling you: Something useful might come. Example: During a casual conversation where you are not paying attention so much, somebody suddenly states some news about one of your favourite tv-show, movie or game that you did not know. You immediately become focused on the news and starts asking detailed questions about the topic."
+    },
+    {
+      "emotionsetkey": 25,
+      "emotionsetname": "Emotionless",
+      "emotionsetguide": "Similar words: Detached, Unemotional, Apathetic. Typical sensations: No sensation or feeling at all. What is Emotionless telling you: This does not affect me in any way. Example: Two acedemic scholars have a discussion about a tiny little detail that you have no understanding of all and cannot see how it has any impact on anybodys life. The two scholars suddenly ask your opinion but you simple state emotionless that you have no opinion on the matter."
+    },
+    {
+      "emotionsetkey": 26,
+      "emotionsetname": "Contempt",
+      "emotionsetguide": "Similar words: Distaste, Disdain, Despisement, Scorn. Typical senstions: Angry and sad at the same time. Example: You are disgusted and angry at the person your are talking to right now. You really want him or her to leave and never enter your life again. If possible you avoid answering anything the person that disgusts you. When you answer it is with an slightly aggressive voice while looking down on the person and you just want this dicussion to end."
+    },
+    {
+      "emotionsetkey": 27,
+      "emotionsetname": "Remorse",
+      "emotionsetguide": "Similar words: Guilt, Regret, Shame. Typical senstions: Disgusted and sad at the same time. Example: You are disgusted by your own behaviour and it makes you sad that you acted that way. You wish that you had not done or said what you just did. You truly wish that you could go back in time and change what you did or stop your self from doing what you did that made you feel this way. You have for example deeply hurt somebodys feeling and it makes you feel like you are a bad person."
+    },
+    {
+      "emotionsetkey": 28,
+      "emotionsetname": "Disapproval",
+      "emotionsetguide": "Similar words: Dislike, Displeasure, Disfavour. Typical sensations: Sad and surprised at the same time. Example: Somebody says something that goes against your core values. You feel that you cannot support that comment or the person that made the statement. You wish either to change the person or stop interacting with the person."
+    },
+    {
+      "emotionsetkey": 29,
+      "emotionsetname": "Awe",
+      "emotionsetguide": "Similar words: Astonishment, Wonder. Typical sensations: Surprise and with a bit of fear of it being too vast at the same time. Example: You meet your hero and you are overwhelmed with how great that person is, but you are afraid to talk to your hero in case he or she should see you as a blabbering fool."
+    },
+    {
+      "emotionsetkey": 30,
+      "emotionsetname": "Submission",
+      "emotionsetguide": "Similar words: Obedience, Subordination, Compliance. Typical sensations: You fear doing wrong but at same time completely trust instructions from an authority. Example: An dominant or authorative person gives you instructions and you are afraid of not being able to fulfil the instructions or deliver properly according to the instructions. You never question the instructions since you belive in your heart that the dominant or authorative person is always right and you must be wrong if you have a different thought or idea."
+    },
+    {
+      "emotionsetkey": 31,
+      "emotionsetname": "Love",
+      "emotionsetguide": "Similar words: Cherish, Treasure. Typical sensations: Joy with an implicit trust at the same time. Example: You find somebody that you want to talk to and be with all the time. Everytime you are near that person you feel an inner joy and you want to be with that person so much that you seldom question the things he or she does."
+    },
+    {
+      "emotionsetkey": 32,
+      "emotionsetname": "Optimism",
+      "emotionsetguide": "Similar words: Sanguinity, Cheerfulness, Hopeful, Upbeat. Typical sensations: Joyful and anticipate further joy in the future. Example: What ever somebody says to you, you always see the bright side of the comment ignore any negative thoughts and think that all is going well. Your replies are always sunny and bright. Whatever you are trying to do it will work out for the best and you do not concern yourself with risks of something going wrong."
+    },
+    {
+      "emotionsetkey": 33,
+      "emotionsetname": "Aggressiveness",
+      "emotionsetguide": "Similar words: Pushy, Fierce, Self-assertive. Typical sensations: Driven by anger to a specific goal that you anticipate to reach. Example: When you meet a person with different views you try to crush their views using a strong and authorative voice and you refuse to yield to any counter arguments. You assume that you are absolute right and others who do not agree with you must be removed out of the way for you to reach your goal."
+    }
+  ],
+  "phonemes_table": {
+    "format_version": 11,
+    "compatibility_hash": "f0f0f64c9083c822e7ae8dd59066d6d0",
+    "symbol_to_id": {
+      "a": 1,
+      "b": 2,
+      "c": 3,
+      "d": 4,
+      "e": 5,
+      "f": 6,
+      "h": 7,
+      "i": 8,
+      "j": 9,
+      "k": 10,
+      "l": 11,
+      "m": 12,
+      "n": 14,
+      "o": 15,
+      "p": 16,
+      "q": 17,
+      "r": 18,
+      "s": 19,
+      "t": 20,
+      "u": 21,
+      "v": 22,
+      "w": 23,
+      "x": 24,
+      "y": 25,
+      "z": 26,
+      "æ": 27,
+      "ç": 28,
+      "ð": 29,
+      "ø": 30,
+      "ħ": 31,
+      "ŋ": 32,
+      "œ": 33,
+      "ǀ": 34,
+      "ǁ": 35,
+      "ǂ": 36,
+      "ǃ": 37,
+      "ɐ": 38,
+      "ɑ": 39,
+      "ɒ": 40,
+      "ɓ": 41,
+      "ɔ": 42,
+      "ɕ": 43,
+      "ɖ": 44,
+      "ɗ": 45,
+      "ɘ": 46,
+      "ə": 47,
+      "ɚ": 48,
+      "ɛ": 49,
+      "ɜ": 50,
+      "ɞ": 51,
+      "ɟ": 52,
+      "ɠ": 53,
+      "ɡ": 54,
+      "ɢ": 55,
+      "ɣ": 56,
+      "ɤ": 57,
+      "ɥ": 58,
+      "ɦ": 59,
+      "ɧ": 60,
+      "ɨ": 61,
+      "ɪ": 62,
+      "ɫ": 63,
+      "ɬ": 64,
+      "ɭ": 65,
+      "ɮ": 66,
+      "ɯ": 67,
+      "ɰ": 68,
+      "ɱ": 69,
+      "ɲ": 70,
+      "ɳ": 71,
+      "ɴ": 72,
+      "ɵ": 73,
+      "ɶ": 74,
+      "ɸ": 75,
+      "ɹ": 76,
+      "ɺ": 77,
+      "ɻ": 78,
+      "ɽ": 79,
+      "ɾ": 80,
+      "ʀ": 81,
+      "ʁ": 82,
+      "ʂ": 83,
+      "ʃ": 84,
+      "ʄ": 85,
+      "ʈ": 86,
+      "ʉ": 87,
+      "ʊ": 88,
+      "ʋ": 89,
+      "ʌ": 90,
+      "ʍ": 91,
+      "ʎ": 92,
+      "ʏ": 93,
+      "ʐ": 94,
+      "ʑ": 95,
+      "ʒ": 96,
+      "ʔ": 97,
+      "ʕ": 98,
+      "ʘ": 99,
+      "ʙ": 100,
+      "ʛ": 101,
+      "ʜ": 102,
+      "ʝ": 103,
+      "ʟ": 104,
+      "ʡ": 105,
+      "ʢ": 106,
+      "ʲ": 107,
+      "ˈ": 108,
+      "ˌ": 109,
+      "ː": 110,
+      "ˑ": 111,
+      "˞": 112,
+      "̃": 113,
+      "̩": 114,
+      "β": 115,
+      "θ": 116,
+      "χ": 117,
+      "ᵻ": 118,
+      "◌": 119,
+      "ⱱ": 120,
+      " ": 121,
+      "!": 122,
+      "(": 123,
+      ")": 124,
+      ",": 125,
+      ".": 126,
+      ":": 127,
+      ";": 128,
+      "?": 129,
+      "…": 130,
+      "⏸": 131,
+      "&": 132,
+      "‘": 133,
+      "£": 134,
+      "$": 135,
+      "@": 136,
+      "=": 137,
+      "%": 138,
+      "'": 139,
+      "’": 140,
+      "_": 141,
+      "-": 142,
+      "🜁": 143,
+      "⍰": 144,
+      "⏩": 145,
+      "⏪": 146
+    },
+    "vocab_size": 147
+  },
+  "phonemizer_setup": {
+    "modules": [
+      {
+        "iso639_2": "eng",
+        "base_module_id": "module-b29fd6d748df29d8f67087d4ceb1ec81-6e618052e5f4d47d63d03d6e608dfc3a-2948f8991e777c5a42df283efa0947e5",
+        "version": {
+          "major": 1,
+          "minor": 0,
+          "patch": 1
+        },
+        "properties": {
+          "performance": "mid"
+        }
+      }
+    ]
+  },
+  "files": [
+    {
+      "name": "index_converter",
+      "md5": "ab5d8a1ebe67fdb2df818fefd57e58eb",
+      "extension": "sentis"
+    },
+    {
+      "name": "vocoder_middle",
+      "md5": "8bd33fe1fa7f246a0021235cafcd1863",
+      "extension": "sentis"
+    },
+    {
+      "name": "decoder",
+      "md5": "9867193e28e1bf3e98b603bd53f1b8f2",
+      "extension": "sentis"
+    },
+    {
+      "name": "durpred",
+      "md5": "77e2f4a369aadba455b68a97215667e5",
+      "extension": "sentis"
+    },
+    {
+      "name": "encoder",
+      "md5": "f8ea4f0d63ab4d032c2482ff2f5a8caf",
+      "extension": "sentis"
+    },
+    {
+      "name": "vocoder_last",
+      "md5": "682b844d07de49cd14f747bdbdd7efcf",
+      "extension": "sentis"
+    },
+    {
+      "name": "chunk_slicer",
+      "md5": "0753880719d790c86360f6320cbfc369",
+      "extension": "sentis"
+    },
+    {
+      "name": "vocoder_first",
+      "md5": "8969d3d9488ab17de480cf2528442778",
+      "extension": "sentis"
+    },
+    {
+      "name": "durpred_mapper",
+      "md5": "5afdb7596d7f68e29ed51ed2ba5a479e",
+      "extension": "sentis"
+    },
+    {
+      "name": "metagraph",
+      "md5": "a0ae37b5b2a620ae57f798fb7962409a",
+      "extension": "metagraph"
+    }
+  ],
+  "createtime": "2026-03-04T11:54:22.49941",
+  "name": "e2d80418594746a0b4f932738c02bbc8",
+  "source_id": "e2d80418594746a0b4f932738c02bbc8",
+  "version": {
+    "major": 2,
+    "minor": 0,
+    "patch": 0
+  },
+  "platform": "Unity"
+}
