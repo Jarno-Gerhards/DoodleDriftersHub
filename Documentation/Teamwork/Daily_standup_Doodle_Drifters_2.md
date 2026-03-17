@@ -51,3 +51,13 @@ Elke dag worden dezelfde 3 vragen gesteld. Wat heb je gisteren gedaan, wat ga je
 | Elias   | -                                                                                                                                 | -                                                                                          | Afwezig                                                   |
 | Jarno   | Onderzoek naar verschillende PCG methodes.                                                                                                 | Content generation uitwerken.                                                             | -                            |
 | Vincent | Gewerkt aan onderzoek over TTS.                                                                                                         | Onderzzoek TTS af maken voor de showcase en werken aan een side quest.                                              | -                                                         |
+
+#### 17/03/2026
+
+|         | Gedaan                                                                                                                            | Doen                                                                                       | Obstakels                                                 |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------- |
+| Bart    | Onderzoek gedaan naar image generation. |   Implementeren image generation.                                                 | - |
+| Daan    | Onderzoek geschreven over Dungeons & Dragons.                                                  | Verder aan de GDD. | -                          |
+| Elias   | -                                                                                                                                 | -                                                                                          | Afwezig                                                   |
+| Jarno   | -                                                                                                | -                                                             | Afwezig                            |
+| Vincent | Gewerkt aan documenmtatie TTS.                                                                                                         | Proberen de TTS documentatie af te krijgen.                                              | -                                                         |
