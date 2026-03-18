@@ -18,6 +18,9 @@ using Unity.Burst;
 [RequireComponent(typeof(AudioSource))]
 public class TTS : MonoBehaviour
 {
+    [Header("Debug Sample (Legacy)")]
+    [SerializeField] private bool enableLegacySampleHotkey = false;
+
     private ThespeonComponent engine;
     private AudioSource audioSource;
     private List<float> audioData;
@@ -81,17 +84,64 @@ public class TTS : MonoBehaviour
 
     void Update()
     {
+        if (!enableLegacySampleHotkey)
+        {
+            return;
+        }
+
         if (Keyboard.current.spaceKey.wasPressedThisFrame || Keyboard.current.enterKey.wasPressedThisFrame)
         {
-            char pauseChar = (char)ControlCharacters.Pause;
-            List<ThespeonInputSegment> segments = new() {
-                new(inputLineStart + $"{pauseChar}", emotion: inputEmotionStart),
-                new(inputLineStory + $"{pauseChar}", emotion: inputEmotionStory),
-                new($"{pauseChar}" + inputLinePrompt, emotion: inputEmotionPrompt)
-            };
-            ThespeonInput input = new(segments, characterAsset.characterName, characterAsset.moduleType, defaultEmotion: Emotion.Joy, defaultLanguage: "", defaultDialect: "", speed: speed, loudness: loudness);
-            engine.Synthesize(input, sessionID: "SampleSynthesisSession");
+            SpeakStructuredSample();
         }
+    }
+
+    /// <summary>
+    /// Public helper to synthesize a single line of text from other gameplay scripts.
+    /// </summary>
+    public void SpeakText(string text, string sessionID = "OllamaSession", Emotion emotion = Emotion.Joy)
+    {
+        if (string.IsNullOrWhiteSpace(text))
+        {
+            LingotionLogger.Warning("SpeakText called with empty text.");
+            return;
+        }
+
+        if (engine == null || characterAsset == null)
+        {
+            LingotionLogger.Warning("TTS is not ready. Ensure character asset and components are initialized.");
+            return;
+        }
+
+        engine.TryPreloadCharacter(characterAsset.characterName, characterAsset.moduleType, runWarmup: true);
+
+        List<ThespeonInputSegment> segments = new()
+        {
+            new(text, emotion: emotion)
+        };
+
+        ThespeonInput input = new(
+            segments,
+            characterAsset.characterName,
+            characterAsset.moduleType,
+            defaultEmotion: emotion,
+            defaultLanguage: "",
+            defaultDialect: "",
+            speed: speed,
+            loudness: loudness);
+
+        engine.Synthesize(input, sessionID: sessionID);
+    }
+
+    private void SpeakStructuredSample()
+    {
+        char pauseChar = (char)ControlCharacters.Pause;
+        List<ThespeonInputSegment> segments = new() {
+            new(inputLineStart + $"{pauseChar}", emotion: inputEmotionStart),
+            new(inputLineStory + $"{pauseChar}", emotion: inputEmotionStory),
+            new($"{pauseChar}" + inputLinePrompt, emotion: inputEmotionPrompt)
+        };
+        ThespeonInput input = new(segments, characterAsset.characterName, characterAsset.moduleType, defaultEmotion: Emotion.Joy, defaultLanguage: "", defaultDialect: "", speed: speed, loudness: loudness);
+        engine.Synthesize(input, sessionID: "SampleSynthesisSession");
     }
 
     void SetPrompts()
