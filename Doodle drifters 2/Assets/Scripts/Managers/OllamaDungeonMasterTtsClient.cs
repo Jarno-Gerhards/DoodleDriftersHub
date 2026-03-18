@@ -16,14 +16,20 @@ public class OllamaDungeonMasterTtsClient : MonoBehaviour
 
     [Header("Request Settings")]
     [SerializeField] private string ollamaModel = "llama3.1:8b";
-    [SerializeField] private int requestTimeoutSeconds = 15;
+    [SerializeField] private int requestTimeoutSeconds = 60;
 
-    [Header("Ollama Auto Start (Prototype)")]
+    [Header("Ollama Auto Start")]
     [SerializeField] private bool autoStartOllama = true;
     [SerializeField] private string ollamaExecutable = "ollama";
     [SerializeField] private string ollamaServeArgs = "serve";
     [SerializeField] private int startupWaitSeconds = 12;
     [SerializeField] private bool allowOpenAiCompatibleFallback = true;
+
+    [Header("Model Auto-Pull")]
+    [Tooltip("If the model is not present locally, pull it automatically at runtime.")]
+    [SerializeField] private bool autoPullModel = true;
+    [Tooltip("Timeout in seconds for the model pull request. Large models take a while.")]
+    [SerializeField] private int pullTimeoutSeconds = 1800; // 30 minutes
 
     [Header("Prototype Status UI")]
     [SerializeField] private TextMeshProUGUI ollamaStatusText;
@@ -33,51 +39,71 @@ public class OllamaDungeonMasterTtsClient : MonoBehaviour
         "Be creative, atmospheric, and cinematic. " +
         "Keep responses short (1-3 sentences) and easy to voice.";
 
-    // Stores the most recent AI response text for easy debugging/inspection.
+    /// <summary>Stores the most recent AI response text for easy debugging/inspection.</summary>
     public string LastAiResponse { get; private set; }
 
-    private bool hasTriedAutoStart;
-    private bool isCheckingOllama;
-    private bool isOllamaReady;
+    private bool _hasTriedAutoStart;
+    private bool _isCheckingOllama;
+    private bool _isOllamaReady;
+    private bool _isModelReady;
+    private bool _isPullingModel;
+
+    // ── Lifecycle ────────────────────────────────────────────────────────────
 
     private void Awake()
     {
         if (projectTts == null)
-        {
             projectTts = GetComponent<TTS>();
-        }
 
         SetStatus("LLM: idle");
     }
 
+    // ── Public API ───────────────────────────────────────────────────────────
+
     /// <summary>
-    /// Main entry point: generates text with Ollama, then speaks it through the project's TTS component.
+    /// Main entry point: ensures Ollama is running and the model is available,
+    /// generates text, then speaks it through the TTS component.
     /// Returns the generated text via callback.
     /// </summary>
     public IEnumerator GenerateAndSpeak(string userInput, Action<string> onComplete = null)
     {
         if (string.IsNullOrWhiteSpace(userInput))
         {
-            Debug.LogWarning("GenerateAndSpeak called with empty userInput.");
+            Debug.LogWarning("[OllamaDM] GenerateAndSpeak called with empty userInput.");
             SetStatus("LLM: idle");
             onComplete?.Invoke(string.Empty);
             yield break;
         }
 
-        SetStatus("LLM: checking...");
+        // 1. Make sure the Ollama service is up
+        SetStatus("LLM: checking service...");
         yield return EnsureOllamaReady();
-        if (!isOllamaReady)
+        if (!_isOllamaReady)
         {
-            Debug.LogError("Ollama is not reachable. Start it manually or enable auto-start settings on this component.");
-            SetStatus("LLM: failed");
+            Debug.LogError("[OllamaDM] Ollama is not reachable. " +
+                           "Start it manually or enable Auto Start on this component.");
+            SetStatus("LLM: service unavailable");
             onComplete?.Invoke(string.Empty);
             yield break;
         }
 
-        // Build Ollama payload with model, hardcoded DM system prompt, and player's input.
+        // 2. Make sure the model is pulled
+        SetStatus("LLM: checking model...");
+        yield return EnsureModelReady();
+        if (!_isModelReady)
+        {
+            Debug.LogError($"[OllamaDM] Model '{ollamaModel}' is not available. " +
+                           "Enable Auto Pull Model or run 'ollama pull <model>' manually.");
+            SetStatus("LLM: model unavailable");
+            onComplete?.Invoke(string.Empty);
+            yield break;
+        }
+
+        // 3. Generate text
         SetStatus("LLM: generating...");
         string generatedText = string.Empty;
         yield return RequestTextFromLocalLlm(userInput, text => generatedText = text);
+
         if (string.IsNullOrWhiteSpace(generatedText))
         {
             SetStatus("LLM: request failed");
@@ -88,9 +114,10 @@ public class OllamaDungeonMasterTtsClient : MonoBehaviour
         LastAiResponse = generatedText.Trim();
         onComplete?.Invoke(LastAiResponse);
 
+        // 4. Speak
         if (projectTts == null)
         {
-            Debug.LogError("No TTS component assigned/found. Add the TTS component and link it in the Inspector.");
+            Debug.LogError("[OllamaDM] No TTS component assigned/found.");
             SetStatus("LLM: no TTS");
             yield break;
         }
@@ -100,40 +127,40 @@ public class OllamaDungeonMasterTtsClient : MonoBehaviour
         SetStatus("LLM: ready");
     }
 
+    // ── Service readiness ────────────────────────────────────────────────────
+
     private IEnumerator EnsureOllamaReady()
     {
-        if (isOllamaReady)
+        if (_isOllamaReady)
         {
-            SetStatus("LLM: ready");
             yield break;
         }
 
-        if (isCheckingOllama)
+        // If another coroutine is already checking, wait for it
+        if (_isCheckingOllama)
         {
-            while (isCheckingOllama)
-            {
+            while (_isCheckingOllama)
                 yield return null;
-            }
-
             yield break;
         }
 
-        isCheckingOllama = true;
+        _isCheckingOllama = true;
 
-        bool wasReachable = false;
-        yield return CheckOllamaReachable(result => wasReachable = result);
-        if (wasReachable)
+        bool reachable = false;
+        yield return CheckOllamaReachable(result => reachable = result);
+
+        if (reachable)
         {
-            isOllamaReady = true;
-            isCheckingOllama = false;
+            _isOllamaReady    = true;
+            _isCheckingOllama = false;
             SetStatus("LLM: ready");
             yield break;
         }
 
-        if (autoStartOllama && !hasTriedAutoStart)
+        if (autoStartOllama && !_hasTriedAutoStart)
         {
-            hasTriedAutoStart = true;
-            SetStatus("LLM: starting local service...");
+            _hasTriedAutoStart = true;
+            SetStatus("LLM: starting service...");
             TryStartOllamaProcess();
 
             float deadline = Time.realtimeSinceStartup + Mathf.Max(1, startupWaitSeconds);
@@ -145,289 +172,355 @@ public class OllamaDungeonMasterTtsClient : MonoBehaviour
                 yield return CheckOllamaReachable(result => started = result);
                 if (started)
                 {
-                    isOllamaReady = true;
+                    _isOllamaReady = true;
                     SetStatus("LLM: ready");
                     break;
                 }
             }
         }
 
-        if (!isOllamaReady)
-        {
+        if (!_isOllamaReady)
             SetStatus("LLM: unavailable");
-        }
 
-        isCheckingOllama = false;
+        _isCheckingOllama = false;
     }
 
     private IEnumerator CheckOllamaReachable(Action<bool> onChecked)
     {
-        bool reachable = false;
-
-        string healthUrl = BuildHealthUrl();
-        using (UnityWebRequest tagsRequest = UnityWebRequest.Get(healthUrl))
+        // Primary: Ollama native health endpoint
+        using (var req = UnityWebRequest.Get(BuildBaseUrl() + "/api/tags"))
         {
-            tagsRequest.timeout = 2;
-            yield return tagsRequest.SendWebRequest();
-            reachable = tagsRequest.result == UnityWebRequest.Result.Success;
+            req.timeout = 3;
+            yield return req.SendWebRequest();
+            if (req.result == UnityWebRequest.Result.Success)
+            {
+                onChecked?.Invoke(true);
+                yield break;
+            }
         }
 
-        if (!reachable)
+        // Fallback: OpenAI-compatible models endpoint
+        using (var req = UnityWebRequest.Get(BuildBaseUrl() + "/v1/models"))
         {
-            string modelsUrl = BuildOpenAiModelsUrl();
-            using UnityWebRequest modelsRequest = UnityWebRequest.Get(modelsUrl);
-            modelsRequest.timeout = 2;
-            yield return modelsRequest.SendWebRequest();
-            reachable = modelsRequest.result == UnityWebRequest.Result.Success;
+            req.timeout = 3;
+            yield return req.SendWebRequest();
+            onChecked?.Invoke(req.result == UnityWebRequest.Result.Success);
         }
-
-        onChecked?.Invoke(reachable);
     }
+
+    // ── Model readiness ──────────────────────────────────────────────────────
+
+    private IEnumerator EnsureModelReady()
+    {
+        if (_isModelReady)
+            yield break;
+
+        // Check if model is already listed in /api/tags
+        bool present = false;
+        yield return CheckModelPresent(result => present = result);
+
+        if (present)
+        {
+            _isModelReady = true;
+            yield break;
+        }
+
+        // Optionally auto-pull
+        if (!autoPullModel)
+        {
+            Debug.LogWarning($"[OllamaDM] Model '{ollamaModel}' is not present and Auto Pull is disabled.");
+            yield break;
+        }
+
+        // Prevent concurrent pulls
+        if (_isPullingModel)
+        {
+            while (_isPullingModel)
+                yield return null;
+            yield break;
+        }
+
+        _isPullingModel = true;
+        SetStatus($"LLM: pulling {ollamaModel}...");
+        Debug.Log($"[OllamaDM] Pulling model '{ollamaModel}'. This may take several minutes on first run.");
+
+        yield return PullModel();
+
+        // Verify after pull
+        yield return CheckModelPresent(result => _isModelReady = result);
+
+        if (!_isModelReady)
+            Debug.LogError($"[OllamaDM] Model pull completed but '{ollamaModel}' still not found in /api/tags.");
+
+        _isPullingModel = false;
+    }
+
+    private IEnumerator CheckModelPresent(Action<bool> onChecked)
+    {
+        using var req = UnityWebRequest.Get(BuildBaseUrl() + "/api/tags");
+        req.timeout = HttpTimeoutSeconds;
+        yield return req.SendWebRequest();
+
+        if (req.result != UnityWebRequest.Result.Success)
+        {
+            onChecked?.Invoke(false);
+            yield break;
+        }
+
+        // Simple string search — avoids a full JSON parse
+        bool found = req.downloadHandler.text.IndexOf(
+            ollamaModel, StringComparison.OrdinalIgnoreCase) >= 0;
+        onChecked?.Invoke(found);
+    }
+
+    /// <summary>
+    /// Pulls a model by POSTing to /api/pull with stream:false.
+    /// Ollama streams NDJSON by default; with stream:false it returns one final JSON object.
+    /// The request timeout is set to pullTimeoutSeconds to handle large models.
+    /// </summary>
+    private IEnumerator PullModel()
+    {
+        string url  = BuildBaseUrl() + "/api/pull";
+        string body = $"{{\"name\":\"{ollamaModel}\",\"stream\":false}}";
+        byte[] bodyBytes = Encoding.UTF8.GetBytes(body);
+
+        using var req = new UnityWebRequest(url, UnityWebRequest.kHttpVerbPOST);
+        req.uploadHandler   = new UploadHandlerRaw(bodyBytes);
+        req.downloadHandler = new DownloadHandlerBuffer();
+        req.SetRequestHeader("Content-Type", "application/json");
+        req.timeout = pullTimeoutSeconds;
+
+        yield return req.SendWebRequest();
+
+        if (req.result == UnityWebRequest.Result.Success)
+        {
+            Debug.Log($"[OllamaDM] Pull response: {req.downloadHandler.text}");
+        }
+        else
+        {
+            Debug.LogError($"[OllamaDM] Pull request failed (status {req.responseCode}): {req.error}");
+        }
+    }
+
+    // ── Text generation ──────────────────────────────────────────────────────
 
     private IEnumerator RequestTextFromLocalLlm(string userInput, Action<string> onComplete)
     {
         List<string> candidateUrls = BuildCandidateGenerateUrls();
+
         for (int i = 0; i < candidateUrls.Count; i++)
         {
-            string candidateUrl = candidateUrls[i];
-            bool useOpenAiPayload = candidateUrl.Contains("/v1/chat/completions", StringComparison.OrdinalIgnoreCase);
+            string url            = candidateUrls[i];
+            bool   useOpenAiStyle = url.IndexOf("/v1/chat/completions",
+                                        StringComparison.OrdinalIgnoreCase) >= 0;
 
-            string requestJson = useOpenAiPayload
+            string json  = useOpenAiStyle
                 ? BuildOpenAiChatRequestJson(userInput)
                 : BuildOllamaGenerateRequestJson(userInput);
 
-            byte[] requestBytes = Encoding.UTF8.GetBytes(requestJson);
+            byte[] bytes = Encoding.UTF8.GetBytes(json);
 
-            using UnityWebRequest request = new UnityWebRequest(candidateUrl, UnityWebRequest.kHttpVerbPOST);
-            request.uploadHandler = new UploadHandlerRaw(requestBytes);
-            request.downloadHandler = new DownloadHandlerBuffer();
-            request.SetRequestHeader("Content-Type", "application/json");
-            request.timeout = requestTimeoutSeconds;
+            using var req = new UnityWebRequest(url, UnityWebRequest.kHttpVerbPOST);
+            req.uploadHandler   = new UploadHandlerRaw(bytes);
+            req.downloadHandler = new DownloadHandlerBuffer();
+            req.SetRequestHeader("Content-Type", "application/json");
+            req.timeout = requestTimeoutSeconds;
 
-            yield return request.SendWebRequest();
+            Debug.Log($"[OllamaDM] Sending request to {url}");
+            yield return req.SendWebRequest();
 
-            if (request.result == UnityWebRequest.Result.Success)
+            if (req.result == UnityWebRequest.Result.Success)
             {
-                string responseText = request.downloadHandler.text;
-                if (TryExtractGeneratedText(responseText, useOpenAiPayload, out string extractedText))
+                string raw = req.downloadHandler.text;
+                if (TryExtractGeneratedText(raw, useOpenAiStyle, out string text))
                 {
-                    onComplete?.Invoke(extractedText);
+                    onComplete?.Invoke(text);
                     yield break;
                 }
 
-                Debug.LogError($"LLM response parse failed for endpoint {candidateUrl}. Raw: {responseText}");
-                continue;
+                Debug.LogError($"[OllamaDM] Response parse failed for {url}.\nRaw: {raw}");
+                continue; // try next candidate
             }
 
-            long statusCode = request.responseCode;
-            Debug.LogWarning($"LLM request failed on {candidateUrl} with status {statusCode}: {request.error}");
+            long code = req.responseCode;
+            Debug.LogWarning($"[OllamaDM] Request to {url} failed (HTTP {code}): {req.error}");
 
-            if (statusCode != 404 && statusCode != 405)
-            {
+            // Only continue to next URL on "not found" / "method not allowed"
+            if (code != 404 && code != 405)
                 break;
-            }
         }
 
         Debug.LogError(
-            $"All local LLM endpoint attempts failed. Tried base URL from: {ollamaGenerateUrl}. " +
-            "If you test in browser, note that /api/generate is POST-only so GET can show 405.");
+            "[OllamaDM] All endpoint attempts failed.\n" +
+            $"Base URL: {ollamaGenerateUrl}\n" +
+            "Tip: /api/generate only accepts POST — a 405 in browser is normal.");
         onComplete?.Invoke(string.Empty);
     }
 
+    // ── JSON builders ────────────────────────────────────────────────────────
+
     private string BuildOllamaGenerateRequestJson(string userInput)
     {
-        OllamaGenerateRequest requestBody = new OllamaGenerateRequest
+        var body = new OllamaGenerateRequest
         {
-            model = ollamaModel,
+            model  = ollamaModel,
             system = DungeonMasterSystemPrompt,
             prompt = userInput,
             stream = false
         };
-
-        return JsonUtility.ToJson(requestBody);
+        return JsonUtility.ToJson(body);
     }
 
     private string BuildOpenAiChatRequestJson(string userInput)
     {
-        OpenAiChatRequest requestBody = new OpenAiChatRequest
+        var body = new OpenAiChatRequest
         {
-            model = ollamaModel,
+            model    = ollamaModel,
             messages = new[]
             {
                 new OpenAiChatMessage { role = "system", content = DungeonMasterSystemPrompt },
-                new OpenAiChatMessage { role = "user", content = userInput }
+                new OpenAiChatMessage { role = "user",   content = userInput }
             },
             stream = false
         };
-
-        return JsonUtility.ToJson(requestBody);
+        return JsonUtility.ToJson(body);
     }
 
     private bool TryExtractGeneratedText(string rawJson, bool isOpenAiStyle, out string text)
     {
         text = string.Empty;
-
         try
         {
             if (!isOpenAiStyle)
             {
-                OllamaGenerateResponse ollamaResponse = JsonUtility.FromJson<OllamaGenerateResponse>(rawJson);
-                if (ollamaResponse != null && !string.IsNullOrWhiteSpace(ollamaResponse.response))
+                var r = JsonUtility.FromJson<OllamaGenerateResponse>(rawJson);
+                if (r != null && !string.IsNullOrWhiteSpace(r.response))
                 {
-                    text = ollamaResponse.response;
+                    text = r.response;
                     return true;
                 }
-
                 return false;
             }
 
-            OpenAiChatResponse openAiResponse = JsonUtility.FromJson<OpenAiChatResponse>(rawJson);
-            if (openAiResponse?.choices == null || openAiResponse.choices.Length == 0)
-            {
-                return false;
-            }
+            var oai = JsonUtility.FromJson<OpenAiChatResponse>(rawJson);
+            if (oai?.choices == null || oai.choices.Length == 0) return false;
 
-            OpenAiChatChoice firstChoice = openAiResponse.choices[0];
-            if (firstChoice?.message != null && !string.IsNullOrWhiteSpace(firstChoice.message.content))
+            var choice = oai.choices[0];
+            if (choice?.message != null && !string.IsNullOrWhiteSpace(choice.message.content))
             {
-                text = firstChoice.message.content;
+                text = choice.message.content;
                 return true;
             }
-
-            if (!string.IsNullOrWhiteSpace(firstChoice?.text))
+            if (!string.IsNullOrWhiteSpace(choice?.text))
             {
-                text = firstChoice.text;
+                text = choice.text;
                 return true;
             }
-
             return false;
         }
         catch (Exception ex)
         {
-            Debug.LogError($"Failed to parse LLM response JSON: {ex.Message}");
+            Debug.LogError($"[OllamaDM] JSON parse error: {ex.Message}");
             return false;
         }
     }
 
-    private string BuildHealthUrl()
-    {
-        return BuildBaseUrl() + "/api/tags";
-    }
+    // ── URL helpers ──────────────────────────────────────────────────────────
 
-    private string BuildOpenAiModelsUrl()
+    private string BuildBaseUrl()
     {
-        return BuildBaseUrl() + "/v1/models";
+        if (Uri.TryCreate(ollamaGenerateUrl, UriKind.Absolute, out Uri uri))
+            return $"{uri.Scheme}://{uri.Host}:{uri.Port}";
+        return "http://localhost:11434";
     }
 
     private List<string> BuildCandidateGenerateUrls()
     {
-        List<string> urls = new List<string>();
+        var urls = new List<string>();
         AddUrlIfMissing(urls, ollamaGenerateUrl);
         AddUrlIfMissing(urls, BuildBaseUrl() + "/api/generate");
-
         if (allowOpenAiCompatibleFallback)
-        {
             AddUrlIfMissing(urls, BuildBaseUrl() + "/v1/chat/completions");
-        }
-
         return urls;
     }
 
-    private void AddUrlIfMissing(List<string> urls, string candidate)
+    private static void AddUrlIfMissing(List<string> list, string candidate)
     {
-        if (string.IsNullOrWhiteSpace(candidate))
-        {
-            return;
-        }
-
-        string normalized = candidate.Trim();
-        if (!urls.Contains(normalized))
-        {
-            urls.Add(normalized);
-        }
+        if (string.IsNullOrWhiteSpace(candidate)) return;
+        string n = candidate.Trim();
+        if (!list.Contains(n)) list.Add(n);
     }
 
-    private string BuildBaseUrl()
-    {
-        if (Uri.TryCreate(ollamaGenerateUrl, UriKind.Absolute, out Uri generateUri))
-        {
-            return $"{generateUri.Scheme}://{generateUri.Host}:{generateUri.Port}";
-        }
-
-        return "http://localhost:11434";
-    }
+    // ── Process helpers ──────────────────────────────────────────────────────
 
     private void TryStartOllamaProcess()
     {
         try
         {
-            var startInfo = new System.Diagnostics.ProcessStartInfo
+            var psi = new System.Diagnostics.ProcessStartInfo
             {
-                FileName = ollamaExecutable,
-                Arguments = ollamaServeArgs,
+                FileName        = ollamaExecutable,
+                Arguments       = ollamaServeArgs,
                 UseShellExecute = false,
-                CreateNoWindow = true,
-                WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden
+                CreateNoWindow  = true,
+                WindowStyle     = System.Diagnostics.ProcessWindowStyle.Hidden
             };
-
-            System.Diagnostics.Process.Start(startInfo);
-            Debug.Log("Attempted to start Ollama process automatically.");
+            System.Diagnostics.Process.Start(psi);
+            Debug.Log("[OllamaDM] Auto-started Ollama process.");
         }
         catch (Exception ex)
         {
-            Debug.LogWarning($"Could not auto-start Ollama. Error: {ex.Message}");
+            Debug.LogWarning($"[OllamaDM] Could not auto-start Ollama: {ex.Message}");
         }
     }
+
+    // ── UI helper ────────────────────────────────────────────────────────────
 
     private void SetStatus(string message)
     {
         if (ollamaStatusText != null)
-        {
             ollamaStatusText.text = message;
-        }
     }
 
-    [Serializable]
-    private class OllamaGenerateRequest
+    // Avoid hard-coding the constant so the compiler doesn't complain about unused private fields
+    private int HttpTimeoutSeconds => 10;
+
+    // ── Serializable types ───────────────────────────────────────────────────
+
+    [Serializable] private class OllamaGenerateRequest
     {
         public string model;
         public string system;
         public string prompt;
-        public bool stream;
+        public bool   stream;
     }
 
-    [Serializable]
-    private class OllamaGenerateResponse
+    [Serializable] private class OllamaGenerateResponse
     {
         public string response;
     }
 
-    [Serializable]
-    private class OpenAiChatRequest
+    [Serializable] private class OpenAiChatRequest
     {
-        public string model;
+        public string             model;
         public OpenAiChatMessage[] messages;
-        public bool stream;
+        public bool               stream;
     }
 
-    [Serializable]
-    private class OpenAiChatMessage
+    [Serializable] private class OpenAiChatMessage
     {
         public string role;
         public string content;
     }
 
-    [Serializable]
-    private class OpenAiChatResponse
+    [Serializable] private class OpenAiChatResponse
     {
         public OpenAiChatChoice[] choices;
     }
 
-    [Serializable]
-    private class OpenAiChatChoice
+    [Serializable] private class OpenAiChatChoice
     {
         public OpenAiChatMessage message;
-        public string text;
+        public string            text;
     }
-
 }
