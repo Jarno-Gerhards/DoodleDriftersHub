@@ -1,98 +1,157 @@
+using System;
 using UnityEngine;
 using Unity.InferenceEngine;
 using TMPro;
 
+/// <summary>
+/// Runs the doodle classification model and exposes the result both via UI
+/// and via a callback (label + confidence) for the GameLoopOrchestrator.
+/// </summary>
 public class DoodleInference : MonoBehaviour
 {
+    [Header("Model")]
     public ModelAsset modelAsset;
+
+    [Header("References")]
     public DoodleDrawer drawingInput;
+
+    [Header("UI")]
     public TextMeshProUGUI resultText;
 
-    private Worker worker;
-    private string[] classLabels = new string[] { "Bandage" , "Compass" , "Hammer" , "Ladder" , "Lantern" , "Sword" };
+    private Worker   _worker;
+    private string[] _classLabels = { "Bandage", "Compass", "Hammer", "Ladder", "Lantern", "Sword" };
 
-    void Start()
+    // ── Result cache (readable by orchestrator without callback) ─────────────
+    public string LastPredictedLabel { get; private set; } = string.Empty;
+    public float  LastConfidence     { get; private set; } = 0f;
+
+    // ── Callback set by orchestrator before Submit is pressed ────────────────
+    /// <summary>
+    /// Optional. Set this before the player presses Submit.
+    /// Called with (label, confidence) once Predict() finishes.
+    /// </summary>
+    public Action<string, float> OnPredictionComplete;
+
+    // ── Lifecycle ─────────────────────────────────────────────────────────────
+
+    private void Start()
     {
-        //RunModel();
         Model model = ModelLoader.Load(modelAsset);
-        worker = new Worker(model, BackendType.GPUCompute);
+        _worker = new Worker(model, BackendType.GPUCompute);
     }
 
+    private void OnDestroy()
+    {
+        _worker?.Dispose();
+    }
+
+    // ── Public API ────────────────────────────────────────────────────────────
+
+    /// <summary>
+    /// Called by the Submit button (and by the orchestrator indirectly via that button).
+    /// Runs inference, updates UI, caches result, and fires OnPredictionComplete.
+    /// </summary>
     public void Predict()
     {
         Texture2D drawing = drawingInput.GetTexture();
-        // Convert image to tensor
-        Tensor<float> inputTensor = TextureToTensor(drawing);
 
-        // Run inference
-        worker.Schedule(inputTensor);
+        using Tensor<float> inputTensor = TextureToTensor(drawing);
+        _worker.Schedule(inputTensor);
 
-        // Get output
-        Tensor<float> outputGPU = worker.PeekOutput() as Tensor<float>;
-        Tensor<float> output = outputGPU.ReadbackAndClone();
-        
-        int predictedClass = ArgMax(output);
-        
+        Tensor<float> outputGPU = _worker.PeekOutput() as Tensor<float>;
+        Tensor<float> output     = outputGPU.ReadbackAndClone();
+
+        // Get predicted class and confidence
+        int   predictedIndex = ArgMax(output);
+        float confidence     = Softmax(output, predictedIndex);
+
         output.Dispose();
 
-        //Debug.Log("Predicted class: " + classLabels[predictedClass]);
-        resultText.text = $"I think this is a {classLabels[predictedClass]}";
+        string label = _classLabels[predictedIndex];
 
-        inputTensor.Dispose();
-        output.Dispose();
+        // Cache
+        LastPredictedLabel = label;
+        LastConfidence     = confidence;
+
+        // UI
+        if (resultText != null)
+            resultText.text = $"I think this is a {label} ({confidence:P0})";
+
+        Debug.Log($"[DoodleInference] Predicted: {label} (confidence: {confidence:P1})");
+
+        // Notify orchestrator (if listening)
+        OnPredictionComplete?.Invoke(label, confidence);
     }
 
-    Tensor<float> TextureToTensor(Texture2D texture)
+    // ── Private helpers ───────────────────────────────────────────────────────
+
+    private Tensor<float> TextureToTensor(Texture2D texture)
     {
-        int width = 28;
-        int height = 28;
+        const int W = 28, H = 28;
+        Texture2D resized = Resize(texture, W, H);
 
-        Texture2D resized = Resize(texture, width, height);
-
-        Tensor<float> tensor = new Tensor<float>(new TensorShape(1, height, width, 1));
-
+        var tensor = new Tensor<float>(new TensorShape(1, H, W, 1));
         Color[] pixels = resized.GetPixels();
 
-        for (int y = 0; y < height; y++)
+        for (int y = 0; y < H; y++)
+        for (int x = 0; x < W; x++)
         {
-            for (int x = 0; x < width; x++)
-            {
-                float grayscale = 1f - pixels[y * width + x].grayscale;
-                tensor[0, y, x, 0] = grayscale;
-            }
+            float grayscale = 1f - pixels[y * W + x].grayscale;
+            tensor[0, y, x, 0] = grayscale;
         }
 
         return tensor;
     }
 
-int ArgMax(Tensor<float> tensor)
-{
-    int maxIndex = 0;
-    float maxValue = tensor[0];
-
-    for (int i = 1; i < tensor.shape[1]; i++)
+    private int ArgMax(Tensor<float> tensor)
     {
-        float val = tensor[i];
-        if (val > maxValue)
+        int   maxIndex = 0;
+        float maxValue = tensor[0];
+
+        for (int i = 1; i < tensor.shape[1]; i++)
         {
-            maxValue = val;
-            maxIndex = i;
+            if (tensor[i] > maxValue)
+            {
+                maxValue = tensor[i];
+                maxIndex = i;
+            }
         }
+
+        return maxIndex;
     }
 
-    return maxIndex;
-}
+    /// <summary>Returns the softmax probability of one class index.</summary>
+    private float Softmax(Tensor<float> tensor, int targetIndex)
+    {
+        int n = tensor.shape[1];
 
-    Texture2D Resize(Texture2D source, int width, int height)
+        float max = tensor[0];
+        for (int i = 1; i < n; i++)
+            if (tensor[i] > max) max = tensor[i];
+
+        float sumExp    = 0f;
+        float targetExp = 0f;
+
+        for (int i = 0; i < n; i++)
+        {
+            float e = Mathf.Exp(tensor[i] - max);
+            sumExp += e;
+            if (i == targetIndex) targetExp = e;
+        }
+
+        return sumExp > 0f ? targetExp / sumExp : 0f;
+    }
+
+    private Texture2D Resize(Texture2D source, int width, int height)
     {
         RenderTexture rt = RenderTexture.GetTemporary(width, height);
         Graphics.Blit(source, rt);
 
-        RenderTexture previous = RenderTexture.active;
-        RenderTexture.active = rt;
+        RenderTexture previous  = RenderTexture.active;
+        RenderTexture.active    = rt;
 
         Texture2D result = new Texture2D(width, height);
-        result.ReadPixels(new Rect(0,0,width,height),0,0);
+        result.ReadPixels(new Rect(0, 0, width, height), 0, 0);
         result.Apply();
 
         RenderTexture.active = previous;
