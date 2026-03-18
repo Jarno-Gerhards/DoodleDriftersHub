@@ -5,7 +5,6 @@ using TMPro;
 public class DoodleInference : MonoBehaviour
 {
     public ModelAsset modelAsset;
-    public Texture2D inputImage;
     public DoodleDrawer drawingInput;
     public TextMeshProUGUI resultText;
 
