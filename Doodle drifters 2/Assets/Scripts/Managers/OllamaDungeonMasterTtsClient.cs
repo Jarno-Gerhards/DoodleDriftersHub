@@ -53,7 +53,7 @@ public class OllamaDungeonMasterTtsClient : MonoBehaviour
     private const string SolutionSystemPrompt =
         "You are a Dungeon Master for a fantasy dungeon game. " +
         "The player has drawn an object to solve a room challenge. " +
-        "Describe in 2-3 sentences how the player cleverly uses that object to overcome the obstacle. " +
+        "Describe in 2-3 sentences how the player cleverly uses that object to overcome the obstacle or utterly fail. " +
         "Be creative, atmospheric, and satisfying. Easy to understand when spoken aloud.";
 
     // ── Fallbacks ─────────────────────────────────────────────────────────────
@@ -142,7 +142,7 @@ public class OllamaDungeonMasterTtsClient : MonoBehaviour
             $"Room scenario: \"{scenario}\"\n\n" +
             $"The player {confidenceDesc} draws a {predictedObject} " +
             $"(recognition confidence: {confidence:P0}). " +
-            $"Describe how they use the {predictedObject} to overcome the obstacle.";
+            $"Describe how they use the {predictedObject} to overcome the obstacle or utterly fail.";
 
         string result = string.Empty;
         yield return GenerateWithFallback(
