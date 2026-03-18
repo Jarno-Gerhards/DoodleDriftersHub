@@ -1,5 +1,16 @@
 {
   "dependencies": {
+    "com.lingotion.thespeon": {
+      "version": "https://github.com/Lingotion/lingotion-thespeon-unity.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.2.1",
+        "com.unity.ai.inference": "2.5.0",
+        "com.unity.editorcoroutines": "1.0.0"
+      },
+      "hash": "b1fc9c76e5b7b7649e471890efc7231fd0a6ddcc"
+    },
     "com.unity.2d.animation": {
       "version": "13.0.4",
       "depth": 0,
@@ -101,7 +112,7 @@
     },
     "com.unity.ai.inference": {
       "version": "2.5.0",
-      "depth": 0,
+      "depth": 1,
       "source": "registry",
       "dependencies": {
         "com.unity.burst": "1.8.17",
@@ -144,7 +155,7 @@
     },
     "com.unity.dt.app-ui": {
       "version": "2.1.1",
-      "depth": 1,
+      "depth": 2,
       "source": "registry",
       "dependencies": {
         "com.unity.modules.physics": "1.0.0",
@@ -152,6 +163,13 @@
         "com.unity.modules.uielements": "1.0.0",
         "com.unity.modules.screencapture": "1.0.0"
       },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.editorcoroutines": {
+      "version": "1.0.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
       "url": "https://packages.unity.com"
     },
     "com.unity.ext.nunit": {
