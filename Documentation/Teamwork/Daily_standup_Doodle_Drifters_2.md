@@ -71,3 +71,14 @@ Elke dag worden dezelfde 3 vragen gesteld. Wat heb je gisteren gedaan, wat ga je
 | Elias   | -                                                                                                                                 | -                                                                                          | Afwezig                                                   |
 | Jarno   | Gewerkt aan de showcase en de showcase zelf gedaan.                                                                                                | Gewerkt aan een room system.                                                             | -                            |
 | Vincent | Gewerkt aan showcase en de showcase zelf gegeven.                                                                                                         | Merge request documentatie TTS. Voorbereiden sprint review.                                             | -                                                         |
+
+#### 23/03/2026
+
+|         | Gedaan                                                                                                                            | Doen                                                                                       | Obstakels                                                 |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------- |
+| Bart    | Gewerkt aan de Retrospective en hoorcollege bijgewoond. |   Issues maken voor de het issue bord.                                                 | Niet het gehele team is er. |
+| Daan    | Gewerkt aan de Retrospective en een klein stukje aan de GDD.                                                | Issues maken voor het issue bord en aan de hand daarvan een issue op me nemen en deze uitwerken. Retrospective af maken | -                          |
+| Elias   | -                                                                                                                                 | -                                                                                          | Afwezig                                                   |
+| Jarno   | Werken aan de Retrospective.                                                                                                | Werken aan het issue bord.                                                             | Voelt zich niet goed.                            |
+| Vincent | Werken aan de Retrospective.                                                                                                 | Werken aan de issues voorbereiden voor sidequest quiz.                                            | -                                                         |
+
