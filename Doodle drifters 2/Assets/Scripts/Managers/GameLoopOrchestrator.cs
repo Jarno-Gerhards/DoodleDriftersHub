@@ -40,9 +40,9 @@ public class GameLoopOrchestrator : MonoBehaviour
 
     // ── Runtime state ─────────────────────────────────────────────────────────
 
-    private RoomState _currentRoom;
-    private bool      _predictionReceived;
-    private bool      _isRunning;
+    private RoomState currentRoom;
+    private bool      predictionReceived;
+    private bool      isRunning;
 
     // ── Lifecycle ─────────────────────────────────────────────────────────────
 
@@ -60,7 +60,7 @@ public class GameLoopOrchestrator : MonoBehaviour
 
     public void StartGame()
     {
-        if (_isRunning) return;
+        if (isRunning) return;
         if (startButton != null) startButton.gameObject.SetActive(false);
         StartCoroutine(RunAllRooms());
     }
@@ -69,15 +69,15 @@ public class GameLoopOrchestrator : MonoBehaviour
 
     private IEnumerator RunAllRooms()
     {
-        _isRunning = true;
+        isRunning = true;
 
         for (int i = 0; i < totalRooms; i++)
         {
-            _currentRoom = new RoomState(i);
-            yield return RunRoom(_currentRoom);
+            currentRoom = new RoomState(i);
+            yield return RunRoom(currentRoom);
         }
 
-        _isRunning = false;
+        isRunning = false;
         Debug.Log("[GameLoop] All rooms complete!");
         // TODO: hook into victory screen / room transition here
     }
@@ -97,11 +97,11 @@ public class GameLoopOrchestrator : MonoBehaviour
         doodleDrawer?.ClearCanvas();
         SetDrawingPhaseActive(true);
 
-        _predictionReceived = false;
+        predictionReceived = false;
         doodleInference.OnPredictionComplete = OnPredictionReceived;
 
         // Wait until the player submits their drawing
-        yield return new WaitUntil(() => _predictionReceived);
+        yield return new WaitUntil(() => predictionReceived);
 
         doodleInference.OnPredictionComplete = null;
         SetDrawingPhaseActive(false);
@@ -125,11 +125,11 @@ public class GameLoopOrchestrator : MonoBehaviour
 
     private void OnPredictionReceived(string label, float confidence)
     {
-        if (_currentRoom == null) return;
+        if (currentRoom == null) return;
 
-        _currentRoom.predictedObject = label;
-        _currentRoom.confidence      = confidence;
-        _predictionReceived          = true;
+        currentRoom.predictedObject = label;
+        currentRoom.confidence      = confidence;
+        predictionReceived          = true;
     }
 
     // ── UI helpers ────────────────────────────────────────────────────────────

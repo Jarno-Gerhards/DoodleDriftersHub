@@ -18,8 +18,8 @@ public class DoodleInference : MonoBehaviour
     [Header("UI")]
     public TextMeshProUGUI resultText;
 
-    private Worker   _worker;
-    private string[] _classLabels = { "Bandage", "Compass", "Hammer", "Ladder", "Lantern", "Sword" };
+    private Worker   worker;
+    private string[] classLabels = { "Bandage", "Compass", "Hammer", "Ladder", "Lantern", "Sword" };
 
     // ── Result cache (readable by orchestrator without callback) ─────────────
     public string LastPredictedLabel { get; private set; } = string.Empty;
@@ -37,12 +37,12 @@ public class DoodleInference : MonoBehaviour
     private void Start()
     {
         Model model = ModelLoader.Load(modelAsset);
-        _worker = new Worker(model, BackendType.GPUCompute);
+        worker = new Worker(model, BackendType.GPUCompute);
     }
 
     private void OnDestroy()
     {
-        _worker?.Dispose();
+        worker?.Dispose();
     }
 
     // ── Public API ────────────────────────────────────────────────────────────
@@ -56,9 +56,9 @@ public class DoodleInference : MonoBehaviour
         Texture2D drawing = drawingInput.GetTexture();
 
         using Tensor<float> inputTensor = TextureToTensor(drawing);
-        _worker.Schedule(inputTensor);
+        worker.Schedule(inputTensor);
 
-        Tensor<float> outputGPU = _worker.PeekOutput() as Tensor<float>;
+        Tensor<float> outputGPU = worker.PeekOutput() as Tensor<float>;
         Tensor<float> output     = outputGPU.ReadbackAndClone();
 
         // Get predicted class and confidence
@@ -67,7 +67,7 @@ public class DoodleInference : MonoBehaviour
 
         output.Dispose();
 
-        string label = _classLabels[predictedIndex];
+        string label = classLabels[predictedIndex];
 
         // Cache
         LastPredictedLabel = label;

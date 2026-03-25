@@ -76,11 +76,11 @@ public class OllamaDungeonMasterTtsClient : MonoBehaviour
 
     public string LastAiResponse { get; private set; }
 
-    private bool _hasTriedAutoStart;
-    private bool _isCheckingOllama;
-    private bool _isOllamaReady;
-    private bool _isModelReady;
-    private bool _isPullingModel;
+    private bool hasTriedAutoStart;
+    private bool isCheckingOllama;
+    private bool isOllamaReady;
+    private bool isModelReady;
+    private bool isPullingModel;
 
     private int HttpTimeoutSeconds => 10;
 
@@ -171,7 +171,7 @@ public class OllamaDungeonMasterTtsClient : MonoBehaviour
 
         SetStatus("LLM: checking service...");
         yield return EnsureOllamaReady();
-        if (!_isOllamaReady)
+        if (!isOllamaReady)
         {
             SetStatus("LLM: service unavailable");
             onComplete?.Invoke(string.Empty);
@@ -180,7 +180,7 @@ public class OllamaDungeonMasterTtsClient : MonoBehaviour
 
         SetStatus("LLM: checking model...");
         yield return EnsureModelReady();
-        if (!_isModelReady)
+        if (!isModelReady)
         {
             SetStatus("LLM: model unavailable");
             onComplete?.Invoke(string.Empty);
@@ -215,7 +215,7 @@ public class OllamaDungeonMasterTtsClient : MonoBehaviour
         Action<string> onComplete)
     {
         yield return EnsureOllamaReady();
-        if (!_isOllamaReady)
+        if (!isOllamaReady)
         {
             Debug.LogWarning("[OllamaDM] Service unavailable — using fallback.");
             onComplete?.Invoke(fallbackText);
@@ -223,7 +223,7 @@ public class OllamaDungeonMasterTtsClient : MonoBehaviour
         }
 
         yield return EnsureModelReady();
-        if (!_isModelReady)
+        if (!isModelReady)
         {
             Debug.LogWarning("[OllamaDM] Model unavailable — using fallback.");
             onComplete?.Invoke(fallbackText);
@@ -269,29 +269,29 @@ public class OllamaDungeonMasterTtsClient : MonoBehaviour
 
     private IEnumerator EnsureOllamaReady()
     {
-        if (_isOllamaReady) yield break;
+        if (isOllamaReady) yield break;
 
-        if (_isCheckingOllama)
+        if (isCheckingOllama)
         {
-            while (_isCheckingOllama) yield return null;
+            while (isCheckingOllama) yield return null;
             yield break;
         }
 
-        _isCheckingOllama = true;
+        isCheckingOllama = true;
 
         bool reachable = false;
         yield return CheckOllamaReachable(r => reachable = r);
 
         if (reachable)
         {
-            _isOllamaReady    = true;
-            _isCheckingOllama = false;
+            isOllamaReady    = true;
+            isCheckingOllama = false;
             yield break;
         }
 
-        if (autoStartOllama && !_hasTriedAutoStart)
+        if (autoStartOllama && !hasTriedAutoStart)
         {
-            _hasTriedAutoStart = true;
+            hasTriedAutoStart = true;
             SetStatus("LLM: starting service...");
             TryStartOllamaProcess();
 
@@ -301,14 +301,14 @@ public class OllamaDungeonMasterTtsClient : MonoBehaviour
                 yield return new WaitForSecondsRealtime(0.5f);
                 bool started = false;
                 yield return CheckOllamaReachable(r => started = r);
-                if (started) { _isOllamaReady = true; break; }
+                if (started) { isOllamaReady = true; break; }
             }
         }
 
-        if (!_isOllamaReady)
+        if (!isOllamaReady)
             SetStatus("LLM: unavailable");
 
-        _isCheckingOllama = false;
+        isCheckingOllama = false;
     }
 
     private IEnumerator CheckOllamaReachable(Action<bool> onChecked)
@@ -329,11 +329,11 @@ public class OllamaDungeonMasterTtsClient : MonoBehaviour
 
     private IEnumerator EnsureModelReady()
     {
-        if (_isModelReady) yield break;
+        if (isModelReady) yield break;
 
         bool present = false;
         yield return CheckModelPresent(r => present = r);
-        if (present) { _isModelReady = true; yield break; }
+        if (present) { isModelReady = true; yield break; }
 
         if (!autoPullModel)
         {
@@ -341,23 +341,23 @@ public class OllamaDungeonMasterTtsClient : MonoBehaviour
             yield break;
         }
 
-        if (_isPullingModel)
+        if (isPullingModel)
         {
-            while (_isPullingModel) yield return null;
+            while (isPullingModel) yield return null;
             yield break;
         }
 
-        _isPullingModel = true;
+        isPullingModel = true;
         SetStatus($"LLM: pulling {ollamaModel}...");
         Debug.Log($"[OllamaDM] Pulling model '{ollamaModel}'. This may take several minutes on first run.");
 
         yield return PullModel();
-        yield return CheckModelPresent(r => _isModelReady = r);
+        yield return CheckModelPresent(r => isModelReady = r);
 
-        if (!_isModelReady)
+        if (!isModelReady)
             Debug.LogError($"[OllamaDM] Pull finished but model '{ollamaModel}' still not found.");
 
-        _isPullingModel = false;
+        isPullingModel = false;
     }
 
     private IEnumerator CheckModelPresent(Action<bool> onChecked)
