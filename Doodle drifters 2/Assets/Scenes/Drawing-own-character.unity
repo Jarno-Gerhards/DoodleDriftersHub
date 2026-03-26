@@ -1055,7 +1055,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &673988889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3088,7 +3088,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1404737161
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3923,7 +3923,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 6698808079931324835, guid: 71f4e6259f742ad49ba6717e5b591fb9, type: 3}
+  m_Sprite: {fileID: -4769468870279542096, guid: a91358fa63157c34a844eb767e5904e5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4156,7 +4156,7 @@ MonoBehaviour:
   pencilButton: {fileID: 766868623}
   eraserButton: {fileID: 1359668398}
   fillButton: {fileID: 1677896446}
-  selectedButtonColor: {r: 0.25, g: 0.55, b: 1, a: 1}
+  selectedButtonColor: {r: 0.6886792, g: 0.6886792, b: 0.6886792, a: 1}
   deselectedButtonColor: {r: 1, g: 1, b: 1, a: 1}
   colorButtons:
   - {fileID: 1966649043}
