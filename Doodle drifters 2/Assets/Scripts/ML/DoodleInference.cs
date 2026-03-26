@@ -13,7 +13,7 @@ public class DoodleInference : MonoBehaviour
     public ModelAsset modelAsset;
 
     [Header("References")]
-    public DoodleDrawer drawingInput;
+    public DoodleDrawerPro  drawingInput;
 
     [Header("UI")]
     public TextMeshProUGUI resultText;
