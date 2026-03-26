@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -53,6 +54,9 @@ public class DoodleDrawerPro : MonoBehaviour
 
         if (pointerDown)
         {
+            Vector2 screenPos = Pointer.current.position.ReadValue();
+            if (IsBlockedByOtherUI(screenPos)) { strokeStarted = false; return; }
+
             Vector2 localPos;
             if (!GetLocalPos(out localPos)) { strokeStarted = false; return; }
 
@@ -217,6 +221,24 @@ public class DoodleDrawerPro : MonoBehaviour
 
         return RectTransformUtility.ScreenPointToLocalPointInRectangle(
             drawArea.rectTransform, screenPos, uiCam, out localPos);
+    }
+
+    private bool IsBlockedByOtherUI(Vector2 screenPos)
+    {
+        if (EventSystem.current == null) return false;
+
+        var pointerData = new PointerEventData(EventSystem.current)
+        {
+            position = screenPos
+        };
+
+        var hits = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerData, hits);
+
+        if (hits.Count == 0) return false;
+
+        var topHit = hits[0].gameObject;
+        return topHit != null && topHit != drawArea.gameObject;
     }
 
     private int LocalToPixel(float local, float min, float max)
