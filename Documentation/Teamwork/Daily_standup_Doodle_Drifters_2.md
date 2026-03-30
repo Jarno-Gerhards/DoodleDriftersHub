@@ -92,3 +92,13 @@ Elke dag worden dezelfde 3 vragen gesteld. Wat heb je gisteren gedaan, wat ga je
 | Jarno   | Ziek. Naar design patternts gekeken.                                                                                                | Verder kijken naar design patterns. | Voelt zich niet goed.                            |
 | Vincent | Hoorcollege, sidequest quiz, munshkin gespeeld.                                                                                                 | Werken aan de TTS user story   en beginnen met de optimization sidequest.                                         | -                                                         |
 
+#### 30/03/2026
+
+|         | Gedaan                                                                                                                            | Doen                                                                                       | Obstakels                                                 |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------- |
+| Bart    | Munchkin gespeeld voor onderzoek en het college gevolgd. |   Verder aan analyse van image recognicion en voorbereiden voor morgen voor het testen.                                                 | - |
+| Daan    | Munchkin gespeeld voor onderzoek en het college gevolgd.                                                | Voorbereiden voor testen en GDD user stories maken. | -                          |
+| Elias   | Munchkin gespeeld voor onderzoek en het college gevolgd.                                                                                                                                  |  Verder werken aan UX designs of paper prototype voor testing tuesday.                                                                                         | -                                                   |
+| Jarno   | Munchkin gespeeld voor onderzoek en het college gevolgd.                                                                                                | Verder werken aan de GDD. | -                            |
+| Vincent | Munchkin gespeeld voor onderzoek en het college gevolgd.                                                                                                 | Narrative design uitwerken en paper prototype voorbereiden.                                         | -    
+
