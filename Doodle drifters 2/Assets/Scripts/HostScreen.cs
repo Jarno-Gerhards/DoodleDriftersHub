@@ -27,6 +27,7 @@ public class HostScreen : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private string assemblingMessage = "The party is assembling...";
     [SerializeField] private Vector2 portraitSize     = new Vector2(180f, 180f);
+    [SerializeField] private int maxPortraits          = 8;
 
     // Runtime list of all added portraits
     private readonly List<GameObject> portraits = new List<GameObject>();
@@ -60,6 +61,12 @@ public class HostScreen : MonoBehaviour
         if (portraitPrefab == null)
         {
             Debug.LogError("[HostScreen] portraitPrefab is not assigned!");
+            return;
+        }
+
+        if (portraits.Count >= maxPortraits)
+        {
+            Debug.LogWarning($"[HostScreen] Max submissions reached ({maxPortraits}). Ignoring drawing from '{playerName}'.");
             return;
         }
 
