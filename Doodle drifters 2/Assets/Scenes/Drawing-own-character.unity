@@ -1299,18 +1299,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3054316802790191210, guid: 26ea68f45d3627f478e0af716e5468d1, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3054316802790191210, guid: 26ea68f45d3627f478e0af716e5468d1, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3054316802790191210, guid: 26ea68f45d3627f478e0af716e5468d1, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3173124123074047420, guid: 26ea68f45d3627f478e0af716e5468d1, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1515,22 +1503,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5402458031243706857, guid: 26ea68f45d3627f478e0af716e5468d1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5622745887740385164, guid: 26ea68f45d3627f478e0af716e5468d1, type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5622745887740385164, guid: 26ea68f45d3627f478e0af716e5468d1, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5622745887740385164, guid: 26ea68f45d3627f478e0af716e5468d1, type: 3}
-      propertyPath: m_Color.r
-      value: 0.27450967
-      objectReference: {fileID: 0}
     - target: {fileID: 5852972822215102466, guid: 26ea68f45d3627f478e0af716e5468d1, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1557,11 +1529,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6287561186694461817, guid: 26ea68f45d3627f478e0af716e5468d1, type: 3}
       propertyPath: m_Name
-      value: DrawingPlane(Improved)Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 6287561186694461817, guid: 26ea68f45d3627f478e0af716e5468d1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      value: Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 6388735806048693557, guid: 26ea68f45d3627f478e0af716e5468d1, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1618,14 +1586,6 @@ PrefabInstance:
     - target: {fileID: 6902935916146717428, guid: 26ea68f45d3627f478e0af716e5468d1, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6902935916146717428, guid: 26ea68f45d3627f478e0af716e5468d1, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 985
-      objectReference: {fileID: 0}
-    - target: {fileID: 6902935916146717428, guid: 26ea68f45d3627f478e0af716e5468d1, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 653
       objectReference: {fileID: 0}
     - target: {fileID: 6902935916146717428, guid: 26ea68f45d3627f478e0af716e5468d1, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1747,14 +1707,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1760754974}
-    - target: {fileID: 8146130089352946612, guid: 26ea68f45d3627f478e0af716e5468d1, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnSubmit
-      objectReference: {fileID: 0}
-    - target: {fileID: 8146130089352946612, guid: 26ea68f45d3627f478e0af716e5468d1, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: DrawingSubmitBridge, Assembly-CSharp
-      objectReference: {fileID: 0}
     - target: {fileID: 8162887048141907616, guid: 26ea68f45d3627f478e0af716e5468d1, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
