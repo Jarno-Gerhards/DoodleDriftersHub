@@ -44,7 +44,7 @@ public class DrawingSubmitBridge : MonoBehaviour
             doodleInference.Predict();
 
         // Send drawing to host screen
-        Texture2D drawing = drawer.GetTexture();
+        Texture2D drawing = drawer.GetTextureWithTransparentBackground();
         HostScreen.Instance.AddDrawing(drawing, playerName);
 
         Debug.Log($"[DrawingSubmitBridge] Submitted drawing for '{playerName}'.");

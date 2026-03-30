@@ -128,6 +128,33 @@ public class DoodleDrawerPro : MonoBehaviour
 
     public Texture2D GetTexture() => drawTexture;
 
+    /// <summary>
+    /// Returns a cloned texture where near-white pixels become transparent.
+    /// Useful for submit/export while keeping the editor canvas white.
+    /// </summary>
+    public Texture2D GetTextureWithTransparentBackground(byte whiteThreshold = 245)
+    {
+        if (drawTexture == null) return null;
+
+        Texture2D clone = new Texture2D(drawTexture.width, drawTexture.height, TextureFormat.RGBA32, false);
+        clone.filterMode = drawTexture.filterMode;
+        clone.wrapMode = drawTexture.wrapMode;
+
+        Color32[] pixels = drawTexture.GetPixels32();
+
+        for (int i = 0; i < pixels.Length; i++)
+        {
+            Color32 p = pixels[i];
+            bool isWhiteLike = p.r >= whiteThreshold && p.g >= whiteThreshold && p.b >= whiteThreshold;
+            p.a = isWhiteLike ? (byte)0 : (byte)255;
+            pixels[i] = p;
+        }
+
+        clone.SetPixels32(pixels);
+        clone.Apply();
+        return clone;
+    }
+
     private void DrawCircle(int cx, int cy, int radius, Color color)
     {
         int r2 = radius * radius;
