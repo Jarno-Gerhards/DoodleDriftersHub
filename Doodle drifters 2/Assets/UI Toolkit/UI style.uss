@@ -1,2 +1,11 @@
 .button {
+    transition-duration: 0.35s;
+}
+
+.button:hover {
+    -unity-background-image-tint-color: rgb(248, 116, 120);
+    background-size: 100% 100%;
+    color: rgb(255, 255, 255);
+    transition-duration: 0s;
+    scale: 1.1 1.1;
 }
