@@ -6,6 +6,31 @@
     -unity-background-image-tint-color: rgb(248, 116, 120);
     background-size: 100% 100%;
     color: rgb(255, 255, 255);
-    transition-duration: 0s;
+    transition-duration: 0.35s;
+    scale: 1.1 1.1;
+}
+
+.textfield {
+    background-image: url("project://database/Assets/Sprites/InputRB.png?fileID=-526521656776365555&guid=d7410d7f430599944aadbfd76e584e86&type=3#InputRB_0");
+    background-color: rgba(255, 255, 255, 0);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    transition-duration: 0.35s;
+}
+
+.textfield > #unity-text-input {
+    background-color: transparent;
+    background-image: none;
+    border-width: 0;
+}
+
+.textfield > #unity-text-input > TextElement {
+    -unity-text-align: middle-center;
+    transition-property: scale;
+    transition-duration: 0.2s;
+    color: rgb(0, 0, 0);
+}
+
+/* Hover = grow text */
+.textfield:hover > #unity-text-input > TextElement {
     scale: 1.1 1.1;
 }
