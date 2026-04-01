@@ -102,3 +102,13 @@ Elke dag worden dezelfde 3 vragen gesteld. Wat heb je gisteren gedaan, wat ga je
 | Jarno   | Munchkin gespeeld voor onderzoek en het college gevolgd.                                                                                                | Verder werken aan de GDD. | -                            |
 | Vincent | Munchkin gespeeld voor onderzoek en het college gevolgd.                                                                                                 | Narrative design uitwerken en paper prototype voorbereiden.                                         | -    
 
+#### 01/04/2026
+
+|         | Gedaan                                                                                                                            | Doen                                                                                       | Obstakels                                                 |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------- |
+| Bart    | Gesprek retrospective en prototype getest. Gewerkt aan analyse. |   Observaties van de prototype verwerken ion de analyse en kijken wat er nog voor het project moet gebeuren aangezien image recognicion wordt geschrapt.                                                 | - |
+| Daan    | Gesprek retrospective en prototype getest.                                                | 2 user stories af maken en voorbereiden voor guild meeting. | -                          |
+| Elias                                                                                                                                     |  -                                                                                         | Afwezig                                                   |
+| Jarno   | Gesprek retrospective en prototype getest. gevolgd.                                                                                                | Concrete planning maken en voorbereiden guild meeting. | -                            |
+| Vincent | Gesprek retrospective en prototype getest.                                                                                                 | Feedback van de testing beter formuleren en voorbereiden guild meeting.                                         | -    
+
