@@ -3,14 +3,13 @@ using UnityEngine.UI;
 using TMPro;
 
 /// <summary>
-/// Wires the entire "Draw Your Champion" client screen UI to DoodleDrawerPro.
+/// Wires de volledige "Draw Your Champion" client screen UI aan DoodleDrawerPro.
 ///
+/// Tools: Pencil, Eraser, Fill, Line, Rectangle, Circle
 /// Assign all references in the Inspector.
-/// See the Unity Setup Guide for the full hierarchy.
 /// </summary>
 public class DrawingUIController : MonoBehaviour
 {
-
     [Header("Drawer")]
     [SerializeField] private DoodleDrawerPro drawer;
 
@@ -18,46 +17,52 @@ public class DrawingUIController : MonoBehaviour
     [SerializeField] private Button pencilButton;
     [SerializeField] private Button eraserButton;
     [SerializeField] private Button fillButton;
+    [SerializeField] private Button lineButton;
+    [SerializeField] private Button rectangleButton;
+    [SerializeField] private Button circleButton;
 
-    [Header("Tool Button Selected Colors")]
+    [Header("Tool Button Colors")]
     [SerializeField] private Color selectedButtonColor   = new Color(0.25f, 0.55f, 1f);
     [SerializeField] private Color deselectedButtonColor = Color.white;
 
     [Header("Color Palette Buttons")]
-    [Tooltip("Assign one Button per color swatch. Each button's Image color = the draw color.")]
+    [Tooltip("Elke button's Image.color = de tekenkleur.")]
     [SerializeField] private Button[] colorButtons;
 
-
     [Header("Brush Size")]
-    [SerializeField] private Slider      brushSizeSlider;
-    [SerializeField] private TextMeshProUGUI brushSizeLabel;   // optional — shows current size
-
-    // ── Canvas actions ────────────────────────────────────────────────────────
+    [SerializeField] private Slider          brushSizeSlider;
+    [SerializeField] private TextMeshProUGUI brushSizeLabel;
 
     [Header("Canvas Actions")]
     [SerializeField] private Button undoButton;
     [SerializeField] private Button clearButton;
-    [SerializeField] private Button submitButton;
-
-    // ── Active color indicator ────────────────────────────────────────────────
 
     [Header("Active Color Preview (optional)")]
     [SerializeField] private Image activeColorPreview;
 
-    // ── Runtime state ─────────────────────────────────────────────────────────
+    // ── Runtime ───────────────────────────────────────────────────────────────
 
-    private Button currentToolButton;
+    private Button[] allToolButtons;
 
     // ── Lifecycle ─────────────────────────────────────────────────────────────
 
     private void Start()
     {
-        // Tool buttons
-        pencilButton?.onClick.AddListener(() => SelectTool(DoodleDrawerPro.DrawTool.Pencil, pencilButton));
-        eraserButton?.onClick.AddListener(() => SelectTool(DoodleDrawerPro.DrawTool.Eraser, eraserButton));
-        fillButton?.onClick.AddListener(()   => SelectTool(DoodleDrawerPro.DrawTool.Fill,   fillButton));
+        allToolButtons = new[]
+        {
+            pencilButton, eraserButton, fillButton,
+            lineButton, rectangleButton, circleButton
+        };
 
-        // Color palette
+        // Tool buttons
+        pencilButton?   .onClick.AddListener(() => SelectTool(DoodleDrawerPro.DrawTool.Pencil,    pencilButton));
+        eraserButton?   .onClick.AddListener(() => SelectTool(DoodleDrawerPro.DrawTool.Eraser,    eraserButton));
+        fillButton?     .onClick.AddListener(() => SelectTool(DoodleDrawerPro.DrawTool.Fill,      fillButton));
+        lineButton?     .onClick.AddListener(() => SelectTool(DoodleDrawerPro.DrawTool.Line,      lineButton));
+        rectangleButton?.onClick.AddListener(() => SelectTool(DoodleDrawerPro.DrawTool.Rectangle, rectangleButton));
+        circleButton?   .onClick.AddListener(() => SelectTool(DoodleDrawerPro.DrawTool.Circle,    circleButton));
+
+        // Color palette — leest automatisch Image.color van elke knop
         foreach (Button btn in colorButtons)
         {
             if (btn == null) continue;
@@ -65,25 +70,26 @@ public class DrawingUIController : MonoBehaviour
             btn.onClick.AddListener(() => SelectColor(c));
         }
 
-        // Brush size slider
+        // Brush slider
         if (brushSizeSlider != null)
         {
             brushSizeSlider.minValue = 0f;
             brushSizeSlider.maxValue = 1f;
-            brushSizeSlider.value    = 0.1f;   // default ~5 px
+            brushSizeSlider.value    = 0.1f;
             brushSizeSlider.onValueChanged.AddListener(OnBrushSliderChanged);
             OnBrushSliderChanged(brushSizeSlider.value);
         }
 
-        undoButton?.onClick.AddListener(drawer.Undo);
+        // Canvas actions
+        undoButton? .onClick.AddListener(drawer.Undo);
         clearButton?.onClick.AddListener(drawer.ClearCanvas);
 
-        // Default tool = Pencil
+        // Defaults
         SelectTool(DoodleDrawerPro.DrawTool.Pencil, pencilButton);
-
-        // Default color = black
         SelectColor(Color.black);
     }
+
+    // ── Helpers ───────────────────────────────────────────────────────────────
 
     private void SelectTool(DoodleDrawerPro.DrawTool tool, Button button)
     {
@@ -100,14 +106,10 @@ public class DrawingUIController : MonoBehaviour
 
     private void HighlightToolButton(Button selected)
     {
-        // Reset all tool buttons
-        SetButtonColor(pencilButton, deselectedButtonColor);
-        SetButtonColor(eraserButton, deselectedButtonColor);
-        SetButtonColor(fillButton,   deselectedButtonColor);
+        foreach (Button btn in allToolButtons)
+            SetButtonColor(btn, deselectedButtonColor);
 
-        // Highlight selected
         SetButtonColor(selected, selectedButtonColor);
-        currentToolButton = selected;
     }
 
     private static void SetButtonColor(Button btn, Color color)
