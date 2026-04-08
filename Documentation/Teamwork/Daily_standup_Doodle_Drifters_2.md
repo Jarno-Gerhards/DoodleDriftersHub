@@ -112,3 +112,14 @@ Elke dag worden dezelfde 3 vragen gesteld. Wat heb je gisteren gedaan, wat ga je
 | Jarno   | Gesprek retrospective en prototype getest. gevolgd.                                                                                                | Concrete planning maken en voorbereiden guild meeting. | -                            |
 | Vincent | Gesprek retrospective en prototype getest.                                                                                                 | Feedback van de testing beter formuleren en voorbereiden guild meeting.                                         | -    
 
+#### 08/04/2026
+
+|         | Gedaan                                                                                                                            | Doen                                                                                       | Obstakels                                                 |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------- |
+| Bart    | Gewerkt aan de showcase. |   Voorbereiden sprint review.                                                 | - |
+| Daan    | Gewerkt aan de showcase.                                                | Voorbereiden sprint review. | -                          |
+| Elias                                                                                                                                     |  -                                                                                         | -                                                   | Ziek
+| Jarno   | Bezig geweest met technisch design.                                                                                                 | Verder werken aan dit technische design en voorbereiden op de sprint review. | -                            |
+| Vincent | Gewerkt aan de showcase.                                                                                                 | Voorbereiden op de sprint review.                                         | -    
+
+
