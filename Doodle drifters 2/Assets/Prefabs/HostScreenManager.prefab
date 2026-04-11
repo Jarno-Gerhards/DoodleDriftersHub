@@ -49,3 +49,4 @@ MonoBehaviour:
   assemblingText: {fileID: 0}
   assemblingMessage: The party is assembling...
   portraitSize: {x: 300, y: 300}
+  maxPortraits: 8
