@@ -1,29 +1,24 @@
 using UnityEngine;
+using TMPro;
 
 /// <summary>
-/// Zit op de client side. Koppelt de Submit actie aan de HostScreen.
-///
-/// Werking:
-///   - Roept DoodleInference.Predict() aan (image recognition).
-///   - Stuurt de tekening via HostScreen.AddDrawing() naar het host scherm.
+/// Koppelt de client Submit knop aan de HostScreen.
+/// Stuurt de getekende afbeelding + de door de speler ingetypte naam door.
 ///
 /// Inspector hook-up:
-///   - drawer      : DoodleDrawerPro op de client
-///   - doodleInference : DoodleInference (optioneel — voor predict)
-///   - playerName  : naam die onder het portrait komt (tijdelijk hardcoded)
+///   - drawer        : DoodleDrawerPro op de client
+///   - championNameInput : TMP_InputField waarin de speler de naam typt
 ///
-/// Koppel de Submit knop OnClick aan: DrawingSubmitBridge.OnSubmit()
+/// Koppel Submit knop OnClick aan: DrawingSubmitBridge.OnSubmit()
 /// </summary>
 public class DrawingSubmitBridge : MonoBehaviour
 {
     [Header("Client References")]
     [SerializeField] private DoodleDrawerPro  drawer;
-    [SerializeField] private DoodleInference  doodleInference;
+    [SerializeField] private TMP_InputField   championNameInput;
 
-    [Header("Player Info")]
-    [SerializeField] private string playerName = "Player 1";
-
-    // ── Public — gekoppeld aan Submit knop OnClick ────────────────────────────
+    [Header("Fallback naam (als speler niks intypt)")]
+    [SerializeField] private string fallbackName = "Unnamed Champion";
 
     public void OnSubmit()
     {
@@ -39,14 +34,14 @@ public class DrawingSubmitBridge : MonoBehaviour
             return;
         }
 
-        // Run image recognition if available
-        if (doodleInference != null)
-            doodleInference.Predict();
+        // Gebruik ingetypte naam, of fallback als het veld leeg is
+        string championName = championNameInput != null && !string.IsNullOrWhiteSpace(championNameInput.text)
+            ? championNameInput.text.Trim()
+            : fallbackName;
 
-        // Send drawing to host screen
         Texture2D drawing = drawer.GetTextureWithTransparentBackground();
-        HostScreen.Instance.AddDrawing(drawing, playerName);
+        HostScreen.Instance.AddDrawing(drawing, championName);
 
-        Debug.Log($"[DrawingSubmitBridge] Submitted drawing for '{playerName}'.");
+        Debug.Log($"[DrawingSubmitBridge] Submitted '{championName}'.");
     }
 }
