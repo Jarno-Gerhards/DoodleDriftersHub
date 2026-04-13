@@ -7,15 +7,15 @@ using UnityEngine.UI;
 /// <summary>
 /// Advanced drawing component for the "Draw Your Champion" client screen.
 ///
-/// Performance: alle tekenoperaties werken op een Color32[] buffer in geheugen.
-/// SetPixels32 + Apply wordt maar één keer per frame aangeroepen — geen losse SetPixel calls.
+/// Performance: all drawing operations run on an in-memory Color32[] buffer.
+/// SetPixels32 + Apply is called only once per frame, with no individual SetPixel calls.
 ///
 /// Tools:
-///   - Pencil    : vrijhand tekenen
-///   - Eraser    : vrijhand wissen
-///   - Fill      : flood-fill
-///   - Line      : rechte lijn (live preview)
-///   - Rectangle : rechthoek outline (live preview)
+///   - Pencil    : freehand drawing
+///   - Eraser    : freehand erasing
+///   - Fill      : flood fill
+///   - Line      : straight line (live preview)
+///   - Rectangle : rectangle outline (live preview)
 ///   - Circle    : ellipse outline (live preview)
 /// </summary>
 public class DoodleDrawerPro : MonoBehaviour
@@ -30,25 +30,18 @@ public class DoodleDrawerPro : MonoBehaviour
     [Header("Undo")]
     public int maxUndoSteps = 20;
 
-    // ── Tool enum ─────────────────────────────────────────────────────────────
-
     public enum DrawTool { Pencil, Eraser, Fill, Line, Rectangle, Circle }
 
-    // ── Runtime state ─────────────────────────────────────────────────────────
-
     private Texture2D drawTexture;
-    private Color32[] pixelBuffer;        // live buffer — altijd in sync met drawTexture
+    private Color32[] pixelBuffer;
     private Color     currentColor  = Color.black;
     private DrawTool  currentTool   = DrawTool.Pencil;
     private bool      strokeStarted = false;
 
-    // Shape tools
-    private Color32[] shapeBaseSnapshot;  // snapshot van canvas bij begin van sleep
+    private Color32[] shapeBaseSnapshot;
     private int       shapeStartX, shapeStartY;
 
     private readonly Stack<Color32[]> undoStack = new Stack<Color32[]>();
-
-    // ── Lifecycle ─────────────────────────────────────────────────────────────
 
     private void Start()
     {
@@ -119,13 +112,9 @@ public class DoodleDrawerPro : MonoBehaviour
         }
     }
 
-    // =========================================================================
-    // Public API
-    // =========================================================================
-
     public void SetTool(DrawTool tool) => currentTool = tool;
 
-    /// <summary>0=Pencil 1=Eraser 2=Fill 3=Line 4=Rectangle 5=Circle</summary>
+    /// <summary>0=Pencil 1=Eraser 2=Fill 3=Line 4=Rectangle 5=Circle.</summary>
     public void SetTool(int toolIndex) => currentTool = (DrawTool)toolIndex;
 
     public void SetColor(Color color) => currentColor = color;
@@ -173,13 +162,8 @@ public class DoodleDrawerPro : MonoBehaviour
         return clone;
     }
 
-    // =========================================================================
-    // Shape preview — herstel snapshot + teken shape op tijdelijke buffer
-    // =========================================================================
-
     private void DrawShapePreview(int endX, int endY)
     {
-        // Kopieer de snapshot naar de live buffer
         System.Array.Copy(shapeBaseSnapshot, pixelBuffer, pixelBuffer.Length);
 
         switch (currentTool)
@@ -198,27 +182,19 @@ public class DoodleDrawerPro : MonoBehaviour
         CommitBuffer();
     }
 
-    // =========================================================================
-    // Buffer helpers
-    // =========================================================================
-
-    /// <summary>Schrijft pixelBuffer naar de texture — één keer per tekenoperatie.</summary>
+    /// <summary>Writes pixelBuffer to the texture once per draw operation.</summary>
     private void CommitBuffer()
     {
         drawTexture.SetPixels32(pixelBuffer);
         drawTexture.Apply();
     }
 
-    /// <summary>Zet een pixel in de buffer (geen texture write).</summary>
+    /// <summary>Sets a pixel in the buffer without writing to the texture.</summary>
     private void SetPixelInBuffer(Color32[] buf, int x, int y, Color32 color)
     {
         if (x < 0 || x >= textureSize || y < 0 || y >= textureSize) return;
         buf[y * textureSize + x] = color;
     }
-
-    // =========================================================================
-    // Drawing primitives — allemaal op Color32[] buffer, geen SetPixel
-    // =========================================================================
 
     private void DrawCircleOnBuffer(Color32[] buf, int cx, int cy, int radius, Color color)
     {
@@ -255,10 +231,10 @@ public class DoodleDrawerPro : MonoBehaviour
         int minX = Mathf.Min(x0, x1), maxX = Mathf.Max(x0, x1);
         int minY = Mathf.Min(y0, y1), maxY = Mathf.Max(y0, y1);
 
-        DrawLineOnBuffer(buf, minX, minY, maxX, minY, thickness, color); // onder
-        DrawLineOnBuffer(buf, minX, maxY, maxX, maxY, thickness, color); // boven
-        DrawLineOnBuffer(buf, minX, minY, minX, maxY, thickness, color); // links
-        DrawLineOnBuffer(buf, maxX, minY, maxX, maxY, thickness, color); // rechts
+        DrawLineOnBuffer(buf, minX, minY, maxX, minY, thickness, color);
+        DrawLineOnBuffer(buf, minX, maxY, maxX, maxY, thickness, color);
+        DrawLineOnBuffer(buf, minX, minY, minX, maxY, thickness, color);
+        DrawLineOnBuffer(buf, maxX, minY, maxX, maxY, thickness, color);
     }
 
     private void DrawEllipseOnBuffer(Color32[] buf, int x0, int y0, int x1, int y1, int thickness, Color color)
@@ -288,7 +264,6 @@ public class DoodleDrawerPro : MonoBehaviour
         long x = 0, y = ry;
         long px = 0, py = 2 * rx2 * y;
 
-        // Regio 1
         long p = (long)(ry2 - rx2 * ry + 0.25 * rx2);
         while (px < py)
         {
@@ -298,7 +273,6 @@ public class DoodleDrawerPro : MonoBehaviour
             else { y--; py -= 2 * rx2; p += ry2 + px - py; }
         }
 
-        // Regio 2
         p = (long)(ry2 * (x + 0.5) * (x + 0.5) + rx2 * (y - 1) * (y - 1) - rx2 * ry2);
         while (y >= 0)
         {
@@ -309,17 +283,13 @@ public class DoodleDrawerPro : MonoBehaviour
         }
     }
 
-    /// <summary>Schildert een dik punt op de buffer — geen texture writes.</summary>
+    /// <summary>Paints a thick point on the buffer without texture writes.</summary>
     private void PaintThickOnBuffer(Color32[] buf, int cx, int cy, int half, Color32 color)
     {
         for (int dy = -half; dy <= half; dy++)
         for (int dx = -half; dx <= half; dx++)
             SetPixelInBuffer(buf, cx + dx, cy + dy, color);
     }
-
-    // =========================================================================
-    // Fill white
-    // =========================================================================
 
     private void FillWhite()
     {
@@ -328,10 +298,6 @@ public class DoodleDrawerPro : MonoBehaviour
             pixelBuffer[i] = white;
         CommitBuffer();
     }
-
-    // =========================================================================
-    // Flood fill
-    // =========================================================================
 
     private void FloodFill(int startX, int startY, Color fillColor)
     {
@@ -363,10 +329,6 @@ public class DoodleDrawerPro : MonoBehaviour
     private static bool ColorEquals(Color32 a, Color32 b)
         => a.r == b.r && a.g == b.g && a.b == b.b && a.a == b.a;
 
-    // =========================================================================
-    // Undo
-    // =========================================================================
-
     private void PushUndo()
     {
         if (undoStack.Count >= maxUndoSteps)
@@ -382,10 +344,6 @@ public class DoodleDrawerPro : MonoBehaviour
         }
         undoStack.Push((Color32[])pixelBuffer.Clone());
     }
-
-    // =========================================================================
-    // Input helpers
-    // =========================================================================
 
     private static bool IsShapeTool(DrawTool t)
         => t == DrawTool.Line || t == DrawTool.Rectangle || t == DrawTool.Circle;

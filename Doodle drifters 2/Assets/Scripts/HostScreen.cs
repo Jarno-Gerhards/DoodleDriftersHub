@@ -6,16 +6,16 @@ using TMPro;
 /// <summary>
 /// Host screen — "The party is assembling"
 ///
-/// Toont alle ingezonden tekeningen van clients naast elkaar in het midden.
-/// Geen limiet aan het aantal tekeningen.
+/// Shows all submitted client drawings side by side in the center.
+/// No limit on the number of drawings.
 ///
 /// Inspector hook-up:
-///   - drawingContainer : de HorizontalLayoutGroup waar de portraits in komen
-///   - portraitPrefab   : prefab van één portrait slot (zie setup guide)
-///   - assemblingText   : de "The party is assembling" TextMeshPro (optioneel)
+///   - drawingContainer : the HorizontalLayoutGroup where portraits are added
+///   - portraitPrefab   : prefab of a single portrait slot (see setup guide)
+///   - assemblingText   : the "The party is assembling" TextMeshPro (optional)
 ///
-/// Andere scripts roepen HostScreen.AddDrawing(texture, playerName) aan.
-/// DrawingSubmitBridge.cs doet dit automatisch vanuit de client Submit knop.
+/// Other scripts call HostScreen.AddDrawing(texture, playerName).
+/// DrawingSubmitBridge.cs does this automatically from the client Submit button.
 /// </summary>
 public class HostScreen : MonoBehaviour
 {
@@ -29,10 +29,8 @@ public class HostScreen : MonoBehaviour
     [SerializeField] private Vector2 portraitSize     = new Vector2(180f, 180f);
     [SerializeField] private int maxPortraits          = 8;
 
-    // Runtime list of all added portraits
     private readonly List<GameObject> portraits = new List<GameObject>();
 
-    // ── Singleton so DrawingSubmitBridge can find it easily ───────────────────
     public static HostScreen Instance { get; private set; }
 
     private void Awake()
@@ -45,10 +43,6 @@ public class HostScreen : MonoBehaviour
         if (assemblingText != null)
             assemblingText.text = assemblingMessage;
     }
-
-    // =========================================================================
-    // Public API
-    // =========================================================================
 
     /// <summary>
     /// Add a drawing to the host screen.
@@ -73,18 +67,15 @@ public class HostScreen : MonoBehaviour
         GameObject portrait = Instantiate(portraitPrefab, drawingContainer);
         portraits.Add(portrait);
 
-        // Set portrait size
         RectTransform rt = portrait.GetComponent<RectTransform>();
         if (rt != null)
         {
             rt.sizeDelta = portraitSize;
         }
 
-        // Find the RawImage inside the prefab and assign the drawing texture
         RawImage img = portrait.GetComponentInChildren<RawImage>();
         if (img != null)
         {
-            // Clone the texture so it isn't affected if the canvas is cleared
             Texture2D clone = CloneTexture(drawing);
             img.texture = clone;
         }
@@ -93,7 +84,6 @@ public class HostScreen : MonoBehaviour
             Debug.LogWarning("[HostScreen] Portrait prefab has no RawImage child.");
         }
 
-        // Find the label TMP and set player name
         TextMeshProUGUI label = portrait.GetComponentInChildren<TextMeshProUGUI>();
         if (label != null)
             label.text = playerName;
@@ -108,10 +98,6 @@ public class HostScreen : MonoBehaviour
             Destroy(p);
         portraits.Clear();
     }
-
-    // =========================================================================
-    // Helpers
-    // =========================================================================
 
     private Texture2D CloneTexture(Texture2D source)
     {

@@ -2,14 +2,14 @@ using UnityEngine;
 using TMPro;
 
 /// <summary>
-/// Koppelt de client Submit knop aan de HostScreen.
-/// Stuurt de getekende afbeelding + de door de speler ingetypte naam door.
+/// Connects the client Submit button to the HostScreen.
+/// Sends the drawn image together with the player-entered name.
 ///
 /// Inspector hook-up:
-///   - drawer        : DoodleDrawerPro op de client
-///   - championNameInput : TMP_InputField waarin de speler de naam typt
+///   - drawer        : DoodleDrawerPro on the client
+///   - championNameInput : TMP_InputField where the player enters the name
 ///
-/// Koppel Submit knop OnClick aan: DrawingSubmitBridge.OnSubmit()
+/// Connect Submit button OnClick to: DrawingSubmitBridge.OnSubmit()
 /// </summary>
 public class DrawingSubmitBridge : MonoBehaviour
 {
@@ -17,7 +17,7 @@ public class DrawingSubmitBridge : MonoBehaviour
     [SerializeField] private DoodleDrawerPro  drawer;
     [SerializeField] private TMP_InputField   championNameInput;
 
-    [Header("Fallback naam (als speler niks intypt)")]
+    [Header("Fallback name (if the player enters nothing)")]
     [SerializeField] private string fallbackName = "Unnamed Champion";
 
     public void OnSubmit()
@@ -34,7 +34,6 @@ public class DrawingSubmitBridge : MonoBehaviour
             return;
         }
 
-        // Gebruik ingetypte naam, of fallback als het veld leeg is
         string championName = championNameInput != null && !string.IsNullOrWhiteSpace(championNameInput.text)
             ? championNameInput.text.Trim()
             : fallbackName;
