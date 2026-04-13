@@ -1,0 +1,157 @@
+{
+  "character_modules": {
+    "e2d80418594746a0b4f932738c02bbc8": {
+      "name": "Aaron Archer-M",
+      "jsonpath": "1c5d5bab4348d66801c1b3dbce68721c.json",
+      "required_language_modules": {
+        "eng": "module-b29fd6d748df29d8f67087d4ceb1ec81-6e618052e5f4d47d63d03d6e608dfc3a-2948f8991e777c5a42df283efa0947e5"
+      },
+      "characters": [
+        "Aaron Archer"
+      ],
+      "quality": "mid",
+      "languages": {
+        "English": {
+          "languagecode": "eng",
+          "dialects": {
+            "English US": {
+              "iso639_2": "eng",
+              "iso639_3": "",
+              "glottocode": "",
+              "customdialect": "",
+              "iso3166_1": "US",
+              "iso3166_2": "US-IN",
+              "languagecode": "eng_US"
+            }
+          }
+        }
+      },
+      "version": {
+        "major": 2,
+        "minor": 0,
+        "patch": 0
+      }
+    },
+    "117e46ddfb8a4214a2da01867afbb1ca": {
+      "name": "Aaron Archer-XL",
+      "jsonpath": "e5684c6d08c5682f99f0886699d8b778.json",
+      "required_language_modules": {
+        "eng": "module-b29fd6d748df29d8f67087d4ceb1ec81-6e618052e5f4d47d63d03d6e608dfc3a-2948f8991e777c5a42df283efa0947e5"
+      },
+      "characters": [
+        "Aaron Archer"
+      ],
+      "quality": "ultrahigh",
+      "languages": {
+        "English": {
+          "languagecode": "eng",
+          "dialects": {
+            "English US": {
+              "iso639_2": "eng",
+              "iso639_3": "",
+              "glottocode": "",
+              "customdialect": "",
+              "iso3166_1": "US",
+              "iso3166_2": "US-IN",
+              "languagecode": "eng_US"
+            }
+          }
+        }
+      },
+      "version": {
+        "major": 2,
+        "minor": 0,
+        "patch": 0
+      }
+    }
+  },
+  "language_modules": {
+    "module-b29fd6d748df29d8f67087d4ceb1ec81-6e618052e5f4d47d63d03d6e608dfc3a-2948f8991e777c5a42df283efa0947e5": {
+      "name": "English",
+      "languages": {
+        "English": [
+          {
+            "iso639_2": "eng",
+            "iso639_3": "",
+            "glottocode": "",
+            "customdialect": "",
+            "iso3166_1": "",
+            "iso3166_2": ""
+          }
+        ]
+      },
+      "jsonpath": "025d4b06a012541195854af4e833b12a.json"
+    }
+  },
+  "imported_configs": {
+    "English": "025d4b06a012541195854af4e833b12a.json",
+    "Aaron Archer-M": "1c5d5bab4348d66801c1b3dbce68721c.json",
+    "Aaron Archer-XL": "e5684c6d08c5682f99f0886699d8b778.json"
+  },
+  "file_usage": {
+    "2d8441cc379118bb6434b40a815faedb": [
+      "025d4b06a012541195854af4e833b12a.json"
+    ],
+    "d5d58f254f736eb5f6321e05601e4e3d": [
+      "025d4b06a012541195854af4e833b12a.json"
+    ],
+    "ab5d8a1ebe67fdb2df818fefd57e58eb": [
+      "1c5d5bab4348d66801c1b3dbce68721c.json",
+      "e5684c6d08c5682f99f0886699d8b778.json"
+    ],
+    "8bd33fe1fa7f246a0021235cafcd1863": [
+      "1c5d5bab4348d66801c1b3dbce68721c.json"
+    ],
+    "9867193e28e1bf3e98b603bd53f1b8f2": [
+      "1c5d5bab4348d66801c1b3dbce68721c.json"
+    ],
+    "77e2f4a369aadba455b68a97215667e5": [
+      "1c5d5bab4348d66801c1b3dbce68721c.json"
+    ],
+    "f8ea4f0d63ab4d032c2482ff2f5a8caf": [
+      "1c5d5bab4348d66801c1b3dbce68721c.json"
+    ],
+    "682b844d07de49cd14f747bdbdd7efcf": [
+      "1c5d5bab4348d66801c1b3dbce68721c.json"
+    ],
+    "0753880719d790c86360f6320cbfc369": [
+      "1c5d5bab4348d66801c1b3dbce68721c.json"
+    ],
+    "8969d3d9488ab17de480cf2528442778": [
+      "1c5d5bab4348d66801c1b3dbce68721c.json"
+    ],
+    "5afdb7596d7f68e29ed51ed2ba5a479e": [
+      "1c5d5bab4348d66801c1b3dbce68721c.json"
+    ],
+    "a0ae37b5b2a620ae57f798fb7962409a": [
+      "1c5d5bab4348d66801c1b3dbce68721c.json"
+    ],
+    "1a36c27eaa96cec2d4a4afc5ebf03090": [
+      "e5684c6d08c5682f99f0886699d8b778.json"
+    ],
+    "5d41199145d78b83d1db1fbab0795591": [
+      "e5684c6d08c5682f99f0886699d8b778.json"
+    ],
+    "fce0075c470e7758738571c79734928d": [
+      "e5684c6d08c5682f99f0886699d8b778.json"
+    ],
+    "72efc328ae36aa70516ce2e1bb3c2077": [
+      "e5684c6d08c5682f99f0886699d8b778.json"
+    ],
+    "be3cfbdde3d4ee617a75b32d8dde2cc6": [
+      "e5684c6d08c5682f99f0886699d8b778.json"
+    ],
+    "d8dabc03ccf67aea39b27e82f02470d0": [
+      "e5684c6d08c5682f99f0886699d8b778.json"
+    ],
+    "731def678783ac10ea199ce03cce9f4f": [
+      "e5684c6d08c5682f99f0886699d8b778.json"
+    ],
+    "4b0b7a0175d86f81187a97074d033347": [
+      "e5684c6d08c5682f99f0886699d8b778.json"
+    ],
+    "4d66f6d7357914466209d663c134a4da": [
+      "e5684c6d08c5682f99f0886699d8b778.json"
+    ]
+  }
+}
