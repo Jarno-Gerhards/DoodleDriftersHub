@@ -122,4 +122,14 @@ Elke dag worden dezelfde 3 vragen gesteld. Wat heb je gisteren gedaan, wat ga je
 | Jarno   | Bezig geweest met technisch design.                                                                                                 | Verder werken aan dit technische design en voorbereiden op de sprint review. | -                            |
 | Vincent | Gewerkt aan de showcase.                                                                                                 | Voorbereiden op de sprint review.                                         | -    
 
+#### 15/04/2026
+
+|         | Gedaan                                                                                                                            | Doen                                                                                       | Obstakels                                                 |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------- |
+| Bart    | Side quest quiz gedaan en sprint start. |   Verder werken aan de scenario issue en als ie daar klaar mee is dan pakt hij een nieuwe issue.                                                 | - |
+| Daan    | Side quest quiz gedaan en sprint start.                                                | Verder werken aan de schetesen voor de schermen en issues maken voor de telefoon schermen.   | -                          |
+| Elias                                                                                                                                     |  Side quest quiz gedaan en sprint start.                                                                                         | Werken aan een issue.                                                   | -
+| Jarno   | Side quest quiz gedaan en sprint start.                                                                                                 | Verder werken aan dit technische design en voorbereiden op de sprint review. | -                            |
+| Vincent | Side quest quiz gedaan en sprint start.                                                                                                 | Flow chart af maken en daarna beginnen aan een nieuwe issue.                                         | -    
+
 
