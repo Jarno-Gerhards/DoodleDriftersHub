@@ -6,7 +6,7 @@ public class NewScenario : BaseScenario
     "Generate an atmospheric description of a room in a dungeon." +
     "End with a clear challenge which the players must overcome";
 
-    public void Generate()
+    public override void Generate()
     {
         SendLLMRequest(scenarioSpecificPrompt);
     }
