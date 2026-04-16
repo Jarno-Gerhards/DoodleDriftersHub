@@ -18,17 +18,26 @@
         <div id="activeColorPreview" class="palette-strip"></div>
         <div class="color-grid">
           <button class="color-btn" data-color="#000000" style="--swatch:#000000"></button>
-          <button class="color-btn" data-color="#ffffff" style="--swatch:#ffffff"></button>
+          <button class="color-btn" data-color="#4a4a4a" style="--swatch:#4a4a4a"></button>
           <button class="color-btn" data-color="#8a8a8a" style="--swatch:#8a8a8a"></button>
+          <button class="color-btn" data-color="#ffffff" style="--swatch:#ffffff"></button>
+          <button class="color-btn" data-color="#c7c7c7" style="--swatch:#c7c7c7"></button>
+          <button class="color-btn" data-color="#7b5747" style="--swatch:#7b5747"></button>
           <button class="color-btn" data-color="#ed3333" style="--swatch:#ed3333"></button>
           <button class="color-btn" data-color="#f08f00" style="--swatch:#f08f00"></button>
           <button class="color-btn" data-color="#f1d133" style="--swatch:#f1d133"></button>
+          <button class="color-btn" data-color="#8bc34a" style="--swatch:#8bc34a"></button>
           <button class="color-btn" data-color="#46a346" style="--swatch:#46a346"></button>
+          <button class="color-btn" data-color="#0d7a34" style="--swatch:#0d7a34"></button>
           <button class="color-btn" data-color="#1ca3b6" style="--swatch:#1ca3b6"></button>
+          <button class="color-btn" data-color="#00c8ff" style="--swatch:#00c8ff"></button>
           <button class="color-btn" data-color="#2c87d3" style="--swatch:#2c87d3"></button>
+          <button class="color-btn" data-color="#4f46e5" style="--swatch:#4f46e5"></button>
           <button class="color-btn" data-color="#8b2bb0" style="--swatch:#8b2bb0"></button>
           <button class="color-btn" data-color="#df5d96" style="--swatch:#df5d96"></button>
-          <button class="color-btn" data-color="#7b5747" style="--swatch:#7b5747"></button>
+          <button class="color-btn" data-color="#8b1e3f" style="--swatch:#8b1e3f"></button>
+          <button class="color-btn" data-color="#ffb347" style="--swatch:#ffb347"></button>
+          <button class="color-btn" data-color="#1f4e79" style="--swatch:#1f4e79"></button>
         </div>
       </aside>
 
@@ -62,8 +71,11 @@
         </div>
 
         <div class="slider-wrap">
-          <label for="brushSize">Grootte: <span id="brushSizeLabel">5</span></label>
-          <input id="brushSize" type="range" min="0" max="1" value="0.1" step="0.01" />
+          <div class="slider-track-row">
+            <span class="slider-size-dot small" aria-hidden="true"></span>
+            <input id="brushSize" type="range" min="0" max="1" value="0.1" step="0.01" />
+            <span class="slider-size-dot large" aria-hidden="true"></span>
+          </div>
         </div>
 
         <button id="clearBtn" class="clear-btn" title="Clear canvas">Clear</button>

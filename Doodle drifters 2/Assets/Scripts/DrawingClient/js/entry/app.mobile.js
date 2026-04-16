@@ -10,7 +10,6 @@ const toolToggle = document.getElementById("toolToggle");
 const brushToggle = document.getElementById("brushToggle");
 
 const toolCurrentIcon = document.getElementById("toolCurrentIcon");
-const brushCurrentPreview = document.getElementById("brushCurrentPreview");
 const activeColorPreview = document.getElementById("activeColorPreview");
 
 const popupBackdrop = document.getElementById("popupBackdrop");
@@ -18,7 +17,6 @@ const toolPopup = document.getElementById("toolPopup");
 const brushPopup = document.getElementById("brushPopup");
 
 const brushSlider = document.getElementById("brushSize");
-const brushLabel = document.getElementById("brushSizeLabel");
 
 const fallbackName = "Unnamed Champion";
 
@@ -31,13 +29,6 @@ const drawer = createDrawer({
 });
 
 let openPopup = null;
-
-const brushPreviewMap = [
-  { max: 8, size: 14 },
-  { max: 16, size: 22 },
-  { max: 26, size: 32 },
-  { max: 40, size: 44 }
-];
 
 function setTool(toolName, icon) {
   drawer.setTool(toolName);
@@ -52,19 +43,6 @@ function setColor(hex) {
 function updateBrushUiFromSlider() {
   const value = Number(brushSlider.value);
   drawer.setBrushSizeNormalized(value);
-  const brushSize = Math.round(1 + value * 39);
-  brushLabel.textContent = String(brushSize);
-
-  let previewSize = 44;
-  for (const item of brushPreviewMap) {
-    if (brushSize <= item.max) {
-      previewSize = item.size;
-      break;
-    }
-  }
-
-  brushCurrentPreview.style.width = previewSize + "px";
-  brushCurrentPreview.style.height = previewSize + "px";
 }
 
 function hideAllPopups() {

@@ -12,6 +12,10 @@
       <h1>Draw your champion</h1>
     </header>
 
+    <section class="name-section">
+      <input id="championName" type="text" maxlength="50" placeholder="Give your champion a name!" />
+    </section>
+
     <section class="canvas-shell" aria-label="Drawing area">
       <canvas id="drawCanvas" width="600" height="820" aria-label="Drawing canvas"></canvas>
 
@@ -21,34 +25,45 @@
       </div>
     </section>
 
-    <section class="name-section">
-      <input id="championName" type="text" maxlength="50" placeholder="Give your champion a name!" />
-    </section>
-
     <section class="control-strip" aria-label="Tool controls">
       <button id="toolToggle" class="toggle-btn" type="button" aria-haspopup="dialog" aria-expanded="false">
         <span class="toggle-icon" id="toolCurrentIcon">✏</span>
       </button>
 
       <button id="brushToggle" class="toggle-btn" type="button" aria-haspopup="dialog" aria-expanded="false">
-        <span class="toggle-icon brush-dot" id="brushCurrentPreview"></span>
+        <span class="toggle-icon brush-size-icon" id="brushCurrentPreview" aria-hidden="true">
+          <span class="brush-size-circle brush-size-circle-small"></span>
+          <span class="brush-size-circle brush-size-circle-large"></span>
+        </span>
       </button>
 
       <div class="color-panel" aria-label="Color picker">
         <span class="active-color-chip" id="activeColorPreview" aria-label="Actieve kleur"></span>
-        <div class="inline-color-grid">
-          <button class="inline-color" data-color="#000000" style="--swatch:#000000" type="button"></button>
-          <button class="inline-color" data-color="#ffffff" style="--swatch:#ffffff" type="button"></button>
-          <button class="inline-color" data-color="#8a8a8a" style="--swatch:#8a8a8a" type="button"></button>
-          <button class="inline-color" data-color="#ed3333" style="--swatch:#ed3333" type="button"></button>
-          <button class="inline-color" data-color="#f08f00" style="--swatch:#f08f00" type="button"></button>
-          <button class="inline-color" data-color="#f1d133" style="--swatch:#f1d133" type="button"></button>
-          <button class="inline-color" data-color="#46a346" style="--swatch:#46a346" type="button"></button>
-          <button class="inline-color" data-color="#1ca3b6" style="--swatch:#1ca3b6" type="button"></button>
-          <button class="inline-color" data-color="#2c87d3" style="--swatch:#2c87d3" type="button"></button>
-          <button class="inline-color" data-color="#8b2bb0" style="--swatch:#8b2bb0" type="button"></button>
-          <button class="inline-color" data-color="#df5d96" style="--swatch:#df5d96" type="button"></button>
-          <button class="inline-color" data-color="#19e09a" style="--swatch:#19e09a" type="button"></button>
+        <div class="color-scroll" aria-label="Swipe voor meer kleuren">
+          <div class="inline-color-grid">
+            <button class="inline-color" data-color="#000000" style="--swatch:#000000" type="button"></button>
+            <button class="inline-color" data-color="#4a4a4a" style="--swatch:#4a4a4a" type="button"></button>
+            <button class="inline-color" data-color="#8a8a8a" style="--swatch:#8a8a8a" type="button"></button>
+            <button class="inline-color" data-color="#ffffff" style="--swatch:#ffffff" type="button"></button>
+            <button class="inline-color" data-color="#c7c7c7" style="--swatch:#c7c7c7" type="button"></button>
+            <button class="inline-color" data-color="#7b5747" style="--swatch:#7b5747" type="button"></button>
+            <button class="inline-color" data-color="#ed3333" style="--swatch:#ed3333" type="button"></button>
+            <button class="inline-color" data-color="#f08f00" style="--swatch:#f08f00" type="button"></button>
+            <button class="inline-color" data-color="#f1d133" style="--swatch:#f1d133" type="button"></button>
+            <button class="inline-color" data-color="#ffb347" style="--swatch:#ffb347" type="button"></button>
+            <button class="inline-color" data-color="#8bc34a" style="--swatch:#8bc34a" type="button"></button>
+            <button class="inline-color" data-color="#46a346" style="--swatch:#46a346" type="button"></button>
+            <button class="inline-color" data-color="#0d7a34" style="--swatch:#0d7a34" type="button"></button>
+            <button class="inline-color" data-color="#1ca3b6" style="--swatch:#1ca3b6" type="button"></button>
+            <button class="inline-color" data-color="#00c8ff" style="--swatch:#00c8ff" type="button"></button>
+            <button class="inline-color" data-color="#2c87d3" style="--swatch:#2c87d3" type="button"></button>
+            <button class="inline-color" data-color="#1f4e79" style="--swatch:#1f4e79" type="button"></button>
+            <button class="inline-color" data-color="#8b2bb0" style="--swatch:#8b2bb0" type="button"></button>
+            <button class="inline-color" data-color="#df5d96" style="--swatch:#df5d96" type="button"></button>
+            <button class="inline-color" data-color="#8b1e3f" style="--swatch:#8b1e3f" type="button"></button>
+            <button class="inline-color" data-color="#19e09a" style="--swatch:#19e09a" type="button"></button>
+            <button class="inline-color" data-color="#4f46e5" style="--swatch:#4f46e5" type="button"></button>
+          </div>
         </div>
       </div>
     </section>
@@ -78,8 +93,11 @@
       </div>
 
       <div class="brush-slider-wrap">
-        <input id="brushSize" type="range" min="0" max="1" step="0.01" value="0.1" />
-        <span id="brushSizeLabel">5</span>
+        <div class="mobile-slider-stack" aria-hidden="true">
+          <span class="slider-size-dot large"></span>
+          <input id="brushSize" type="range" min="0" max="1" step="0.01" value="0.1" />
+          <span class="slider-size-dot small"></span>
+        </div>
       </div>
     </div>
   </section>
