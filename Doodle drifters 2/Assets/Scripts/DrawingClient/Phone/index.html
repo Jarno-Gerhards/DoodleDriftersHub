@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Client draw template</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="phone-app">
+    <header class="app-header">
+      <h1>Draw your champion</h1>
+    </header>
+
+    <section class="canvas-shell" aria-label="Drawing area">
+      <canvas id="drawCanvas" width="600" height="820" aria-label="Drawing canvas"></canvas>
+
+      <div class="canvas-actions">
+        <button id="undoBtn" class="action-btn undo" type="button" aria-label="Undo">↺</button>
+        <button id="submitBtn" class="action-btn submit" type="button" aria-label="Submit">✓</button>
+      </div>
+    </section>
+
+    <section class="name-section">
+      <input id="championName" type="text" maxlength="50" placeholder="Give your champion a name!" />
+    </section>
+
+    <section class="control-strip" aria-label="Tool controls">
+      <button id="toolToggle" class="toggle-btn" type="button" aria-haspopup="dialog" aria-expanded="false">
+        <span class="toggle-icon" id="toolCurrentIcon">✏</span>
+      </button>
+
+      <button id="brushToggle" class="toggle-btn" type="button" aria-haspopup="dialog" aria-expanded="false">
+        <span class="toggle-icon brush-dot" id="brushCurrentPreview"></span>
+      </button>
+
+      <div class="color-panel" aria-label="Color picker">
+        <span class="active-color-chip" id="activeColorPreview" aria-label="Actieve kleur"></span>
+        <div class="inline-color-grid">
+          <button class="inline-color" data-color="#000000" style="--swatch:#000000" type="button"></button>
+          <button class="inline-color" data-color="#ffffff" style="--swatch:#ffffff" type="button"></button>
+          <button class="inline-color" data-color="#8a8a8a" style="--swatch:#8a8a8a" type="button"></button>
+          <button class="inline-color" data-color="#ed3333" style="--swatch:#ed3333" type="button"></button>
+          <button class="inline-color" data-color="#f08f00" style="--swatch:#f08f00" type="button"></button>
+          <button class="inline-color" data-color="#f1d133" style="--swatch:#f1d133" type="button"></button>
+          <button class="inline-color" data-color="#46a346" style="--swatch:#46a346" type="button"></button>
+          <button class="inline-color" data-color="#1ca3b6" style="--swatch:#1ca3b6" type="button"></button>
+          <button class="inline-color" data-color="#2c87d3" style="--swatch:#2c87d3" type="button"></button>
+          <button class="inline-color" data-color="#8b2bb0" style="--swatch:#8b2bb0" type="button"></button>
+          <button class="inline-color" data-color="#df5d96" style="--swatch:#df5d96" type="button"></button>
+          <button class="inline-color" data-color="#19e09a" style="--swatch:#19e09a" type="button"></button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="popupBackdrop" class="popup-backdrop" hidden></div>
+
+  <section id="toolPopup" class="popup" hidden aria-label="Select tool">
+    <div class="tool-grid">
+      <button class="popup-tool" data-tool="pencil" data-icon="✏" type="button">✏</button>
+      <button class="popup-tool" data-tool="eraser" data-icon="⌫" type="button">⌫</button>
+      <button class="popup-tool" data-tool="fill" data-icon="🪣" type="button">🪣</button>
+      <button class="popup-tool" data-tool="line" data-icon="／" type="button">／</button>
+      <button class="popup-tool" data-tool="rectangle" data-icon="□" type="button">□</button>
+      <button class="popup-tool" data-tool="circle" data-icon="◯" type="button">◯</button>
+    </div>
+  </section>
+
+  <section id="brushPopup" class="popup" hidden aria-label="Select brush size">
+    <div class="brush-popup-content">
+      <div class="brush-size-list" id="brushQuickChoices">
+        <button class="brush-choice" data-size="1.00" type="button"><span class="dot s5"></span></button>
+        <button class="brush-choice" data-size="0.65" type="button"><span class="dot s4"></span></button>
+        <button class="brush-choice" data-size="0.40" type="button"><span class="dot s3"></span></button>
+        <button class="brush-choice" data-size="0.20" type="button"><span class="dot s2"></span></button>
+        <button class="brush-choice" data-size="0.00" type="button"><span class="dot s1"></span></button>
+      </div>
+
+      <div class="brush-slider-wrap">
+        <input id="brushSize" type="range" min="0" max="1" step="0.01" value="0.1" />
+        <span id="brushSizeLabel">5</span>
+      </div>
+    </div>
+  </section>
+
+  <script type="module" src="../js/entry/app.mobile.js"></script>
+</body>
+</html>
