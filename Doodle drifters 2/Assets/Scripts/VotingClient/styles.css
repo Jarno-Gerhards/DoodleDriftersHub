@@ -1,17 +1,42 @@
 @import "./Phone/styles.css";
 
+.desktop-voting-page {
+  background: var(--bg);
+}
+
 .desktop-voting-shell {
-  width: min(900px, 96vw);
+  width: 100vw;
   min-height: 100vh;
   margin: 0 auto;
   background: var(--bg);
-  padding: 24px 22px 28px;
+  padding: 46px 54px 42px;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.desktop-voting-shell .voting-header {
+  margin-bottom: 0;
+}
+
+.desktop-voting-shell .voting-header h1 {
+  font-size: clamp(2.3rem, 4vw, 3.15rem);
+  font-weight: 500;
 }
 
 .desktop-voting-shell .voting-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(4, 140px);
+  justify-content: center;
+  gap: 260px 260px;
+  width: fit-content;
+  align-self: center;
+  margin: 0 auto 90px;
 }
 
 .desktop-voting-shell .vote-card {
-  width: clamp(90px, 15vw, 142px);
+  width: 140px;
+  border-color: #a77fe3;
+}
+
+.desktop-voting-shell .vote-status {
+  display: none;
 }
