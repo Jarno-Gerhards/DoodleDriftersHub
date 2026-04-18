@@ -1,0 +1,17 @@
+@import "./Phone/styles.css";
+
+.desktop-voting-shell {
+  width: min(900px, 96vw);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: var(--bg);
+  padding: 24px 22px 28px;
+}
+
+.desktop-voting-shell .voting-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.desktop-voting-shell .vote-card {
+  width: clamp(90px, 15vw, 142px);
+}
