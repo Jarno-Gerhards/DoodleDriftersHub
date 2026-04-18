@@ -66,26 +66,16 @@ MonoBehaviour:
   pencilButton: {fileID: 0}
   eraserButton: {fileID: 0}
   fillButton: {fileID: 0}
+  lineButton: {fileID: 0}
+  rectangleButton: {fileID: 0}
+  circleButton: {fileID: 0}
   selectedButtonColor: {r: 0.6886792, g: 0.6886792, b: 0.6886792, a: 1}
   deselectedButtonColor: {r: 1, g: 1, b: 1, a: 1}
-  colorButtons:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  colorButtons: []
   brushSizeSlider: {fileID: 0}
   brushSizeLabel: {fileID: 0}
   undoButton: {fileID: 0}
   clearButton: {fileID: 0}
-  submitButton: {fileID: 0}
   activeColorPreview: {fileID: 0}
 --- !u!114 &6978933912500378048
 MonoBehaviour:
@@ -100,5 +90,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DrawingSubmitBridge
   drawer: {fileID: 7797779929299938919}
-  doodleInference: {fileID: 0}
-  playerName: Player 1
+  championNameInput: {fileID: 0}
+  fallbackName: Unnamed Champion
