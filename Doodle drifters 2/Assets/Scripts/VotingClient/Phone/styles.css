@@ -31,7 +31,7 @@ body {
 
 .voting-header {
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 80px;
 }
 
 .voting-header h1 {
@@ -42,13 +42,13 @@ body {
 
 .voting-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 34px 32px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 60px 28px;
   justify-items: center;
 }
 
 .vote-card {
-  width: clamp(82px, 26vw, 136px);
+  width: clamp(86px, 28vw, 132px);
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   border: 2px solid transparent;
@@ -89,6 +89,6 @@ body {
   }
 
   .voting-grid {
-    gap: 24px 18px;
+    gap: 22px 20px;
   }
 }
