@@ -1,0 +1,31 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/hostLobbyPresets.uss?fileID=7433441132597879392&amp;guid=bbb5081f88aabca46b254d49f57382fa&amp;type=3#hostLobbyPresets"/>
+    <ui:VisualElement name="LobbyUI" style="flex-grow: 1;">
+        <ui:VisualElement name="player1Container" class="playerContainer" style="top: 100px; left: 150px;">
+            <ui:VisualElement name="player1Avatar" class="playerAvatar"/>
+            <ui:Label text="Open slot" name="player1Name" class="playerName"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="player2Container" class="playerContainer" style="top: 400px; left: 150px;">
+            <ui:VisualElement name="player2Avatar" class="playerAvatar"/>
+            <ui:Label text="Open slot" name="player2Name" class="playerName"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="player3Container" class="playerContainer" style="top: 700px; left: 150px;">
+            <ui:VisualElement name="player3Avatar" class="playerAvatar"/>
+            <ui:Label text="Open slot" name="player3Name" class="playerName"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="player4Container" class="playerContainer" style="top: 100px; left: 450px;">
+            <ui:VisualElement name="player4Avatar" class="playerAvatar"/>
+            <ui:Label text="Open slot" name="player4Name" class="playerName"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="player5Container" class="playerContainer" style="top: 400px; left: 450px;">
+            <ui:VisualElement name="player5Avatar" class="playerAvatar"/>
+            <ui:Label text="Open slot" name="player5Name" class="playerName"/>
+        </ui:VisualElement>
+        <ui:VisualElement name="player6Container" class="playerContainer" style="top: 700px; left: 450px;">
+            <ui:VisualElement name="player6Avatar" class="playerAvatar"/>
+            <ui:Label text="Open slot" name="player6Name" class="playerName"/>
+        </ui:VisualElement>
+        <ui:TextField label="Number of Encounters :" placeholder-text="-" name="EncounterInput" max-length="1" class="numericInputField" style="top: 374px; left: 1131px;"/>
+        <ui:Button text="Start Game" name="StartGame" class="button" style="position: absolute; top: 623px; left: 1260px; height: 100px; width: 248px; font-size: 35px; background-color: rgb(255, 255, 255); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;"/>
+    </ui:VisualElement>
+</ui:UXML>
