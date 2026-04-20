@@ -132,4 +132,14 @@ Elke dag worden dezelfde 3 vragen gesteld. Wat heb je gisteren gedaan, wat ga je
 | Jarno   | Side quest quiz gedaan en sprint start.                                                                                                 | Verder werken aan dit technische design en voorbereiden op de sprint review. | -                            |
 | Vincent | Side quest quiz gedaan en sprint start.                                                                                                 | Flow chart af maken en daarna beginnen aan een nieuwe issue.                                         | -    
 
+#### 20/04/2026
+
+|         | Gedaan                                                                                                                            | Doen                                                                                       | Obstakels                                                 |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------- |
+| Bart    | Gewerkt aan sidequest. |   Aan de slag met lobby scherm en join scherm.                                                 | - |
+| Daan    | Gastcollege gevolgd.                                                | Werken aan het dichte en open boek in Unity.   | -                          |
+| Elias                                                                                                                                     |  Client side voting gedaan.                                                                                         | Wachten op boek components.                                                   | -
+| Jarno   | Gastcollege gevolgd.                                                                                                 | Issues updaten en aan de slag met state machine. | -                            |
+| Vincent | Gastcollege gevolgd.                                                                                                 | Test plan opzetten en eventueel beginnen aan UI.                                         | -    
+
 
