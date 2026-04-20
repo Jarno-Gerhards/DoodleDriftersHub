@@ -1,13 +1,12 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/Scripts/Voting/UI/VotingHostPanel.uss?fileID=7433441132597879392&amp;guid=abc02a8a2866c4a42a69532c86dd65aa&amp;type=3#VotingHostPanel"/>
     <ui:VisualElement name="host-voting-root" class="host-voting-root">
-        <ui:Label name="status-label" text="Voting" class="host-voting-status"/>
         <ui:VisualElement name="book-spread" class="book-spread">
             <ui:VisualElement name="left-page" class="book-page">
-                <ui:VisualElement name="left-page-grid" class="page-grid"/>
+                <ui:VisualElement name="left-page-grid" class="page-grid" style="top: 20%;"/>
             </ui:VisualElement>
             <ui:VisualElement name="right-page" class="book-page">
-                <ui:VisualElement name="right-page-grid" class="page-grid"/>
+                <ui:VisualElement name="right-page-grid" class="page-grid" style="top: 20%;"/>
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

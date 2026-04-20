@@ -22,7 +22,7 @@
 .book-page {
   flex-grow: 1;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .center-fold {
@@ -34,18 +34,20 @@
 
 .page-grid {
   width: 100%;
-  max-width: 880px;
-  max-height: 500px;
+  max-width: 520px;
+  min-height: 470px;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  align-content: center;
-  column-gap: 78px;
-  row-gap: 40px;
+  align-content: flex-start;
+  padding-top: 46px;
 }
 
 .host-vote-card {
-  width: 220px;
+  width: 230px;
+  margin-left: 12px;
+  margin-right: 12px;
+  margin-bottom: 0px;
   padding-top: 8px;
   padding-bottom: 8px;
   align-items: center;
@@ -56,12 +58,12 @@
 }
 
 .host-vote-card > .drawing-image {
-  width: 94px;
-  height: 94px;
-  border-top-left-radius: 47px;
-  border-top-right-radius: 47px;
-  border-bottom-left-radius: 47px;
-  border-bottom-right-radius: 47px;
+  width: 112px;
+  height: 112px;
+  border-top-left-radius: 56px;
+  border-top-right-radius: 56px;
+  border-bottom-left-radius: 56px;
+  border-bottom-right-radius: 56px;
   border-left-width: 1px;
   border-right-width: 1px;
   border-top-width: 1px;
@@ -78,7 +80,7 @@
   margin-top: 12px;
   color: rgb(62, 42, 25);
   font-size: 30px;
-  unity-text-align: middle-center;
+  -unity-text-align: middle-center;
 }
 
 .hidden-meta {

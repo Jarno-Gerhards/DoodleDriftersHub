@@ -39,6 +39,11 @@ public class VotingHostPanel : MonoBehaviour
     [SerializeField, Min(1)] private int maxCards = 8;
     [SerializeField, Min(1)] private int maxCardsPerPage = 4;
 
+    [Header("Debug Layout")]
+    [SerializeField] private bool showLayoutPlaceholdersWhenEmpty = true;
+    [SerializeField, Min(1)] private int placeholderCount = 8;
+    [SerializeField] private string placeholderDescription = "Description";
+
     private VisualElement _leftPageContainer;
     private VisualElement _rightPageContainer;
     private VisualElement _fallbackCardContainer;
@@ -95,18 +100,27 @@ public class VotingHostPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        if (VotingManager.Instance == null) return;
-        VotingManager.Instance.OnAllSubmissionsReceived += PopulateCards;
-        VotingManager.Instance.OnVoteProgress += UpdateVoteProgress;
-        VotingManager.Instance.OnAllVotesReceived += OnVotingComplete;
+        if (VotingManager.Instance != null)
+        {
+            VotingManager.Instance.OnAllSubmissionsReceived += PopulateCards;
+            VotingManager.Instance.OnVoteProgress += UpdateVoteProgress;
+            VotingManager.Instance.OnAllVotesReceived += OnVotingComplete;
+        }
+
+        if (showLayoutPlaceholdersWhenEmpty)
+        {
+            PopulateLayoutPlaceholders();
+        }
     }
 
     private void OnDisable()
     {
-        if (VotingManager.Instance == null) return;
-        VotingManager.Instance.OnAllSubmissionsReceived -= PopulateCards;
-        VotingManager.Instance.OnVoteProgress -= UpdateVoteProgress;
-        VotingManager.Instance.OnAllVotesReceived -= OnVotingComplete;
+        if (VotingManager.Instance != null)
+        {
+            VotingManager.Instance.OnAllSubmissionsReceived -= PopulateCards;
+            VotingManager.Instance.OnVoteProgress -= UpdateVoteProgress;
+            VotingManager.Instance.OnAllVotesReceived -= OnVotingComplete;
+        }
     }
 
     // ── Internal ──────────────────────────────────────────────────────────────
@@ -156,6 +170,47 @@ public class VotingHostPanel : MonoBehaviour
 
         SetStatus($"Players are voting... (0/{drawCount})");
         Debug.Log($"[VotingHostPanel] Populated {drawCount} cards.");
+    }
+
+    [ContextMenu("Debug/Show Layout Placeholders")]
+    private void PopulateLayoutPlaceholders()
+    {
+        if (_cards.Count > 0)
+        {
+            return;
+        }
+
+        if (!HasAnyContainer() || drawingCardTemplate == null)
+        {
+            return;
+        }
+
+        int drawCount = Mathf.Min(Mathf.Min(placeholderCount, maxCards), maxCardsPerPage * 2);
+
+        for (int i = 0; i < drawCount; i++)
+        {
+            TemplateContainer cardRoot = drawingCardTemplate.CloneTree();
+
+            VisualElement targetContainer = ResolveContainerForIndex(i);
+            if (targetContainer == null)
+            {
+                break;
+            }
+
+            targetContainer.Add(cardRoot);
+
+            var placeholderSubmission = new SolutionSubmission(
+                "placeholder-" + i,
+                "Placeholder",
+                null,
+                placeholderDescription
+            );
+
+            var card = new HostDrawingCard(cardRoot, placeholderSubmission);
+            _cards.Add(card);
+        }
+
+        SetStatus("Voting");
     }
 
     /// <summary>Updates the status label as votes come in.</summary>
