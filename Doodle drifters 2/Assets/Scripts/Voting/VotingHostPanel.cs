@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
+using UnityEngine.UIElements;
 
 /// <summary>
-/// Host screen panel for the voting phase.
+/// Host screen panel for the voting phase (UI Toolkit version).
 ///
 /// Shows all submitted solution drawings in a grid, each with:
 ///   - The drawing image
@@ -15,37 +14,99 @@ using TMPro;
 /// This panel is read-only — the host does not vote.
 /// It subscribes to VotingManager events directly.
 ///
-/// Inspector hook-up:
-///   - cardContainer    : HorizontalLayoutGroup or GridLayoutGroup parent
-///   - drawingCardPrefab: prefab with RawImage + nameLabel + descriptionLabel + voteLabel
-///   - statusLabel      : "Waiting for votes... (X/Y)" text
+/// UIDocument requirement:
+///   - Root must contain either:
+///       * left + right page containers (preferred book layout)
+///       * or one fallback card container
+///   - Root must contain a status Label named by statusLabelName
+///
+/// Card template requirement (VisualTreeAsset):
+///   - VisualElement named "drawing-image"
+///   - Label named "NameLabel"
+///   - Label named "DescriptionLabel"
+///   - Label named "VoteLabel"
 /// </summary>
 public class VotingHostPanel : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] private Transform          cardContainer;
-    [SerializeField] private GameObject         drawingCardPrefab;
-    [SerializeField] private TextMeshProUGUI    statusLabel;
+    [Header("UI Toolkit")]
+    [SerializeField] private UIDocument uiDocument;
+    [SerializeField] private VisualTreeAsset drawingCardTemplate;
+
+    [SerializeField] private string leftPageContainerName = "left-page-grid";
+    [SerializeField] private string rightPageContainerName = "right-page-grid";
+    [SerializeField] private string fallbackCardContainerName = "card-container";
+    [SerializeField] private string statusLabelName = "status-label";
+    [SerializeField, Min(1)] private int maxCards = 8;
+    [SerializeField, Min(1)] private int maxCardsPerPage = 4;
+
+    private VisualElement _leftPageContainer;
+    private VisualElement _rightPageContainer;
+    private VisualElement _fallbackCardContainer;
+    private Label _statusLabel;
 
     // Runtime list of spawned cards so we can update vote counts live.
     private readonly List<HostDrawingCard> _cards = new();
 
     // ── Lifecycle ─────────────────────────────────────────────────────────────
 
+    private void Awake()
+    {
+        if (uiDocument == null)
+        {
+            uiDocument = GetComponent<UIDocument>();
+        }
+
+        if (uiDocument == null)
+        {
+            Debug.LogError("[VotingHostPanel] UIDocument is not assigned.");
+            return;
+        }
+
+        VisualElement root = uiDocument.rootVisualElement;
+        _leftPageContainer = root.Q<VisualElement>(leftPageContainerName);
+        _rightPageContainer = root.Q<VisualElement>(rightPageContainerName);
+        _fallbackCardContainer = root.Q<VisualElement>(fallbackCardContainerName);
+        _statusLabel = root.Q<Label>(statusLabelName);
+
+        if (_leftPageContainer == null || _rightPageContainer == null)
+        {
+            if (_fallbackCardContainer == null)
+            {
+                Debug.LogError(
+                    $"[VotingHostPanel] Could not find two-page containers " +
+                    $"('{leftPageContainerName}', '{rightPageContainerName}') " +
+                    $"or fallback container '{fallbackCardContainerName}'."
+                );
+            }
+            else
+            {
+                Debug.LogWarning(
+                    $"[VotingHostPanel] Two-page containers not found. " +
+                    $"Using fallback container '{fallbackCardContainerName}'."
+                );
+            }
+        }
+
+        if (_statusLabel == null)
+        {
+            Debug.LogWarning($"[VotingHostPanel] Could not find status label '{statusLabelName}'.");
+        }
+    }
+
     private void OnEnable()
     {
         if (VotingManager.Instance == null) return;
         VotingManager.Instance.OnAllSubmissionsReceived += PopulateCards;
-        VotingManager.Instance.OnVoteProgress           += UpdateVoteProgress;
-        VotingManager.Instance.OnAllVotesReceived       += OnVotingComplete;
+        VotingManager.Instance.OnVoteProgress += UpdateVoteProgress;
+        VotingManager.Instance.OnAllVotesReceived += OnVotingComplete;
     }
 
     private void OnDisable()
     {
         if (VotingManager.Instance == null) return;
         VotingManager.Instance.OnAllSubmissionsReceived -= PopulateCards;
-        VotingManager.Instance.OnVoteProgress           -= UpdateVoteProgress;
-        VotingManager.Instance.OnAllVotesReceived       -= OnVotingComplete;
+        VotingManager.Instance.OnVoteProgress -= UpdateVoteProgress;
+        VotingManager.Instance.OnAllVotesReceived -= OnVotingComplete;
     }
 
     // ── Internal ──────────────────────────────────────────────────────────────
@@ -55,21 +116,46 @@ public class VotingHostPanel : MonoBehaviour
     {
         ClearCards();
 
-        if (drawingCardPrefab == null || cardContainer == null)
+        if (!HasAnyContainer())
         {
-            Debug.LogError("[VotingHostPanel] drawingCardPrefab or cardContainer is not assigned.");
+            Debug.LogError("[VotingHostPanel] Card container is not available.");
             return;
         }
 
-        foreach (var submission in submissions)
+        if (drawingCardTemplate == null)
         {
-            GameObject cardGO = Instantiate(drawingCardPrefab, cardContainer);
-            var card = new HostDrawingCard(cardGO, submission);
+            Debug.LogError("[VotingHostPanel] drawingCardTemplate is not assigned.");
+            return;
+        }
+
+        int drawCount = Mathf.Min(submissions.Count, maxCards);
+
+        for (int i = 0; i < drawCount; i++)
+        {
+            SolutionSubmission submission = submissions[i];
+            TemplateContainer cardRoot = drawingCardTemplate.CloneTree();
+
+            VisualElement targetContainer = ResolveContainerForIndex(i);
+            if (targetContainer == null)
+            {
+                Debug.LogError("[VotingHostPanel] Could not resolve target page container.");
+                break;
+            }
+
+            targetContainer.Add(cardRoot);
+
+            var card = new HostDrawingCard(cardRoot, submission);
             _cards.Add(card);
         }
 
-        SetStatus($"Players are voting... (0/{submissions.Count})");
-        Debug.Log($"[VotingHostPanel] Populated {submissions.Count} cards.");
+        if (submissions.Count > maxCards)
+        {
+            Debug.LogWarning($"[VotingHostPanel] Received {submissions.Count} submissions, " +
+                             $"showing first {maxCards}.");
+        }
+
+        SetStatus($"Players are voting... (0/{drawCount})");
+        Debug.Log($"[VotingHostPanel] Populated {drawCount} cards.");
     }
 
     /// <summary>Updates the status label as votes come in.</summary>
@@ -77,7 +163,6 @@ public class VotingHostPanel : MonoBehaviour
     {
         SetStatus($"Players are voting... ({votesIn}/{totalExpected})");
 
-        // Refresh vote count labels on each card.
         foreach (var card in _cards)
             card.RefreshVoteCount();
     }
@@ -87,7 +172,6 @@ public class VotingHostPanel : MonoBehaviour
     {
         SetStatus($"Voting complete! Winner: {winner?.PlayerName}");
 
-        // Highlight the winning card.
         foreach (var card in _cards)
             card.SetHighlight(card.PlayerId == winner?.PlayerId);
 
@@ -96,56 +180,65 @@ public class VotingHostPanel : MonoBehaviour
 
     private void SetStatus(string message)
     {
-        if (statusLabel != null)
-            statusLabel.text = message;
+        if (_statusLabel != null)
+            _statusLabel.text = message;
     }
 
     private void ClearCards()
     {
-        foreach (var card in _cards)
-            if (card.Root != null) Destroy(card.Root);
+        _leftPageContainer?.Clear();
+        _rightPageContainer?.Clear();
+        _fallbackCardContainer?.Clear();
         _cards.Clear();
+    }
+
+    private bool HasAnyContainer()
+    {
+        return (_leftPageContainer != null && _rightPageContainer != null) ||
+               _fallbackCardContainer != null;
+    }
+
+    private VisualElement ResolveContainerForIndex(int index)
+    {
+        if (_leftPageContainer != null && _rightPageContainer != null)
+        {
+            return index < maxCardsPerPage ? _leftPageContainer : _rightPageContainer;
+        }
+
+        return _fallbackCardContainer;
     }
 
     // ── Inner helper ──────────────────────────────────────────────────────────
 
-    /// <summary>
-    /// Wraps a spawned card GameObject and holds references to its UI elements.
-    /// Looks up child components by name — match these names in your prefab.
-    /// </summary>
     private class HostDrawingCard
     {
-        public GameObject         Root        { get; }
-        public string             PlayerId    { get; }
+        public VisualElement Root { get; }
+        public string PlayerId { get; }
 
-        private readonly SolutionSubmission  _submission;
-        private readonly RawImage            _image;
-        private readonly TextMeshProUGUI     _nameLabel;
-        private readonly TextMeshProUGUI     _descriptionLabel;
-        private readonly TextMeshProUGUI     _voteLabel;
-        private readonly Image               _highlight;
+        private readonly SolutionSubmission _submission;
+        private readonly VisualElement _image;
+        private readonly Label _nameLabel;
+        private readonly Label _descriptionLabel;
+        private readonly Label _voteLabel;
 
-        public HostDrawingCard(GameObject root, SolutionSubmission submission)
+        public HostDrawingCard(VisualElement root, SolutionSubmission submission)
         {
-            Root        = root;
-            PlayerId    = submission.PlayerId;
+            Root = root;
+            PlayerId = submission.PlayerId;
             _submission = submission;
 
-            // Look up child components.
-            // Name your prefab children to match these strings.
-            _image            = root.GetComponentInChildren<RawImage>();
-            _nameLabel        = FindLabel(root, "NameLabel");
-            _descriptionLabel = FindLabel(root, "DescriptionLabel");
-            _voteLabel        = FindLabel(root, "VoteLabel");
-            _highlight        = root.GetComponent<Image>();
+            _image = root.Q<VisualElement>("drawing-image");
+            _nameLabel = root.Q<Label>("NameLabel");
+            _descriptionLabel = root.Q<Label>("DescriptionLabel");
+            _voteLabel = root.Q<Label>("VoteLabel");
 
             Populate();
         }
 
         private void Populate()
         {
-            if (_image != null)
-                _image.texture = _submission.Texture;
+            if (_image != null && _submission.Texture != null)
+                _image.style.backgroundImage = new StyleBackground(_submission.Texture);
 
             if (_nameLabel != null)
                 _nameLabel.text = _submission.PlayerName;
@@ -166,16 +259,9 @@ public class VotingHostPanel : MonoBehaviour
 
         public void SetHighlight(bool isWinner)
         {
-            if (_highlight != null)
-                _highlight.color = isWinner
-                    ? new Color(0.78f, 0.53f, 0.23f, 0.4f)  // torch flame tint
-                    : Color.white;
-        }
-
-        private static TextMeshProUGUI FindLabel(GameObject root, string childName)
-        {
-            Transform t = root.transform.Find(childName);
-            return t != null ? t.GetComponent<TextMeshProUGUI>() : null;
+            Root.style.backgroundColor = isWinner
+                ? new StyleColor(new Color(0.78f, 0.53f, 0.23f, 0.4f))
+                : StyleKeyword.Null;
         }
     }
 }

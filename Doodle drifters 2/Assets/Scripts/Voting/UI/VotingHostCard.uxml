@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+  <ui:VisualElement name="host-vote-card" class="host-vote-card">
+    <ui:VisualElement name="drawing-image" class="drawing-image" />
+    <ui:Label name="DescriptionLabel" text="Description" class="description-label" />
+
+    <!-- Hidden but available for script compatibility if needed later. -->
+    <ui:Label name="NameLabel" text="" class="hidden-meta" />
+    <ui:Label name="VoteLabel" text="" class="hidden-meta" />
+  </ui:VisualElement>
+</ui:UXML>

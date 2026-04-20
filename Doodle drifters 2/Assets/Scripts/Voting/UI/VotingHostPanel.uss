@@ -1,0 +1,86 @@
+.host-voting-root {
+  flex-grow: 1;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: rgb(220, 216, 208);
+}
+
+.host-voting-status {
+  margin-left: 4px;
+  margin-bottom: 6px;
+  color: rgb(126, 57, 197);
+  font-size: 28px;
+}
+
+.book-spread {
+  flex-grow: 1;
+  flex-direction: row;
+}
+
+.book-page {
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.center-fold {
+  width: 8px;
+  margin-left: 8px;
+  margin-right: 8px;
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+.page-grid {
+  width: 100%;
+  max-width: 880px;
+  max-height: 500px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  column-gap: 78px;
+  row-gap: 40px;
+}
+
+.host-vote-card {
+  width: 220px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  align-items: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.host-vote-card > .drawing-image {
+  width: 94px;
+  height: 94px;
+  border-top-left-radius: 47px;
+  border-top-right-radius: 47px;
+  border-bottom-left-radius: 47px;
+  border-bottom-right-radius: 47px;
+  border-left-width: 1px;
+  border-right-width: 1px;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-left-color: rgb(169, 129, 233);
+  border-right-color: rgb(169, 129, 233);
+  border-top-color: rgb(169, 129, 233);
+  border-bottom-color: rgb(169, 129, 233);
+  background-color: rgb(190, 166, 223);
+  -unity-background-scale-mode: scale-and-crop;
+}
+
+.description-label {
+  margin-top: 12px;
+  color: rgb(62, 42, 25);
+  font-size: 30px;
+  unity-text-align: middle-center;
+}
+
+.hidden-meta {
+  display: none;
+}
