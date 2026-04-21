@@ -35,7 +35,7 @@
 }
 
 .playerAvatar {
-    background-color: rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0.51);
     width: 200px;
     height: 200px;
     position: absolute;
@@ -54,7 +54,7 @@
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
-    background-image: url("project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=4584671053970592468&guid=0d9d778c7e1ffff458f347a7cf8152e8&type=3#console.infoicon@2x");
+    background-image: none;
 }
 
 .playerContainer {

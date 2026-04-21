@@ -20,12 +20,11 @@ public class HostLobbyScript : MonoBehaviour
     private void Awake()
     {
         document = GetComponent<UIDocument>();
-        StartCoroutine(TextFunc());
+        StartCoroutine(TestFunc());
     }
 
     private void Start()
     {
-        roomCodeNumber = Random.Range(10000, 99999);
         roomCode = document.rootVisualElement.Q<Label>("RoomCode");
         roomCode.text = $"Room Code: {roomCodeNumber}";
         encounters = document.rootVisualElement.Q<TextField>("EncounterInput");
@@ -35,7 +34,7 @@ public class HostLobbyScript : MonoBehaviour
         encounters.RegisterValueChangedCallback(encounterCallback);
     }
 
-    public void AddPlayer(string name, Texture2D avatar)
+    public void AddPlayer(string name, Texture2D avatar) // Voegt een speler toe met naam en avatar met auto increment
     {
         playerName = document.rootVisualElement.Q<Label>($"player{playerCount + 1}Name");
         playerAvatar = document.rootVisualElement.Q<VisualElement>($"player{playerCount + 1}Avatar");
@@ -44,13 +43,13 @@ public class HostLobbyScript : MonoBehaviour
         playerCount++;
     }
 
-    private IEnumerator TextFunc()
+    private IEnumerator TestFunc() // Tijdelijke functie om speler toevoegen te laten
     {
         yield return new WaitForSeconds(1);
         AddPlayer("Player " + (playerCount + 1), testImage);
         if (playerCount <= 5)
         {
-            StartCoroutine(TextFunc());
+            StartCoroutine(TestFunc());
         }
     }
 
@@ -69,7 +68,7 @@ public class HostLobbyScript : MonoBehaviour
         Debug.Log("Start Game button clicked!");
     }
 
-    private void HandleEncounterCount(ChangeEvent<string> evt)
+    private void HandleEncounterCount(ChangeEvent<string> evt) // Zorgt er voor dat alleen cijfers tussen min en max encounters kunnen worden ingevoerd
     {
         string input = evt.newValue;
         if (string.IsNullOrEmpty(input))
