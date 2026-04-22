@@ -142,4 +142,14 @@ Elke dag worden dezelfde 3 vragen gesteld. Wat heb je gisteren gedaan, wat ga je
 | Jarno   | Gastcollege gevolgd.                                                                                                 | Issues updaten en aan de slag met state machine. | -                            |
 | Vincent | Gastcollege gevolgd.                                                                                                 | Test plan opzetten en eventueel beginnen aan UI.                                         | -    
 
+#### 22/04/2026
+
+|         | Gedaan                                                                                                                            | Doen                                                                                       | Obstakels                                                 |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------- |
+| Bart    | Host lobby screen UI af gemaak en de game getest. |   Voorbereiden guild meeting en voortgangsgesprek morgen.                                                 | - |
+| Daan    | Begin gemaakt aan open en closed book UI.                                                | Open en closed book af maken en eventueel implementeren met alle UI.  | -                          |
+| Elias                                                                                                                                     |  PLaytest gedaan.                                                                                         | Guild meeting voorbereiden.                                                   | -
+| Jarno   | Evaluatie gesprek en gewerkt aan state machine.                                                                                                 | Voorbereiden guild meeting en misschien een begin maken aan de multiplayer. | -                            |
+| Vincent | Playtest gedaan.                                                                                                 | Playtest resultaten uitwerken en voorbereiden op guild meeting en voortgangsgesprek, eventueel ook een begin maken aan UI.                                         | -    
+
 
