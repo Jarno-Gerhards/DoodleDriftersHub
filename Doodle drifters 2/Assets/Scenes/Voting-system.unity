@@ -195,6 +195,9 @@ MonoBehaviour:
   statusLabelName: status-label
   maxCards: 8
   maxCardsPerPage: 4
+  showLayoutPlaceholdersWhenEmpty: 1
+  placeholderCount: 8
+  placeholderDescription: Description
 --- !u!1 &1578472242
 GameObject:
   m_ObjectHideFlags: 0

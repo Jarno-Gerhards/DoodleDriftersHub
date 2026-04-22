@@ -4,7 +4,7 @@
   padding-right: 16px;
   padding-top: 10px;
   padding-bottom: 10px;
-  background-color: rgb(220, 216, 208);
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .host-voting-status {
@@ -60,10 +60,10 @@
 .host-vote-card > .drawing-image {
   width: 112px;
   height: 112px;
-  border-top-left-radius: 56px;
-  border-top-right-radius: 56px;
-  border-bottom-left-radius: 56px;
-  border-bottom-right-radius: 56px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
   border-left-width: 1px;
   border-right-width: 1px;
   border-top-width: 1px;
