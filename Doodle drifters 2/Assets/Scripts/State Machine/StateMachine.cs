@@ -63,7 +63,7 @@ public class StateMachine : MonoBehaviour
         // {
         //     Debug.LogWarning("invalid transition");
         //     return;
-        // }
+        // } uncomment when state transitions are fleshed out
 
         currentStateType = newState;
         SetState(states[newState]);
