@@ -26,6 +26,8 @@ using UnityEngine;
 /// </summary>
 public class VotingManager : MonoBehaviour
 {
+    private const int MinimumExpectedPlayers = 2;
+
     // ── Singleton ─────────────────────────────────────────────────────────────
 
     public static VotingManager Instance { get; private set; }
@@ -33,7 +35,7 @@ public class VotingManager : MonoBehaviour
     // ── Inspector ─────────────────────────────────────────────────────────────
 
     [Tooltip("Expected number of players. Set this when the room is created.")]
-    [SerializeField] private int expectedPlayerCount = 4;
+    [SerializeField, Min(MinimumExpectedPlayers)] private int expectedPlayerCount = MinimumExpectedPlayers;
 
     // ── Events ────────────────────────────────────────────────────────────────
 
@@ -77,6 +79,8 @@ public class VotingManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        expectedPlayerCount = Mathf.Max(MinimumExpectedPlayers, expectedPlayerCount);
         Instance = this;
     }
 
@@ -100,8 +104,17 @@ public class VotingManager : MonoBehaviour
     /// </summary>
     public void SetExpectedPlayerCount(int count)
     {
-        expectedPlayerCount = count;
-        Debug.Log($"[VotingManager] Expecting {count} players.");
+        expectedPlayerCount = Mathf.Max(MinimumExpectedPlayers, count);
+
+        if (count < MinimumExpectedPlayers)
+        {
+            Debug.LogWarning(
+                $"[VotingManager] Expected player count '{count}' is too low. " +
+                $"Clamped to {MinimumExpectedPlayers}."
+            );
+        }
+
+        Debug.Log($"[VotingManager] Expecting {expectedPlayerCount} players.");
     }
 
     /// <summary>
@@ -136,6 +149,18 @@ public class VotingManager : MonoBehaviour
         if (!_votingOpen)
         {
             Debug.LogWarning("[VotingManager] Vote received but voting is not open yet.");
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(voterPlayerId) || string.IsNullOrWhiteSpace(chosenPlayerId))
+        {
+            Debug.LogWarning("[VotingManager] Vote rejected because voter or chosen player ID is missing.");
+            return;
+        }
+
+        if (!_submissions.Any(s => s.PlayerId == chosenPlayerId))
+        {
+            Debug.LogWarning($"[VotingManager] Vote rejected because chosen player '{chosenPlayerId}' has no submission.");
             return;
         }
 

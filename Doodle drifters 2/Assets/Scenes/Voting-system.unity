@@ -303,7 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd1c38c89918e424391279fd4fc2ccea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VotingManager
-  expectedPlayerCount: 8
+  expectedPlayerCount: 2
 --- !u!4 &1851581843
 Transform:
   m_ObjectHideFlags: 0

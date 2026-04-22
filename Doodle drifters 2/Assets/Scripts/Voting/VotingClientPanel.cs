@@ -42,6 +42,8 @@ public class VotingClientPanel : MonoBehaviour
 
     private void Awake()
     {
+        EnsureLocalPlayerId();
+
         if (voteButton != null)
         {
             voteButton.onClick.AddListener(OnVoteButtonPressed);
@@ -71,6 +73,12 @@ public class VotingClientPanel : MonoBehaviour
     /// </summary>
     public void SetLocalPlayer(string playerId)
     {
+        if (string.IsNullOrWhiteSpace(playerId))
+        {
+            Debug.LogWarning("[VotingClientPanel] Ignoring empty local player ID.");
+            return;
+        }
+
         _localPlayerId = playerId;
     }
 
@@ -82,6 +90,8 @@ public class VotingClientPanel : MonoBehaviour
         ClearCards();
         _selectedPlayerId = null;
         _hasVoted         = false;
+
+        EnsureLocalPlayerId();
 
         if (clientCardPrefab == null || cardContainer == null)
         {
@@ -104,6 +114,9 @@ public class VotingClientPanel : MonoBehaviour
         }
 
         SetStatus("Choose a drawing to vote for.");
+
+        if (votable.Count == 0)
+            SetStatus("Waiting for more player submissions...");
 
         if (voteButton != null)
             voteButton.interactable = false;
@@ -167,6 +180,21 @@ public class VotingClientPanel : MonoBehaviour
         foreach (var card in _cards)
             if (card.Root != null) Destroy(card.Root);
         _cards.Clear();
+    }
+
+    private void EnsureLocalPlayerId()
+    {
+        if (!string.IsNullOrWhiteSpace(_localPlayerId))
+            return;
+
+        _localPlayerId = SystemInfo.deviceUniqueIdentifier;
+
+        if (string.IsNullOrWhiteSpace(_localPlayerId))
+            _localPlayerId = "local-player";
+
+        Debug.LogWarning(
+            $"[VotingClientPanel] Local player ID was not set. Falling back to '{_localPlayerId}'."
+        );
     }
 
     // ── Inner helper ──────────────────────────────────────────────────────────

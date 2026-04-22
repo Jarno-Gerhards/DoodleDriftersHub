@@ -24,6 +24,7 @@ public class SolutionSubmitBridge : MonoBehaviour
     [Header("References")]
     [SerializeField] private DoodleDrawerPro drawer;
     [SerializeField] private TMP_InputField  descriptionInput;
+    [SerializeField] private VotingClientPanel votingClientPanel;
 
     [Header("Fallbacks")]
     [SerializeField] private string fallbackDescription = "Something useful";
@@ -40,6 +41,11 @@ public class SolutionSubmitBridge : MonoBehaviour
         // Placeholder ID until multiplayer provides a real one.
         _localPlayerId   = SystemInfo.deviceUniqueIdentifier;
         _localPlayerName = fallbackPlayerName;
+
+        if (votingClientPanel == null)
+            votingClientPanel = FindFirstObjectByType<VotingClientPanel>();
+
+        votingClientPanel?.SetLocalPlayer(_localPlayerId);
     }
 
     // ── Public API ────────────────────────────────────────────────────────────
@@ -49,8 +55,13 @@ public class SolutionSubmitBridge : MonoBehaviour
     /// </summary>
     public void SetLocalPlayer(string playerId, string playerName)
     {
-        _localPlayerId   = playerId;
-        _localPlayerName = playerName;
+        if (!string.IsNullOrWhiteSpace(playerId))
+            _localPlayerId = playerId;
+
+        if (!string.IsNullOrWhiteSpace(playerName))
+            _localPlayerName = playerName;
+
+        votingClientPanel?.SetLocalPlayer(_localPlayerId);
     }
 
     /// <summary>
@@ -84,6 +95,11 @@ public class SolutionSubmitBridge : MonoBehaviour
             texture,
             description
         );
+
+        if (votingClientPanel == null)
+            votingClientPanel = FindFirstObjectByType<VotingClientPanel>();
+
+        votingClientPanel?.SetLocalPlayer(_localPlayerId);
 
         VotingManager.Instance.RegisterSubmission(submission);
 
