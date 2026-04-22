@@ -1,29 +1,29 @@
 using UnityEngine;
 
-public class testState : IState
+public class LobbyState : IState
 {
-    public testState()
+    public LobbyState()
     {
         // Constructor logic if needed
     }
 
     public void Enter(GameContext context)
     {
-        Debug.Log("Entering test state.");
+        Debug.Log("Entering lobby state.");
     }
 
     public void Exit(GameContext context)
     {
-        Debug.Log("Exiting test state.");
+        Debug.Log("Exiting lobby state.");
     }
 
     public void Update(GameContext context)
     {
-        Debug.Log("Updating test state.");
+        Debug.Log("Updating lobby state.");
     }
 
     public void FixedUpdate(GameContext context)
     {
-        Debug.Log("FixedUpdating test state");
+        Debug.Log("FixedUpdating lobby state");
     }
 }
