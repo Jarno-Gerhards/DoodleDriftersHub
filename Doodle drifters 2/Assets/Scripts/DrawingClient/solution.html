@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Draw Your Solution</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <header class="title-wrap">
+      <h1>Draw your solution</h1>
+      <input id="solutionDescription" type="text" placeholder="Describe your solution in one short line!" maxlength="50" />
+    </header>
+
+    <section class="workspace">
+      <aside class="palette-panel">
+        <div id="activeColorPreview" class="palette-strip"></div>
+        <div class="color-grid">
+          <button class="color-btn" data-color="#000000" style="--swatch:#000000"></button>
+          <button class="color-btn" data-color="#4a4a4a" style="--swatch:#4a4a4a"></button>
+          <button class="color-btn" data-color="#8a8a8a" style="--swatch:#8a8a8a"></button>
+          <button class="color-btn" data-color="#ffffff" style="--swatch:#ffffff"></button>
+          <button class="color-btn" data-color="#c7c7c7" style="--swatch:#c7c7c7"></button>
+          <button class="color-btn" data-color="#7b5747" style="--swatch:#7b5747"></button>
+          <button class="color-btn" data-color="#ed3333" style="--swatch:#ed3333"></button>
+          <button class="color-btn" data-color="#f08f00" style="--swatch:#f08f00"></button>
+          <button class="color-btn" data-color="#f1d133" style="--swatch:#f1d133"></button>
+          <button class="color-btn" data-color="#8bc34a" style="--swatch:#8bc34a"></button>
+          <button class="color-btn" data-color="#46a346" style="--swatch:#46a346"></button>
+          <button class="color-btn" data-color="#0d7a34" style="--swatch:#0d7a34"></button>
+          <button class="color-btn" data-color="#1ca3b6" style="--swatch:#1ca3b6"></button>
+          <button class="color-btn" data-color="#00c8ff" style="--swatch:#00c8ff"></button>
+          <button class="color-btn" data-color="#2c87d3" style="--swatch:#2c87d3"></button>
+          <button class="color-btn" data-color="#4f46e5" style="--swatch:#4f46e5"></button>
+          <button class="color-btn" data-color="#8b2bb0" style="--swatch:#8b2bb0"></button>
+          <button class="color-btn" data-color="#df5d96" style="--swatch:#df5d96"></button>
+          <button class="color-btn" data-color="#8b1e3f" style="--swatch:#8b1e3f"></button>
+          <button class="color-btn" data-color="#ffb347" style="--swatch:#ffb347"></button>
+          <button class="color-btn" data-color="#1f4e79" style="--swatch:#1f4e79"></button>
+        </div>
+      </aside>
+
+      <section class="center-stage">
+        <div class="canvas-wrap">
+          <canvas id="drawCanvas" width="1280" height="840" aria-label="Drawing canvas"></canvas>
+
+          <div class="top-actions">
+            <button id="undoBtn" class="icon-btn undo" title="Undo">↺</button>
+            <button id="submitBtn" class="icon-btn submit" title="Submit">✓</button>
+          </div>
+        </div>
+      </section>
+
+      <aside class="tool-panel">
+        <button class="tool-btn" data-tool="pencil" title="Pencil">✏</button>
+        <button class="tool-btn" data-tool="eraser" title="Eraser">⌫</button>
+        <button class="tool-btn" data-tool="fill" title="Fill">▧</button>
+        <button class="tool-btn" data-tool="line" title="Line">／</button>
+        <button class="tool-btn" data-tool="rectangle" title="Rectangle">□</button>
+        <button class="tool-btn" data-tool="circle" title="Circle">◯</button>
+      </aside>
+
+      <div class="bottom-tools">
+        <div class="size-pills" aria-label="Quick brush sizes">
+          <button class="size-pill" data-size="0.00"></button>
+          <button class="size-pill" data-size="0.15"></button>
+          <button class="size-pill" data-size="0.35"></button>
+          <button class="size-pill" data-size="0.60"></button>
+          <button class="size-pill" data-size="1.00"></button>
+        </div>
+
+        <div class="slider-wrap">
+          <div class="slider-track-row">
+            <span class="slider-size-dot small" aria-hidden="true"></span>
+            <input id="brushSize" type="range" min="0" max="1" value="0.1" step="0.01" />
+            <span class="slider-size-dot large" aria-hidden="true"></span>
+          </div>
+        </div>
+
+        <button id="clearBtn" class="clear-btn" title="Clear canvas">Clear</button>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="./js/entry/app.desktop.solution.js"></script>
+</body>
+</html>
