@@ -119,6 +119,192 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &59135183
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 59135185}
+  - component: {fileID: 59135184}
+  m_Layer: 0
+  m_Name: StoryTeller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &59135184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 59135183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4326d5ae3b03ff55847035351559f4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: undream.llmunity.Runtime::LLMUnity.LLMAgent
+  advancedOptions: 0
+  _remote: 0
+  _llm: {fileID: 329885751}
+  _APIKey: 
+  _host: localhost
+  _port: 13333
+  numRetries: 5
+  _grammar: 
+  numPredict: -1
+  cachePrompt: 1
+  seed: 0
+  temperature: 0.2
+  topK: 40
+  topP: 0.9
+  minP: 0.05
+  repeatPenalty: 1.1
+  presencePenalty: 0
+  frequencyPenalty: 0
+  typicalP: 1
+  repeatLastN: 64
+  mirostat: 0
+  mirostatTau: 5
+  mirostatEta: 0.1
+  nProbs: 0
+  ignoreEos: 0
+  save: 
+  debugPrompt: 0
+  overflowStrategy: 1
+  overflowTargetRatio: 0.5
+  overflowSummarizePrompt: 
+  _slot: -1
+  _systemPrompt: You are a dynamic storyteller narrating a fantasy RPG world
+--- !u!4 &59135185
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 59135183}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &329885750
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 329885752}
+  - component: {fileID: 329885751}
+  m_Layer: 0
+  m_Name: LLM
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &329885751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329885750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a50e3140c3ecaaf1c848dbf141cc2074, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: undream.llmunity.Runtime::LLMUnity.LLM
+  advancedOptions: 1
+  _remote: 0
+  _port: 13333
+  _APIKey: 
+  _SSLCert: 
+  _SSLKey: 
+  _numThreads: -1
+  _numGPULayers: 0
+  _parallelPrompts: 1
+  _contextSize: 8192
+  _batchSize: 512
+  _model: Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf
+  _flashAttention: 0
+  _reasoning: 0
+  _lora: 
+  _loraWeights: 
+  dontDestroyOnLoad: 1
+  _embeddingsOnly: 0
+  _embeddingLength: 4096
+  minContextLength: 0
+  maxContextLength: 131072
+--- !u!4 &329885752
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329885750}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1392357062
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1392357064}
+  - component: {fileID: 1392357063}
+  m_Layer: 0
+  m_Name: ScenarioMachine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1392357063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392357062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82f39d28a9a43854d908f0758373e935, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScenarioTemp
+  agent: {fileID: 59135184}
+--- !u!4 &1392357064
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392357062}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1951803133
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,3 +402,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1951803136}
+  - {fileID: 329885752}
+  - {fileID: 59135185}
+  - {fileID: 1392357064}
