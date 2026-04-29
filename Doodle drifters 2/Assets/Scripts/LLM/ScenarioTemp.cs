@@ -13,7 +13,6 @@ public class ScenarioTemp : MonoBehaviour
     void Start()
     {
         test();
-        //text.text = "Testing LLM Agent...";
     }
 
     // Update is called once per frame
@@ -24,8 +23,12 @@ public class ScenarioTemp : MonoBehaviour
 
     async private void test()
     {
-        string reply = await agent.Chat("Give me a description of a room in a dungeon, in 2-3 sentences.", ShowTextOverTime);
-        //Debug.Log("Agent response: " + reply);
+        text.text = "Generating scene...";
+        // The line below causes the reply to be shown as it is being generated
+        string reply = await agent.Chat("Give me a description of a room in a dungeon. End with a clear objective for players to overcome. Only use 2-3 sentences.", ShowTextOverTime);
+
+        // The lines below cause the reply to be shown only after it has been fully generated
+        //string reply = await agent.Chat("Give me a description of a room in a dungeon, in 2-3 sentences.");
         //text.text = reply;
     }
 

@@ -281,7 +281,8 @@ MonoBehaviour:
   overflowTargetRatio: 0.5
   overflowSummarizePrompt: 
   _slot: -1
-  _systemPrompt: You are a dynamic storyteller narrating a fantasy RPG world
+  _systemPrompt: You are the Dungeon Master for a group of adventurers. Your task
+    is to create dynamic and unique scenario's for the group.
 --- !u!4 &59135185
 Transform:
   m_ObjectHideFlags: 0
