@@ -1,0 +1,38 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/hostLobbyPresets.uss?fileID=7433441132597879392&amp;guid=bbb5081f88aabca46b254d49f57382fa&amp;type=3#hostLobbyPresets"/>
+    <ui:VisualElement name="LobbyUI" style="flex-grow: 1;">
+        <ui:VisualElement name="RightPage" style="flex-grow: 1; width: 40%; position: absolute; height: 85%; top: 7.5%; left: 50%; right: auto; background-color: rgba(255, 255, 255, 0.53); border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);">
+            <ui:VisualElement name="player1Container" class="playerContainer" style="top: 25px; left: 75px;">
+                <ui:VisualElement name="player1Avatar" class="playerAvatar"/>
+                <ui:Label text="Empty slot" name="player1Name" class="playerName"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="player2Container" class="playerContainer" style="top: 325px; left: 75px;">
+                <ui:VisualElement name="player2Avatar" class="playerAvatar"/>
+                <ui:Label text="Empty slot" name="player2Name" class="playerName"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="player3Container" class="playerContainer" style="top: 625px; left: 75px;">
+                <ui:VisualElement name="player3Avatar" class="playerAvatar"/>
+                <ui:Label text="Empty slot" name="player3Name" class="playerName"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="player4Container" class="playerContainer" style="top: 25px; left: auto; right: 75px;">
+                <ui:VisualElement name="player4Avatar" class="playerAvatar"/>
+                <ui:Label text="Empty slot" name="player4Name" class="playerName"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="player5Container" class="playerContainer" style="top: 325px; left: auto; right: 75px;">
+                <ui:VisualElement name="player5Avatar" class="playerAvatar"/>
+                <ui:Label text="Empty slot" name="player5Name" class="playerName"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="player6Container" class="playerContainer" style="top: 625px; left: auto; right: 75px;">
+                <ui:VisualElement name="player6Avatar" class="playerAvatar"/>
+                <ui:Label text="Empty slot" name="player6Name" class="playerName"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="LeftPage" style="flex-grow: 1; width: 40%; position: absolute; height: 85%; top: 7.5%; left: auto; right: 50%; background-color: rgba(255, 255, 255, 0.53); border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);">
+            <ui:TextField label="Number of Encounters :" placeholder-text="-" name="EncounterInput" max-length="1" class="numericInputField" style="top: 638px; left: 152px;"/>
+            <ui:Button text="Start Game" name="StartGame" class="button" style="position: absolute; top: 780px; left: 244px; height: 100px; width: 248px; font-size: 35px; background-color: rgb(255, 255, 255); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; align-self: auto; align-items: auto; align-content: auto;"/>
+            <ui:Label text="Room code: 12345" name="RoomCode" style="top: 509px; left: 213px; font-size: 35px; background-color: rgb(255, 255, 255); width: auto; position: absolute; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;"/>
+            <ui:VisualElement name="QRcode" style="flex-grow: 1; position: absolute; width: 300px; height: 300px; top: 154px; left: 231px; background-color: rgb(255, 255, 255); border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); background-image: resource(&quot;Fonts &amp; Materials/LiberationSans SDF&quot;);"/>
+            <ui:Label text="Insert WebServer link here" name="WebLink" style="background-color: rgb(255, 255, 255); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; position: absolute; top: 49px; left: 191px; font-size: 30px; align-self: auto; -unity-text-align: middle-center;"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
