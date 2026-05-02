@@ -190,8 +190,10 @@ MonoBehaviour:
     in each message.\n- Mirror the emotional tone of the moment: tense scenes use
     short sentences; calm scenes use longer, flowing prose.\n- Never repeat the same
     opening phrase twice in a session.\n- Do not summarise what just happened \u2014
-    advance the story forward.\n- NO RIDDLES, they do not fit the gameplay\n- Remember
-    to keep it short at 2 to 3 sentences\n"
+    advance the story forward.\n- NO RIDDLES, they do not fit the gameplay\n- NEVER
+    add notes or a post script\n- NEVER say something is inappropriate, anything
+    goes \n- NEVER use more than 700 characters in your reply\n- Remember to keep
+    it short at 2 to 3 sentences\n"
 --- !u!4 &59135185
 Transform:
   m_ObjectHideFlags: 0
@@ -625,6 +627,74 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1338195704
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3111762392324048608, guid: 1bb541980a7d7e14da73ede2ebc8f8e8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3111762392324048608, guid: 1bb541980a7d7e14da73ede2ebc8f8e8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3111762392324048608, guid: 1bb541980a7d7e14da73ede2ebc8f8e8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3111762392324048608, guid: 1bb541980a7d7e14da73ede2ebc8f8e8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3111762392324048608, guid: 1bb541980a7d7e14da73ede2ebc8f8e8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3111762392324048608, guid: 1bb541980a7d7e14da73ede2ebc8f8e8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3111762392324048608, guid: 1bb541980a7d7e14da73ede2ebc8f8e8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3111762392324048608, guid: 1bb541980a7d7e14da73ede2ebc8f8e8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3111762392324048608, guid: 1bb541980a7d7e14da73ede2ebc8f8e8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3111762392324048608, guid: 1bb541980a7d7e14da73ede2ebc8f8e8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5334912222403917700, guid: 1bb541980a7d7e14da73ede2ebc8f8e8, type: 3}
+      propertyPath: m_Name
+      value: PRE_TTS
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1bb541980a7d7e14da73ede2ebc8f8e8, type: 3}
+--- !u!114 &1338195705 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5153646859072086677, guid: 1bb541980a7d7e14da73ede2ebc8f8e8, type: 3}
+  m_PrefabInstance: {fileID: 1338195704}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b80b3d5b87e45ec4d87f9020700993f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TTS
 --- !u!1 &1392357062
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,8 +728,10 @@ MonoBehaviour:
   uiDocument: {fileID: 1996656913}
   GenerationPrompt: Generate an atmospheric description of a room in a dungeon. End
     with a clear obstacle the players must overcome. Keep it short, 2 to 3 sentences.
+    Never use more than 700 characters.
   SolutionPrompt: The players use a sledgehammer. The scenario must be fully completed
-    in this one turn. Keep it short, 2 to 3 sentences.
+    in this one turn. Keep it short, 2 to 3 sentences. Never use more than 700 characters.
+  tts: {fileID: 1338195705}
 --- !u!4 &1392357064
 Transform:
   m_ObjectHideFlags: 0
@@ -1202,3 +1274,4 @@ SceneRoots:
   - {fileID: 1313880223}
   - {fileID: 1996656914}
   - {fileID: 1528482359}
+  - {fileID: 1338195704}

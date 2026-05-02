@@ -15,6 +15,7 @@ public class ScenarioTemp : MonoBehaviour
     public string GenerationPrompt;
     [TextArea(5, 10), Chat, SerializeField]
     public string SolutionPrompt;
+    public TTS tts;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -38,10 +39,11 @@ public class ScenarioTemp : MonoBehaviour
         text.text = "Generating scene...";
         // The line below causes the reply to be shown as it is being generated
         string reply = await DungeonMaster.Chat(GenerationPrompt, ShowTextOverTime);
+        tts.SpeakText(reply);
 
         // The lines below cause the reply to be shown only after it has been fully generated
-        //string reply = await DungeonMaster.Chat("Give me a description of a room in a dungeon, in 2-3 sentences.");
-        //text.text = reply;
+        // string reply = await DungeonMaster.Chat(GenerationPrompt);
+        // text.text = reply;
     }
 
     async public void GenerateSolution()
@@ -49,7 +51,8 @@ public class ScenarioTemp : MonoBehaviour
         text.text = "Generating solution...";
         // The line below causes the reply to be shown as it is being generated
         string reply = await DungeonMaster.Chat(SolutionPrompt, ShowTextOverTime);
-
+        tts.SpeakText(reply);
+        
         // The lines below cause the reply to be shown only after it has been fully generated
         //string reply = await DungeonMaster.Chat("What is a good solution to the problem described in the scene?");
         //text.text = reply;
