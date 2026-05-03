@@ -13,8 +13,9 @@ public class ScenarioTemp : MonoBehaviour
     private Label text;
     [TextArea(5, 10), Chat, SerializeField]
     public string GenerationPrompt;
-    [TextArea(5, 10), Chat, SerializeField]
-    public string SolutionPrompt;
+    [TextArea(1, 10), Chat, SerializeField]
+    public string SolutionItem;
+    private string SolutionPrompt;
     public TTS tts;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,12 +26,6 @@ public class ScenarioTemp : MonoBehaviour
 
     async private void WarmUpAgent()
     {
-        DungeonMaster.temperature = 1.1f;
-        DungeonMaster.topP = 0.92f;
-        DungeonMaster.repeatPenalty = 1.15f;
-        DungeonMaster.mirostat = 2;
-        DungeonMaster.mirostatEta = 0.1f;
-        DungeonMaster.mirostatTau = 5.0f;
         await DungeonMaster.Warmup(WarmUpNotification);
     }
 
@@ -49,6 +44,7 @@ public class ScenarioTemp : MonoBehaviour
     async public void GenerateSolution()
     {
         text.text = "Generating solution...";
+        SolutionPrompt = $"The players use the item: {SolutionItem}. Solve the challenge using the item. The scenario must be fully completed in this one turn. Keep it short, 2 to 3 sentences. Never use more than 700 characters.";
         // The line below causes the reply to be shown as it is being generated
         string reply = await DungeonMaster.Chat(SolutionPrompt, ShowTextOverTime);
         tts.SpeakText(reply);

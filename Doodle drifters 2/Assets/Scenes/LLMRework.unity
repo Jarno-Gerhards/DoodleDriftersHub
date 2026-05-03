@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4326d5ae3b03ff55847035351559f4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: undream.llmunity.Runtime::LLMUnity.LLMAgent
-  advancedOptions: 0
+  advancedOptions: 1
   _remote: 0
   _llm: {fileID: 329885751}
   _APIKey: 
@@ -159,16 +159,16 @@ MonoBehaviour:
   numPredict: -1
   cachePrompt: 1
   seed: 0
-  temperature: 0.2
+  temperature: 1.1
   topK: 40
   topP: 0.9
   minP: 0.05
-  repeatPenalty: 1.1
+  repeatPenalty: 1.2
   presencePenalty: 0
   frequencyPenalty: 0
   typicalP: 1
   repeatLastN: 64
-  mirostat: 0
+  mirostat: 2
   mirostatTau: 5
   mirostatEta: 0.1
   nProbs: 0
@@ -249,16 +249,16 @@ MonoBehaviour:
   _parallelPrompts: 1
   _contextSize: 8192
   _batchSize: 512
-  _model: mistral-7b-instruct-v0.2.Q4_K_M.gguf
+  _model: gemma-3-4b-it-Q4_K_M.gguf
   _flashAttention: 0
   _reasoning: 0
   _lora: 
   _loraWeights: 
   dontDestroyOnLoad: 1
   _embeddingsOnly: 0
-  _embeddingLength: 4096
+  _embeddingLength: 2560
   minContextLength: 0
-  maxContextLength: 32768
+  maxContextLength: 131072
 --- !u!4 &329885752
 Transform:
   m_ObjectHideFlags: 0
@@ -729,8 +729,7 @@ MonoBehaviour:
   GenerationPrompt: Generate an atmospheric description of a room in a dungeon. End
     with a clear obstacle the players must overcome. Keep it short, 2 to 3 sentences.
     Never use more than 700 characters.
-  SolutionPrompt: The players use a sledgehammer. The scenario must be fully completed
-    in this one turn. Keep it short, 2 to 3 sentences. Never use more than 700 characters.
+  SolutionItem: 
   tts: {fileID: 1338195705}
 --- !u!4 &1392357064
 Transform:
