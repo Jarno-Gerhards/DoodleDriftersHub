@@ -45,7 +45,7 @@ namespace LLMUnity
         [ModelAdvanced, SerializeField] protected int _slot = -1;
 
         /// <summary>System prompt that defines the AI's personality and behavior</summary>
-        [TextArea(5, 10), Chat, SerializeField]
+        [TextArea(5, 20), Chat, SerializeField]
         [Tooltip("System prompt that defines the AI's personality and behavior")]
         protected string _systemPrompt = "A chat between a curious human and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the human's questions.";
         #endregion
