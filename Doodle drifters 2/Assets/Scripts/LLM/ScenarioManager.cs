@@ -33,12 +33,26 @@ public class ScenarioManager : MonoBehaviour
         text = uiDocument.rootVisualElement.Q<Label>("StoryText");
     }
 
+    private void InitializeScenarios()
+    {
+        scenarios.Add(ScenarioType.New, gameObject.GetComponent<NewScenario>());
+        scenarios.Add(ScenarioType.Solve, gameObject.GetComponent<SolveScenario>());
+        scenarios.Add(ScenarioType.Fail, gameObject.GetComponent<FailScenario>());
+        scenarios.Add(ScenarioType.Adjust, gameObject.GetComponent<AdjustedScenario>());
+        scenarios.Add(ScenarioType.Boss, gameObject.GetComponent<BossScenario>());
+    }
+
     async private void WarmUpAgent()
     {
         await DungeonMaster.Warmup(WarmUpNotification);
     }
 
-    async public void GenerateScene()
+        private void WarmUpNotification()
+    {
+        Debug.Log("Warmup complete!");
+    }    
+
+    async public void GenerateNewScene()
     {
         text.text = "Generating scene...";
         // The line below causes the reply to be shown as it is being generated
@@ -46,7 +60,7 @@ public class ScenarioManager : MonoBehaviour
         tts.SpeakText(reply);
 
         // The lines below cause the reply to be shown only after it has been fully generated
-        // string reply = await DungeonMaster.Chat(GenerationPrompt);
+        // string reply = await DungeonMaster.Chat(scenarios[ScenarioType.New].GetPrompt());
         // text.text = reply;
     }
 
@@ -58,26 +72,48 @@ public class ScenarioManager : MonoBehaviour
         tts.SpeakText(reply);
         
         // The lines below cause the reply to be shown only after it has been fully generated
-        //string reply = await DungeonMaster.Chat("What is a good solution to the problem described in the scene?");
+        //string reply = await DungeonMaster.Chat(SolutionItem + scenarios[ScenarioType.Solve].GetPrompt());
         //text.text = reply;
+    }
+
+    async public void GenerateFailure()
+    {
+        text.text = "Generating failure...";
+        // The line below causes the reply to be shown as it is being generated
+        string reply = await DungeonMaster.Chat(SolutionItem + scenarios[ScenarioType.Fail].GetPrompt(), ShowTextOverTime);
+        tts.SpeakText(reply);
+        
+        // The lines below cause the reply to be shown only after it has been fully generated
+        //string reply = await DungeonMaster.Chat(SolutionItem + scenarios[ScenarioType.Fail].GetPrompt());
+        //text.text = reply;
+    }
+
+    async public void GenerateAdjustedScene()
+    {
+        text.text = "Generating adjusted scene...";
+        // The line below causes the reply to be shown as it is being generated
+        string reply = await DungeonMaster.Chat(scenarios[ScenarioType.Adjust].GetPrompt(), ShowTextOverTime);
+        tts.SpeakText(reply);
+
+        // The lines below cause the reply to be shown only after it has been fully generated
+        // string reply = await DungeonMaster.Chat(scenarios[ScenarioType.Adjust].GetPrompt());
+        // text.text = reply;
+    }
+
+    async public void GenerateBossScene()
+    {
+        text.text = "Generating boss scene...";
+        // The line below causes the reply to be shown as it is being generated
+        string reply = await DungeonMaster.Chat(scenarios[ScenarioType.Boss].GetPrompt(), ShowTextOverTime);
+        tts.SpeakText(reply);
+
+        // The lines below cause the reply to be shown only after it has been fully generated
+        // string reply = await DungeonMaster.Chat(scenarios[ScenarioType.Boss].GetPrompt());
+        // text.text = reply;
     }
 
     private void ShowTextOverTime(string reply)
     {
         text.text = reply;
     }
-
-    private void InitializeScenarios()
-    {
-        scenarios.Add(ScenarioType.New, gameObject.GetComponent<NewScenario>());
-        scenarios.Add(ScenarioType.Solve, gameObject.GetComponent<SolveScenario>());
-        scenarios.Add(ScenarioType.Fail, gameObject.GetComponent<FailScenario>());
-        scenarios.Add(ScenarioType.Adjust, gameObject.GetComponent<AdjustedScenario>());
-        scenarios.Add(ScenarioType.Boss, gameObject.GetComponent<BossScenario>());
-    }
-
-    private void WarmUpNotification()
-    {
-        Debug.Log("Warmup complete!");
-    }    
 }
