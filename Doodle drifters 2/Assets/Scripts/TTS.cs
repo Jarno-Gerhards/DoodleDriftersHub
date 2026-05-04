@@ -98,7 +98,7 @@ public class TTS : MonoBehaviour
     /// <summary>
     /// Public helper to synthesize a single line of text from other gameplay scripts.
     /// </summary>
-    public void SpeakText(string text, string sessionID = "OllamaSession", Emotion emotion = Emotion.Interest)
+    public void SpeakText(string text, string sessionID = "OllamaSession", Emotion emotion = Emotion.Serenity)
     {
         if (string.IsNullOrWhiteSpace(text))
         {

@@ -1,7 +1,7 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/hostLobbyPresets.uss?fileID=7433441132597879392&amp;guid=bbb5081f88aabca46b254d49f57382fa&amp;type=3#hostLobbyPresets"/>
     <ui:VisualElement name="LobbyUI" style="flex-grow: 1;">
-        <ui:VisualElement name="RightPage" style="flex-grow: 1; width: 40%; position: absolute; height: 85%; top: 7.5%; left: 50%; right: auto; background-color: rgba(255, 255, 255, 0.53); border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);">
+        <ui:VisualElement name="RightPage" class="page" style="position: absolute; top: 7.5%; left: 50%;">
             <ui:VisualElement name="player1Container" class="playerContainer" style="top: 25px; left: 75px;">
                 <ui:VisualElement name="player1Avatar" class="playerAvatar"/>
                 <ui:Label text="Empty slot" name="player1Name" class="playerName"/>
