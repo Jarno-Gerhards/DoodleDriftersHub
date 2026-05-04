@@ -1,0 +1,8 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/hostLobbyPresets.uss?fileID=7433441132597879392&amp;guid=bbb5081f88aabca46b254d49f57382fa&amp;type=3#hostLobbyPresets"/>
+    <ui:VisualElement name="RightPage" class="page" style="flex-grow: 1; position: absolute; top: 7.5%; left: 50%;"/>
+    <ui:VisualElement name="LeftPage" class="page" style="flex-grow: 1; position: absolute; top: 7.5%; right: 50%;"/>
+    <ui:VisualElement name="TextContainer" style="flex-grow: 1; position: absolute; width: 730px; height: 846px; top: 91px; left: 979px;">
+        <ui:Label text=". . ." name="StoryText" style="font-size: 37px; white-space: normal; height: 873px; width: 726px;"/>
+    </ui:VisualElement>
+</ui:UXML>
