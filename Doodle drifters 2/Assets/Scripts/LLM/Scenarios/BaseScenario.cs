@@ -2,14 +2,6 @@ using UnityEngine;
 
 public abstract class BaseScenario : MonoBehaviour
 {
-    private const string personalityPrompt = 
-    "You are the Game Master for a fantasy game in which players navigate a dangerous dungeon." + 
-    "You must be creative, atmospheric and engaging in your descriptions." +
-    "You will keep it short (around 3 sentences) and make sure it is easy to understand when spoken aloud by a text-to-speech system.";
-
-    public abstract string scenarioSpecificPrompt { get; } 
-
-
     private string previousScenario;
     private int roomCount;
     private int roomFailureCount;
@@ -22,21 +14,7 @@ public abstract class BaseScenario : MonoBehaviour
     // private const string judgePrompt = 
     // "The players have chosen a single object which they will use to solve the scenario" +
     // "Based on the scenario and the chosen object, determine if the players have solved the scenario or failed it.";
-
-
-    void Start()
-    {
-        //
-        // Initialize the LLM and such
-        //
-    }
-
-    protected void SendLLMRequest(string prompt) // Sends a request to the LLM and returns the response
-    {
-        // Use the personalityPrompt and the specific prompt to generate a response from the LLM
-    }
-
-    public abstract void Generate();
+    public abstract string GetPrompt();
 
     private void FallbackIntermission() // Called when the LLM fails to generate a response
     {

@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using LLMUnity;
@@ -6,22 +8,29 @@ using Unity.AppUI.UI;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class ScenarioTemp : MonoBehaviour
+public class ScenarioManager : MonoBehaviour
 {
     [SerializeField] private LLMAgent DungeonMaster;
     public UIDocument uiDocument;
     private Label text;
-    [TextArea(5, 10), Chat, SerializeField]
-    public string GenerationPrompt;
     [TextArea(1, 10), Chat, SerializeField]
     public string SolutionItem;
-    private string SolutionPrompt;
     public TTS tts;
+    private Dictionary<ScenarioType, BaseScenario> scenarios = new Dictionary<ScenarioType, BaseScenario>();
+    private enum ScenarioType
+    {
+        New,
+        Solve,
+        Fail,
+        Adjust,
+        Boss
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        text = uiDocument.rootVisualElement.Q<Label>("StoryText");
+        InitializeScenarios();
         WarmUpAgent();
+        text = uiDocument.rootVisualElement.Q<Label>("StoryText");
     }
 
     async private void WarmUpAgent()
@@ -33,7 +42,7 @@ public class ScenarioTemp : MonoBehaviour
     {
         text.text = "Generating scene...";
         // The line below causes the reply to be shown as it is being generated
-        string reply = await DungeonMaster.Chat(GenerationPrompt, ShowTextOverTime);
+        string reply = await DungeonMaster.Chat(scenarios[ScenarioType.New].GetPrompt(), ShowTextOverTime);
         tts.SpeakText(reply);
 
         // The lines below cause the reply to be shown only after it has been fully generated
@@ -44,9 +53,8 @@ public class ScenarioTemp : MonoBehaviour
     async public void GenerateSolution()
     {
         text.text = "Generating solution...";
-        SolutionPrompt = $"The players use the item: {SolutionItem}. Solve the challenge using the item. The scenario must be fully completed in this one turn. Keep it short, 2 to 3 sentences. Never use more than 700 characters.";
         // The line below causes the reply to be shown as it is being generated
-        string reply = await DungeonMaster.Chat(SolutionPrompt, ShowTextOverTime);
+        string reply = await DungeonMaster.Chat(SolutionItem + scenarios[ScenarioType.Solve].GetPrompt(), ShowTextOverTime);
         tts.SpeakText(reply);
         
         // The lines below cause the reply to be shown only after it has been fully generated
@@ -57,6 +65,15 @@ public class ScenarioTemp : MonoBehaviour
     private void ShowTextOverTime(string reply)
     {
         text.text = reply;
+    }
+
+    private void InitializeScenarios()
+    {
+        scenarios.Add(ScenarioType.New, gameObject.GetComponent<NewScenario>());
+        scenarios.Add(ScenarioType.Solve, gameObject.GetComponent<SolveScenario>());
+        scenarios.Add(ScenarioType.Fail, gameObject.GetComponent<FailScenario>());
+        scenarios.Add(ScenarioType.Adjust, gameObject.GetComponent<AdjustedScenario>());
+        scenarios.Add(ScenarioType.Boss, gameObject.GetComponent<BossScenario>());
     }
 
     private void WarmUpNotification()
