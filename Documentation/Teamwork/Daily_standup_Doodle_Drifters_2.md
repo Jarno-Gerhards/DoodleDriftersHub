@@ -150,6 +150,16 @@ Elke dag worden dezelfde 3 vragen gesteld. Wat heb je gisteren gedaan, wat ga je
 | Daan    | Begin gemaakt aan open en closed book UI.                                                | Open en closed book af maken en eventueel implementeren met alle UI.  | -                          |
 | Elias                                                                                                                                     |  PLaytest gedaan.                                                                                         | Guild meeting voorbereiden.                                                   | -
 | Jarno   | Evaluatie gesprek en gewerkt aan state machine.                                                                                                 | Voorbereiden guild meeting en misschien een begin maken aan de multiplayer. | -                            |
-| Vincent | Playtest gedaan.                                                                                                 | Playtest resultaten uitwerken en voorbereiden op guild meeting en voortgangsgesprek, eventueel ook een begin maken aan UI.                                         | -    
+| Vincent | Playtest gedaan.                                                                                                 | Playtest resultaten uitwerken en voorbereiden op guild meeting en voortgangsgesprek, eventueel ook een begin maken aan UI.      
+
+####04/05/2026
+
+|         | Gedaan                                                                                                                            | Doen                                                                                       | Obstakels                                                 |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------- |
+| Bart    | Gewerkt aan de rework van de LLM. |   Scenario systeem invoegen bij de LLM.                                                 | - |
+| Daan    | -                                                | Implementeren book flip asset.  | Voelt zich niet zo goed en werkt in de middag.                          |
+| Elias                                                                                                                                     |  Features gemerged.                                                                                         | Voorbereiden guild meeting.                                                   | -
+| Jarno   | State machine voor de client side en gekeken naar multiplayer.                                                                                                 | Fixen van multiplayer tussen host en client. | -                            |
+| Vincent | Gewerkt aan side quests en UI feature ontworpen.                                                                                                 | Ui feature af maken.                                     | -    
 
 
