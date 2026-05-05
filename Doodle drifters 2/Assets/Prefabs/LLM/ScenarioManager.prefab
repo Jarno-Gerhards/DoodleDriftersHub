@@ -1,0 +1,128 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8857852532001304639
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1010840559369661990}
+  - component: {fileID: 34470877927163308}
+  - component: {fileID: 436901506066717024}
+  - component: {fileID: 1000247156218720200}
+  - component: {fileID: 3848742516753489593}
+  - component: {fileID: 7949968634905503991}
+  - component: {fileID: 3876065911888568447}
+  m_Layer: 0
+  m_Name: ScenarioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1010840559369661990
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8857852532001304639}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &34470877927163308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8857852532001304639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82f39d28a9a43854d908f0758373e935, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScenarioTemp
+  DungeonMaster: {fileID: 0}
+  uiDocument: {fileID: 0}
+  SolutionItem: 
+  tts: {fileID: 0}
+--- !u!114 &436901506066717024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8857852532001304639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c796f192cf326248867458ae2d2dff5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NewScenario
+  scenarioSpecificPrompt: Generate an atmospheric description of a room in a dungeon.
+    End with a clear obstacle the players must overcome.
+--- !u!114 &1000247156218720200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8857852532001304639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba9293b61029d4e49bfba50e55b328d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SolveScenario
+  scenarioSpecificPrompt: ', is the Item the players have chosen. Solve the challenge
+    using the item. The scenario must be fully completed in this one turn. '
+--- !u!114 &3848742516753489593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8857852532001304639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8614bf55cd7d27342a4eec828769bc59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FailScenario
+  scenarioSpecificPrompt: ', is the item the players have chosen. The players have
+    failed the scenario.Describe how they used their chosen object and how it failed
+    to solve the challenge'
+--- !u!114 &7949968634905503991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8857852532001304639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 651748f4db5d9344f8f0f1ed8990444b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AdjustedScenario
+  scenarioSpecificPrompt: The players have failed the scenario.Make adjustments to
+    the scenario based on their failure and give them a second chanceEnd with a clear
+    new challenge which the players must overcome
+--- !u!114 &3876065911888568447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8857852532001304639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4abbb470f6eb7748acf056181bcd17e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossScenario
+  scenarioSpecificPrompt: Generate an atmospheric description of am imposing boss
+    room in a dungeon.Generate a unique and challenging boss for the players to face.End
+    with a clear weakness which the players can exploit to defeat the boss

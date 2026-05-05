@@ -2,28 +2,29 @@ using UnityEngine;
 
 public class LobbyState : IState
 {
+    private GameObject lobbyUI;
     public LobbyState()
     {
-        // Constructor logic if needed
+        lobbyUI = GameObject.Find("HostLobbyScreen");
     }
 
     public void Enter(GameContext context)
     {
-        Debug.Log("Entering lobby state.");
+        lobbyUI.SetActive(true);
     }
 
     public void Exit(GameContext context)
     {
-        Debug.Log("Exiting lobby state.");
+        lobbyUI.SetActive(false);
     }
 
     public void Update(GameContext context)
     {
-        Debug.Log("Updating lobby state.");
+        
     }
 
     public void FixedUpdate(GameContext context)
     {
-        Debug.Log("FixedUpdating lobby state");
+        
     }
 }
