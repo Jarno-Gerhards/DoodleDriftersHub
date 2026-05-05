@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="root" style="flex-grow: 1; justify-content: center; align-items: center;">
+        <ui:VisualElement name="bookImage" style="width: 1920px; height: 1080px; background-image: url(&quot;project://database/Assets/Images/Book/Book%20closed.png?fileID=-3992176170690234577&amp;guid=b4f563f379285ad4c8abdabee7fd90d5&amp;type=3#Book closed_0&quot;);"/>
+        <ui:Label name="Title" text="Doodle &#10;into the&#10;Depths" style="position: absolute; bottom: 748px; font-size: 100px; left: 794px; -unity-font-definition: url(&quot;project://database/Library/unity%20default%20resources?fileID=10102&amp;guid=0000000000000000e000000000000000&amp;type=0#LegacyRuntime&quot;); -unity-font-style: bold; height: 142px; width: 567px;"/>
+        <ui:Label name="pageText" text="Start game" style="position: absolute; bottom: 284px; font-size: 40px; left: 848px; -unity-font-style: bold;"/>
+    </ui:VisualElement>
+</ui:UXML>

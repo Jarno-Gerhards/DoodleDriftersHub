@@ -1,5 +1,0 @@
-<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement style="flex-grow: 1;">
-        <ui:Image source="project://database/Assets/Images/Book/Book%20closed.png?fileID=-3992176170690234577&amp;guid=b4f563f379285ad4c8abdabee7fd90d5&amp;type=3#Book closed_0" scale-mode="StretchToFill" style="height: 1080px;"/>
-    </ui:VisualElement>
-</ui:UXML>
