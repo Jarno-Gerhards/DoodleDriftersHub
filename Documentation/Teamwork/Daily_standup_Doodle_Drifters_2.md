@@ -162,4 +162,13 @@ Elke dag worden dezelfde 3 vragen gesteld. Wat heb je gisteren gedaan, wat ga je
 | Jarno   | State machine voor de client side en gekeken naar multiplayer.                                                                                                 | Fixen van multiplayer tussen host en client. | -                            |
 | Vincent | Gewerkt aan side quests en UI feature ontworpen.                                                                                                 | Ui feature af maken.                                     | -    
 
+####05/05/2026
+
+|         | Gedaan                                                                                                                            | Doen                                                                                       | Obstakels                                                 |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------- |
+| Bart    | LLM feature af gemaakt en gemerged en gewerkt aan documentatie showcase. |   Kijken wat er nog gedaan kan worden review.                                                 | - |
+| Daan    | Geprobeerd 3D package te importeren maar zonder succes.                                                | 2D book sounds en screens maken.  |                           |
+| Elias                                                                                                                                     |  -                                                                                       | -                                                    | Afwezig
+| Jarno   | Gewerkt aan multiplayer.                                                                                                 | Verder aan multiplayer. | -                            | -
+| Vincent | -                                                                                                 |           Afwezig                          |     
 
