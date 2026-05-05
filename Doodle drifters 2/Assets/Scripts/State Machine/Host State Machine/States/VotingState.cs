@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 public class VotingState : IState
 {
     private UIDocument votingUI;
-    private float voteTime = 10f;
+    private float voteTime = 15f;
     private float timeRemaining = 0f;
     public VotingState()
     {
