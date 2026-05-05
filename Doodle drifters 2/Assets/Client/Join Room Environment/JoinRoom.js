@@ -1,3 +1,7 @@
+import { startClientStateApp } from "../../Scripts/State Machine/Client State Machine/ClientStateApp.js";
+
+window.clientStateMachine = startClientStateApp({ mode: "page" });
+
 // Create main joinScreen
 const joinScreen = document.createElement("div");
 //joinScreen.style.display = "none"

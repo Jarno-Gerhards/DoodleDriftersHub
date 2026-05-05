@@ -1,5 +1,8 @@
 import { initMobileDrawingScreen } from "../shared/mobileDrawingScreen.js";
 import { SolutionSubmitBridge } from "../../../VotingClient/js/shared/solutionSubmitBridge.js";
+import { startClientStateApp } from "../../../State Machine/Client State Machine/ClientStateApp.js";
+
+window.clientStateMachine = startClientStateApp({ mode: "page" });
 
 const { drawer, textInput, submitBtn } = initMobileDrawingScreen({
   textInputId: "solutionDescription"

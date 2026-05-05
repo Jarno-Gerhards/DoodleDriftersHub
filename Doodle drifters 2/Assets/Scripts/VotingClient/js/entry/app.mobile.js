@@ -1,4 +1,7 @@
 import { VotingClientPanel } from "../shared/votingClientPanel.js";
+import { startClientStateApp } from "../../../State Machine/Client State Machine/ClientStateApp.js";
+
+window.clientStateMachine = startClientStateApp({ mode: "page" });
 
 const votingGrid = document.getElementById("votingGrid");
 const voteStatus = document.getElementById("voteStatus");
