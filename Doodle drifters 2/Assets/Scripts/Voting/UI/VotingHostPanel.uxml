@@ -13,4 +13,5 @@
     </ui:VisualElement>
     <ui:VisualElement name="LeftPageVisual" class="page" style="flex-grow: 1; position: absolute; right: 50%; top: 7.5%;"/>
     <ui:VisualElement name="RightPageVisual" class="page" style="flex-grow: 1; left: 50%; top: 7.5%; position: absolute;"/>
+    <ui:Label text="Which item will you choose?" name="Choice" style="position: absolute; top: 109px; left: 238px; font-size: 50px;"/>
 </ui:UXML>
