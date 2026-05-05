@@ -4,11 +4,13 @@ using UnityEngine.UIElements;
 public class VotingState : IState
 {
     private UIDocument votingUI;
+    private Label timer;
     private float voteTime = 15f;
     private float timeRemaining = 0f;
     public VotingState()
     {
         votingUI = GameObject.Find("HostVotingUI").GetComponent<UIDocument>();
+        timer = votingUI.rootVisualElement.Q<Label>("Timer");
         votingUI.rootVisualElement.style.display = DisplayStyle.None;
     }
 
@@ -28,6 +30,7 @@ public class VotingState : IState
         if (timeRemaining > 0)
         {
             timeRemaining -= Time.deltaTime;
+            timer.text = timeRemaining.ToString("F0");
         }
         else
         {
