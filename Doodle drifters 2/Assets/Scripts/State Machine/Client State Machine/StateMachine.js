@@ -1,6 +1,7 @@
 import GameContext from "./GameContext.js";
 import State from "./State.js";
 import LobbyState from "./States/LobbyState.js"
+import SolutionState from "./States/SolutionState.js";
 import TestState from "./States/TestState.js"
 
 /**
@@ -9,6 +10,7 @@ import TestState from "./States/TestState.js"
 export const GameStateType = Object.freeze({
     LOBBY: "Lobby",
     DRAWING: "Drawing",
+    SOLUTION: "Solution",
     VOTING: "Voting"
 });
 
@@ -17,7 +19,8 @@ export default class StateMachine {
         this.states = new Map();
         this.validTransitions = new Map([
             [GameStateType.LOBBY, [GameStateType.DRAWING]],
-            [GameStateType.DRAWING, [GameStateType.VOTING]],
+            [GameStateType.DRAWING, [GameStateType.SOLUTION]],
+            [GameStateType.SOLUTION, [GameStateType.VOTING]],
             [GameStateType.VOTING, [GameStateType.DRAWING]]
         ]);
 
@@ -33,6 +36,7 @@ export default class StateMachine {
         // Replace these with your real state implementations
         this.states.set(GameStateType.LOBBY, new LobbyState());
         this.states.set(GameStateType.DRAWING, new TestState());
+        this.states.set(GameStateType.SOLUTION, new SolutionState());
         this.states.set(GameStateType.VOTING, new TestState());
     }
 

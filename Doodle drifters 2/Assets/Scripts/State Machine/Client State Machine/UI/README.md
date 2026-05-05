@@ -12,10 +12,12 @@ startClientStateApp({
     root: document
 });
 
-Example (page mode):
+Example (page mode, auto phone/desktop):
 
 import { startClientStateApp } from "../ClientStateApp.js";
 
 startClientStateApp({
     mode: "page"
 });
+
+Default routes live in DefaultPageRoutes.js and include desktop + phone versions.

@@ -11,7 +11,9 @@ export function startClientStateApp(options = {}) {
     } else {
         attachPageRouter(stateMachine, options.routes || defaultPageRoutes, {
             force: options.force,
-            replace: options.replace
+            replace: options.replace,
+            deviceKind: options.deviceKind,
+            getDeviceKind: options.getDeviceKind
         });
     }
 
