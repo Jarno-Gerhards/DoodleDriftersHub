@@ -2,6 +2,9 @@ import { createDrawer } from "../core/drawingEngine.js";
 import { DrawingUIController } from "../shared/drawingUIController.js";
 import { DrawingSubmitBridge } from "../shared/drawingSubmitBridge.js";
 import { HostScreenSimulator } from "../shared/hostScreenSimulator.js";
+import { startClientStateApp } from "../../../State Machine/Client State Machine/ClientStateApp.js";
+
+window.clientStateMachine = startClientStateApp({ mode: "page" });
 
 const canvas = document.getElementById("drawCanvas");
 const toolButtons = document.querySelectorAll(".tool-btn");

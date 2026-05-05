@@ -1,5 +1,8 @@
 import { initMobileDrawingScreen } from "../shared/mobileDrawingScreen.js";
 import { createSubmissionPayload, dispatchSubmission } from "../core/gameLogic.js";
+import { startClientStateApp } from "../../../State Machine/Client State Machine/ClientStateApp.js";
+
+window.clientStateMachine = startClientStateApp({ mode: "page" });
 
 const fallbackName = "Unnamed Champion";
 

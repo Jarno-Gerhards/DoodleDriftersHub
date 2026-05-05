@@ -1,6 +1,9 @@
 import { createDrawer } from "../core/drawingEngine.js";
 import { DrawingUIController } from "../shared/drawingUIController.js";
 import { SolutionSubmitBridge } from "../../../VotingClient/js/shared/solutionSubmitBridge.js";
+import { startClientStateApp } from "../../../State Machine/Client State Machine/ClientStateApp.js";
+
+window.clientStateMachine = startClientStateApp({ mode: "page" });
 
 const canvas = document.getElementById("drawCanvas");
 const toolButtons = document.querySelectorAll(".tool-btn");
