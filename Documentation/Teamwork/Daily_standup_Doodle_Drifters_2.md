@@ -170,5 +170,5 @@ Elke dag worden dezelfde 3 vragen gesteld. Wat heb je gisteren gedaan, wat ga je
 | Daan    | Geprobeerd 3D package te importeren maar zonder succes.                                                | 2D book sounds en screens maken.  |                           |
 | Elias                                                                                                                                     |  -                                                                                       | -                                                    | Afwezig
 | Jarno   | Gewerkt aan multiplayer.                                                                                                 | Verder aan multiplayer. | -                            | -
-| Vincent | -                                                                                                 |           Afwezig                          |     
+| Vincent | -                                                                                                 |        -                       |     Afwezig
 
