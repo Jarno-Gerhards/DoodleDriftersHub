@@ -1,5 +1,8 @@
 import { startClientStateApp } from "../../Scripts/State Machine/Client State Machine/ClientStateApp.js";
 
+// Always start from a clean state when opening the join screen.
+sessionStorage.removeItem("clientState");
+
 window.clientStateMachine = startClientStateApp({ mode: "page" });
 
 // Create main joinScreen
