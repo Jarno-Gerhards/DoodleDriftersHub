@@ -10,7 +10,8 @@ public class StateMachine : MonoBehaviour
         NewScene,
         Think,
         Drawing,
-        Voting
+        Voting,
+        Solution
         //Add more types as neccesary
     }
 
@@ -25,6 +26,7 @@ public class StateMachine : MonoBehaviour
             { GameStateType.Think, new ThinkState() },
             { GameStateType.Drawing, new DrawingState() },
             { GameStateType.Voting, new VotingState() },
+            { GameStateType.Solution, new SolutionState() },
         };
     }
 
@@ -35,7 +37,8 @@ public class StateMachine : MonoBehaviour
     { GameStateType.NewScene, new List<GameStateType> { GameStateType.Think } },
     { GameStateType.Think, new List<GameStateType> { GameStateType.Drawing } },
     { GameStateType.Drawing, new List<GameStateType> { GameStateType.Voting } },
-    { GameStateType.Voting, new List<GameStateType> { GameStateType.Drawing } }
+    { GameStateType.Voting, new List<GameStateType> { GameStateType.Solution } },
+    { GameStateType.Solution, new List<GameStateType> { GameStateType.Lobby } }
     };
 
     IState currentState;

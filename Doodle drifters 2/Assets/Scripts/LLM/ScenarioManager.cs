@@ -67,25 +67,25 @@ public class ScenarioManager : MonoBehaviour
         // text.text = reply;
     }
 
-    async public void GenerateSolution()
+    async public void GenerateSolution(string item)
     {
         // The line below causes the reply to be shown as it is being generated
-        string reply = await DungeonMaster.Chat(SolutionItem + scenarios[ScenarioType.Solve].GetPrompt(), ShowTextOverTime);
+        string reply = await DungeonMaster.Chat(item + scenarios[ScenarioType.Solve].GetPrompt(), ShowTextOverTime);
         tts.SpeakText(reply);
         
         // The lines below cause the reply to be shown only after it has been fully generated
-        //string reply = await DungeonMaster.Chat(SolutionItem + scenarios[ScenarioType.Solve].GetPrompt());
+        //string reply = await DungeonMaster.Chat(item + scenarios[ScenarioType.Solve].GetPrompt());
         //text.text = reply;
     }
 
-    async public void GenerateFailure()
+    async public void GenerateFailure(string item)
     {
         // The line below causes the reply to be shown as it is being generated
-        string reply = await DungeonMaster.Chat(SolutionItem + scenarios[ScenarioType.Fail].GetPrompt(), ShowTextOverTime);
+        string reply = await DungeonMaster.Chat(item + scenarios[ScenarioType.Fail].GetPrompt(), ShowTextOverTime);
         tts.SpeakText(reply);
         
         // The lines below cause the reply to be shown only after it has been fully generated
-        //string reply = await DungeonMaster.Chat(SolutionItem + scenarios[ScenarioType.Fail].GetPrompt());
+        //string reply = await DungeonMaster.Chat(item + scenarios[ScenarioType.Fail].GetPrompt());
         //text.text = reply;
     }
 
