@@ -25,12 +25,16 @@ public class ScenarioManager : MonoBehaviour
         Adjust,
         Boss
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    private void Awake()
+    {
+        text = uiDocument.rootVisualElement.Q<Label>("StoryText");
+    }
+
     void Start()
     {
         InitializeScenarios();
         WarmUpAgent();
-        text = uiDocument.rootVisualElement.Q<Label>("StoryText");
     }
 
     private void InitializeScenarios()
@@ -55,6 +59,7 @@ public class ScenarioManager : MonoBehaviour
     async public void GenerateNewScene()
     {
         text.text = "Generating scene...";
+        await Task.Delay(1000); // Optional: Add a short delay to ensure the "Generating scene..." message is visible before the new text starts appearing
         // The line below causes the reply to be shown as it is being generated
         string reply = await DungeonMaster.Chat(scenarios[ScenarioType.New].GetPrompt(), ShowTextOverTime);
         tts.SpeakText(reply);

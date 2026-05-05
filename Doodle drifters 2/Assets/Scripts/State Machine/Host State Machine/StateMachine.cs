@@ -7,6 +7,7 @@ public class StateMachine : MonoBehaviour
     public enum GameStateType
     {
         Lobby,
+        NewScene,
         Drawing,
         Voting
         //Add more types as neccesary
@@ -19,6 +20,7 @@ public class StateMachine : MonoBehaviour
         states = new Dictionary<GameStateType, IState>
         { // change the actual states when they are created
             { GameStateType.Lobby, new LobbyState() },
+            { GameStateType.NewScene, new NewSceneState() },
             { GameStateType.Drawing, new testState() },
             { GameStateType.Voting, new testState() },
         };
@@ -27,7 +29,8 @@ public class StateMachine : MonoBehaviour
     private Dictionary<GameStateType, List<GameStateType>> validTransitions =
         new Dictionary<GameStateType, List<GameStateType>>
     {
-    { GameStateType.Lobby, new List<GameStateType> { GameStateType.Drawing } },
+    { GameStateType.Lobby, new List<GameStateType> { GameStateType.NewScene } },
+    { GameStateType.NewScene, new List<GameStateType> { GameStateType.Drawing } },
     { GameStateType.Drawing, new List<GameStateType> { GameStateType.Voting } },
     { GameStateType.Voting, new List<GameStateType> { GameStateType.Drawing } }
     };
