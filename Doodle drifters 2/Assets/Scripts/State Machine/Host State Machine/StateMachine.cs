@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -11,6 +12,10 @@ public class StateMachine : MonoBehaviour
         Voting
         //Add more types as neccesary
     }
+
+    public event Action<GameStateType, GameStateType> StateChanged;
+
+    public GameStateType CurrentStateType => currentStateType;
 
     private Dictionary<GameStateType, IState> states;
 
@@ -65,8 +70,14 @@ public class StateMachine : MonoBehaviour
         //     return;
         // } uncomment when state transitions are fleshed out
 
+        if (currentState != null && newState == currentStateType)
+        {
+            return;
+        }
+        GameStateType previousState = currentStateType;
         currentStateType = newState;
         SetState(states[newState]);
+        StateChanged?.Invoke(previousState, currentStateType);
     }
 
     public void SetState(IState newState)

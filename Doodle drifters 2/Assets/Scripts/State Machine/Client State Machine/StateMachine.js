@@ -24,6 +24,7 @@ export default class StateMachine {
         this.currentState = null;
         this.currentStateType = null;
         this.context = new GameContext(this);
+        this.stateListeners = new Set();
 
         this.initializeStates();
     }
@@ -39,6 +40,10 @@ export default class StateMachine {
         this.switchState(GameStateType.LOBBY);
     }
 
+    getCurrentStateType() {
+        return this.currentStateType;
+    }
+
     update() {
         if (this.currentState) {
             this.currentState.update(this.context);
@@ -52,6 +57,10 @@ export default class StateMachine {
     }
 
     switchState(newState) {
+        if (this.currentState && newState === this.currentStateType) {
+            return;
+        }
+
         // Enable this when transitions are enforced
         /*
         const allowed = this.validTransitions.get(this.currentStateType);
@@ -61,8 +70,10 @@ export default class StateMachine {
         }
         */
 
+        const previousState = this.currentStateType;
         this.currentStateType = newState;
         this.setState(this.states.get(newState));
+        this.emitStateChanged(previousState, this.currentStateType);
     }
 
     setState(newState) {
@@ -75,6 +86,24 @@ export default class StateMachine {
         if (this.currentState) {
             this.currentState.enter(this.context);
         }
+    }
+
+    onStateChanged(handler) {
+        if (typeof handler !== "function") {
+            return;
+        }
+
+        this.stateListeners.add(handler);
+    }
+
+    offStateChanged(handler) {
+        this.stateListeners.delete(handler);
+    }
+
+    emitStateChanged(previousState, nextState) {
+        this.stateListeners.forEach((handler) => {
+            handler({ previousState, nextState, context: this.context });
+        });
     }
 }
 
