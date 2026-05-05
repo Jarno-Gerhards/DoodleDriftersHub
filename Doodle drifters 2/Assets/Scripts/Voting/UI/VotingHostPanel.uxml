@@ -1,5 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/Scripts/Voting/UI/VotingHostPanel.uss?fileID=7433441132597879392&amp;guid=abc02a8a2866c4a42a69532c86dd65aa&amp;type=3#VotingHostPanel"/>
+    <Style src="project://database/Assets/UI%20Toolkit/hostLobbyPresets.uss?fileID=7433441132597879392&amp;guid=bbb5081f88aabca46b254d49f57382fa&amp;type=3#hostLobbyPresets"/>
     <ui:VisualElement name="host-voting-root" class="host-voting-root">
         <ui:VisualElement name="book-spread" class="book-spread">
             <ui:VisualElement name="left-page" class="book-page">
@@ -10,4 +11,6 @@
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
+    <ui:VisualElement name="LeftPageVisual" class="page" style="flex-grow: 1; position: absolute; right: 50%; top: 7.5%;"/>
+    <ui:VisualElement name="RightPageVisual" class="page" style="flex-grow: 1; left: 50%; top: 7.5%; position: absolute;"/>
 </ui:UXML>
