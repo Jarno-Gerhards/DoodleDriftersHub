@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 
 public class HostLobbyScript : MonoBehaviour
 {
+    public StateMachine stateMachine;
     private UIDocument document;
     private Label roomCode;
     private int roomCodeNumber = 12345;
@@ -65,7 +66,7 @@ public class HostLobbyScript : MonoBehaviour
             Debug.LogWarning("Please enter the number of encounters before starting the game.");
             return;
         }
-        Debug.Log("Start Game button clicked!");
+        stateMachine.SwitchState(StateMachine.GameStateType.NewScene);
     }
 
     private void HandleEncounterCount(ChangeEvent<string> evt) // Zorgt er voor dat alleen cijfers tussen min en max encounters kunnen worden ingevoerd
