@@ -215,6 +215,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2450525027774802560, guid: 846ca564fa65a5a4eb9dc842d5fb96f1, type: 3}
+      propertyPath: stateMachine
+      value: 
+      objectReference: {fileID: 617478336}
     - target: {fileID: 6319666741569220279, guid: 846ca564fa65a5a4eb9dc842d5fb96f1, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -279,6 +283,17 @@ MonoBehaviour:
   m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
+--- !u!114 &428231784 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2450525027774802560, guid: 846ca564fa65a5a4eb9dc842d5fb96f1, type: 3}
+  m_PrefabInstance: {fileID: 428231782}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5638a98a6ae1c044953d84c7a603afd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StoryScreen
 --- !u!1 &488103564
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,6 +383,10 @@ PrefabInstance:
       propertyPath: uiDocument
       value: 
       objectReference: {fileID: 428231783}
+    - target: {fileID: 34470877927163308, guid: 965ef115f23ca5b40987a9b8407b85ed, type: 3}
+      propertyPath: storyScreen
+      value: 
+      objectReference: {fileID: 428231784}
     - target: {fileID: 34470877927163308, guid: 965ef115f23ca5b40987a9b8407b85ed, type: 3}
       propertyPath: DungeonMaster
       value: 

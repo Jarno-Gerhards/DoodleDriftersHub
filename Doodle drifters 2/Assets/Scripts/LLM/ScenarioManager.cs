@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
@@ -11,8 +12,7 @@ using UnityEngine.UIElements;
 public class ScenarioManager : MonoBehaviour
 {
     [SerializeField] private LLMAgent DungeonMaster;
-    public UIDocument uiDocument;
-    private Label text;
+    public StoryScreen storyScreen;
     [TextArea(1, 10), Chat, SerializeField]
     public string SolutionItem;
     public TTS tts;
@@ -28,7 +28,7 @@ public class ScenarioManager : MonoBehaviour
 
     private void Awake()
     {
-        text = uiDocument.rootVisualElement.Q<Label>("StoryText");
+        
     }
 
     void Start()
@@ -58,8 +58,6 @@ public class ScenarioManager : MonoBehaviour
 
     async public void GenerateNewScene()
     {
-        text.text = "Generating scene...";
-        await Task.Delay(1000); // Optional: Add a short delay to ensure the "Generating scene..." message is visible before the new text starts appearing
         // The line below causes the reply to be shown as it is being generated
         string reply = await DungeonMaster.Chat(scenarios[ScenarioType.New].GetPrompt(), ShowTextOverTime);
         tts.SpeakText(reply);
@@ -71,7 +69,6 @@ public class ScenarioManager : MonoBehaviour
 
     async public void GenerateSolution()
     {
-        text.text = "Generating solution...";
         // The line below causes the reply to be shown as it is being generated
         string reply = await DungeonMaster.Chat(SolutionItem + scenarios[ScenarioType.Solve].GetPrompt(), ShowTextOverTime);
         tts.SpeakText(reply);
@@ -83,7 +80,6 @@ public class ScenarioManager : MonoBehaviour
 
     async public void GenerateFailure()
     {
-        text.text = "Generating failure...";
         // The line below causes the reply to be shown as it is being generated
         string reply = await DungeonMaster.Chat(SolutionItem + scenarios[ScenarioType.Fail].GetPrompt(), ShowTextOverTime);
         tts.SpeakText(reply);
@@ -95,7 +91,6 @@ public class ScenarioManager : MonoBehaviour
 
     async public void GenerateAdjustedScene()
     {
-        text.text = "Generating adjusted scene...";
         // The line below causes the reply to be shown as it is being generated
         string reply = await DungeonMaster.Chat(scenarios[ScenarioType.Adjust].GetPrompt(), ShowTextOverTime);
         tts.SpeakText(reply);
@@ -107,7 +102,6 @@ public class ScenarioManager : MonoBehaviour
 
     async public void GenerateBossScene()
     {
-        text.text = "Generating boss scene...";
         // The line below causes the reply to be shown as it is being generated
         string reply = await DungeonMaster.Chat(scenarios[ScenarioType.Boss].GetPrompt(), ShowTextOverTime);
         tts.SpeakText(reply);
@@ -119,6 +113,6 @@ public class ScenarioManager : MonoBehaviour
 
     private void ShowTextOverTime(string reply)
     {
-        text.text = reply;
+        storyScreen.SetStoryText(reply);
     }
 }

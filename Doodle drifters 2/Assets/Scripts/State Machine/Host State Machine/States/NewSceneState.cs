@@ -20,7 +20,7 @@ public class NewSceneState : IState
 
     public void Exit(GameContext context)
     {
-        storyUI.rootVisualElement.style.display = DisplayStyle.None;
+        //storyUI.rootVisualElement.style.display = DisplayStyle.None;
     }
 
     public void Update(GameContext context)
