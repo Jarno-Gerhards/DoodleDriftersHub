@@ -8,6 +8,7 @@ public class StateMachine : MonoBehaviour
     {
         Lobby,
         NewScene,
+        Think,
         Drawing,
         Voting
         //Add more types as neccesary
@@ -21,8 +22,9 @@ public class StateMachine : MonoBehaviour
         { // change the actual states when they are created
             { GameStateType.Lobby, new LobbyState() },
             { GameStateType.NewScene, new NewSceneState() },
-            { GameStateType.Drawing, new testState() },
-            { GameStateType.Voting, new testState() },
+            { GameStateType.Think, new ThinkState() },
+            { GameStateType.Drawing, new DrawingState() },
+            { GameStateType.Voting, new VotingState() },
         };
     }
 
@@ -30,7 +32,8 @@ public class StateMachine : MonoBehaviour
         new Dictionary<GameStateType, List<GameStateType>>
     {
     { GameStateType.Lobby, new List<GameStateType> { GameStateType.NewScene } },
-    { GameStateType.NewScene, new List<GameStateType> { GameStateType.Drawing } },
+    { GameStateType.NewScene, new List<GameStateType> { GameStateType.Think } },
+    { GameStateType.Think, new List<GameStateType> { GameStateType.Drawing } },
     { GameStateType.Drawing, new List<GameStateType> { GameStateType.Voting } },
     { GameStateType.Voting, new List<GameStateType> { GameStateType.Drawing } }
     };
