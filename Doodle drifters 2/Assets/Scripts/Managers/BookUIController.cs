@@ -11,6 +11,8 @@ public class BookUIController : MonoBehaviour
 
     private VisualElement bookImage;
     private Label pageText;
+    private Label nextPageText;
+    private Label titleText;
 
     private enum BookState
     {
@@ -28,15 +30,20 @@ public class BookUIController : MonoBehaviour
 
         bookImage = root.Q<VisualElement>("bookImage");
         pageText = root.Q<Label>("pageText");
+        nextPageText = root.Q<Label>("nextPageText");
+        titleText = root.Q<Label>("titleText");
 
         SetBookImage(closedSprite);
+
+        // Hide next page text at start
+        nextPageText.style.display = DisplayStyle.None;
 
         SetupTextInteractions();
     }
 
     void SetupTextInteractions()
     {
-        // Hover → slightly smaller
+        // Original text interactions
         pageText.RegisterCallback<MouseEnterEvent>(_ =>
         {
             pageText.style.scale = new Scale(new Vector3(0.9f, 0.9f, 1));
@@ -47,30 +54,42 @@ public class BookUIController : MonoBehaviour
             pageText.style.scale = new Scale(Vector3.one);
         });
 
-        // Click
         pageText.RegisterCallback<ClickEvent>(_ =>
         {
             StartCoroutine(HandleClick());
+        });
+
+        // Next page interactions
+        nextPageText.RegisterCallback<MouseEnterEvent>(_ =>
+        {
+            nextPageText.style.scale = new Scale(new Vector3(0.9f, 0.9f, 1));
+        });
+
+        nextPageText.RegisterCallback<MouseLeaveEvent>(_ =>
+        {
+            nextPageText.style.scale = new Scale(Vector3.one);
+        });
+
+        nextPageText.RegisterCallback<ClickEvent>(_ =>
+        {
+            if (currentState == BookState.Open)
+            {
+                StartCoroutine(FlipPage());
+            }
         });
     }
 
     IEnumerator HandleClick()
     {
-        // Make it larger briefly
         pageText.style.scale = new Scale(new Vector3(1.2f, 1.2f, 1));
 
         yield return new WaitForSeconds(0.2f);
 
         pageText.style.scale = new Scale(Vector3.one);
 
-        // Decide animation based on state
         if (currentState == BookState.Closed)
         {
             yield return StartCoroutine(OpenBook());
-        }
-        else if (currentState == BookState.Open)
-        {
-            yield return StartCoroutine(FlipPage());
         }
     }
 
@@ -78,13 +97,21 @@ public class BookUIController : MonoBehaviour
     {
         currentState = BookState.Opening;
 
+                // Hide original text
+        pageText.style.display = DisplayStyle.None;
+        titleText.style.display = DisplayStyle.None;
+
         SetBookImage(openingSprite);
 
-        yield return new WaitForSeconds(0.2f); // adjust timing
+        yield return new WaitForSeconds(0.3f);
 
         SetBookImage(openSprite);
 
         currentState = BookState.Open;
+
+        // Show next page text
+        nextPageText.style.display = DisplayStyle.Flex;
+        nextPageText.text = "Next Page";
     }
 
     IEnumerator FlipPage()
@@ -93,9 +120,14 @@ public class BookUIController : MonoBehaviour
 
         SetBookImage(openFlipSprite);
 
-        yield return new WaitForSeconds(0.3f); // short animation
+        nextPageText.style.display = DisplayStyle.None;
+
+        yield return new WaitForSeconds(0.3f);
 
         SetBookImage(openSprite);
+
+        nextPageText.style.display = DisplayStyle.Flex;
+        nextPageText.text = "Next Page";
 
         currentState = BookState.Open;
     }
