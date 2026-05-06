@@ -4,16 +4,26 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
+    private WebSocketClient network;
+
     public enum GameStateType
     {
         Lobby,
         NewScene,
         Think,
         Drawing,
-        Voting,
+        Voting,//
         Solution
         //Add more types as neccesary
     }
+
+    private HashSet<GameStateType> networkStates = new HashSet<GameStateType> // Only states the network needs to know about
+    {
+        GameStateType.Lobby,
+        GameStateType.Drawing,
+        GameStateType.Voting,
+        GameStateType.Solution
+    };
 
     private Dictionary<GameStateType, IState> states;
 
@@ -22,11 +32,11 @@ public class StateMachine : MonoBehaviour
         states = new Dictionary<GameStateType, IState>
         { // change the actual states when they are created
             { GameStateType.Lobby, new LobbyState() },
-            { GameStateType.NewScene, new NewSceneState() },
-            { GameStateType.Think, new ThinkState() },
-            { GameStateType.Drawing, new DrawingState() },
-            { GameStateType.Voting, new VotingState() },
-            { GameStateType.Solution, new SolutionState() },
+           // { GameStateType.NewScene, new NewSceneState() },
+            { GameStateType.Think, new testState() },
+           // { GameStateType.Drawing, new DrawingState() },
+            //{ GameStateType.Voting, new VotingState() },
+            //{ GameStateType.Solution, new SolutionState() },
         };
     }
 
@@ -73,9 +83,14 @@ public class StateMachine : MonoBehaviour
         //     Debug.LogWarning("invalid transition");
         //     return;
         // } uncomment when state transitions are fleshed out
-
+        Debug.Log(newState);
         currentStateType = newState;
         SetState(states[newState]);
+
+        BroadcastState(newState);
+        Debug.Log("NETWORK REF: " + network);
+        Debug.Log("NETWORK NULL? " + (network == null));
+        Debug.Log("INSTANCE ID: " + GetInstanceID());
     }
 
     public void SetState(IState newState)
@@ -83,5 +98,20 @@ public class StateMachine : MonoBehaviour
         currentState?.Exit(context);
         currentState = newState;
         currentState?.Enter(context);
+    }
+
+    public void SetNetwork(WebSocketClient ws)
+    {
+        Debug.Log("ASSIGNED WS INSTANCE: " + ws.GetInstanceID());
+        network = ws;
+    }
+
+    private void BroadcastState(GameStateType state)
+    {
+        if (network == null) return;
+
+        if (!networkStates.Contains(state)) return;
+
+        network.Send("{\"type\":\"STATE\",\"state\":\"" + state.ToString() + "\"}");
     }
 }

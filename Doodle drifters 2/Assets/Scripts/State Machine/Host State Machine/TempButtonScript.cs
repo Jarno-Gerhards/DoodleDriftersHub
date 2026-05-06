@@ -6,7 +6,7 @@ public class TempButtonScript : MonoBehaviour
 
     public void TestState()
     {
-        sm.SwitchState(StateMachine.GameStateType.Drawing);
+        sm.SwitchState(StateMachine.GameStateType.Think);
     }
 
     public void LobbyState()

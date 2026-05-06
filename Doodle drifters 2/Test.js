@@ -61,11 +61,11 @@ function handleServerMessage(msg) {
             break;
 
         case "START_DRAW":
-            setState("DRAW");
+            setState("Draw");
             break;
 
         case "START_VOTE":
-            setState("VOTE");
+            setState("Vote");
             break;
     }
 }
@@ -81,15 +81,15 @@ function setState(newState) {
 
     switch (state) {
 
-        case "LOBBY":
+        case "Lobby":
             enterLobby();
             break;
 
-        case "DRAW":
+        case "Draw":
             enterDrawMode();
             break;
 
-        case "VOTE":
+        case "Vote":
             enterVoteMode();
             break;
     }
