@@ -20,14 +20,20 @@ const ws = new WebSocket(SERVER_URL);
 // CONNECTION OPEN
 // =====================
 ws.on("open", () => {
-    console.log("📱 Phone connected:", player.name);
+    console.log("CONNECTED TO SERVER");
 
-    // JOIN GAME (PHONE ROLE ONLY)
     ws.send(JSON.stringify({
         type: "JOIN",
-        id: player.id,
-        name: player.name
+        name: "TestPlayer"
     }));
+});
+
+ws.on("error", (err) => {
+    console.error("CONNECTION ERROR:", err.message);
+});
+
+ws.on("close", () => {
+    console.log("CONNECTION CLOSED");
 });
 
 // =====================
@@ -36,7 +42,7 @@ ws.on("open", () => {
 ws.on("message", (data) => {
     const msg = JSON.parse(data.toString());
 
-    console.log("📩 FROM SERVER:", msg);
+    console.log("FROM SERVER:", msg);
 
     handleServerMessage(msg);
 });
@@ -71,7 +77,7 @@ function setState(newState) {
 
     state = newState;
 
-    console.log("📲 PHONE STATE →", state);
+    console.log("PHONE STATE →", state);
 
     switch (state) {
 
@@ -93,11 +99,11 @@ function setState(newState) {
 // UI STATE FUNCTIONS (STUBS)
 // =====================
 function enterLobby() {
-    console.log("🟢 Waiting for game to start...");
+    console.log("Waiting for game to start...");
 }
 
 function enterDrawMode() {
-    console.log("🎨 Draw mode active");
+    console.log("Draw mode active");
 
     // Example auto-test drawing (REMOVE IN REAL APP)
     setTimeout(() => {
@@ -106,7 +112,7 @@ function enterDrawMode() {
 }
 
 function enterVoteMode() {
-    console.log("🗳 Vote mode active");
+    console.log("Vote mode active");
 
     // Example auto-test vote (REMOVE IN REAL APP)
     setTimeout(() => {
@@ -121,7 +127,7 @@ function enterVoteMode() {
 // Send drawing to Unity via server
 function submitDrawing(imageData) {
 
-    console.log("📤 Sending drawing...");
+    console.log("Sending drawing...");
 
     ws.send(JSON.stringify({
         type: "SUBMIT_DRAWING",
@@ -133,7 +139,7 @@ function submitDrawing(imageData) {
 // Send vote to Unity via server
 function vote(drawingId) {
 
-    console.log("📤 Sending vote...");
+    console.log("Sending vote...");
 
     ws.send(JSON.stringify({
         type: "VOTE",
@@ -146,9 +152,9 @@ function vote(drawingId) {
 // SAFETY LOGGING
 // =====================
 ws.on("close", () => {
-    console.log("❌ Disconnected from server");
+    console.log("Disconnected from server");
 });
 
 ws.on("error", (err) => {
-    console.error("⚠️ WebSocket error:", err.message);
+    console.error("WebSocket error:", err.message);
 });
