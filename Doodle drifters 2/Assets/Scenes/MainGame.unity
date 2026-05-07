@@ -176,6 +176,51 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b886a46a493e26409f91168df5c1d6b, type: 3}
+--- !u!1 &304333423
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 304333425}
+  - component: {fileID: 304333424}
+  m_Layer: 0
+  m_Name: DrawingReceiever
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &304333424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304333423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0168adc38b4464e9ee6c8a1d3224da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalDrawingReceiver
+  port: 8085
+--- !u!4 &304333425
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304333423}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &324182618
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -521,6 +566,12 @@ PrefabInstance:
       propertyPath: DungeonMaster
       value: 
       objectReference: {fileID: 1954215149}
+    - target: {fileID: 436901506066717024, guid: 965ef115f23ca5b40987a9b8407b85ed, type: 3}
+      propertyPath: scenarioSpecificPrompt
+      value: Generate an atmospheric description of a room in a dungeon. End with
+        a clear obstacle the players must overcome. Do not be too restrictive with
+        the obstacle, players must have freedom.
+      objectReference: {fileID: 0}
     - target: {fileID: 1010840559369661990, guid: 965ef115f23ca5b40987a9b8407b85ed, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -982,3 +1033,4 @@ SceneRoots:
   - {fileID: 183731934}
   - {fileID: 1954215148}
   - {fileID: 1690130833}
+  - {fileID: 304333425}

@@ -54,18 +54,31 @@ const host = hostGallery
     })
   : null;
 
+const UNITY_DRAWING_ENDPOINT = "http://localhost:8085/drawing";
+
 const submitBridge = new DrawingSubmitBridge({
   drawer,
   championNameInput: championName,
   submitButton: submitBtn,
   fallbackName: "Unnamed Champion",
-  onSubmit: (payload) => {
-    if (host) {
-      host.addDrawing(payload.imageDataUrl, payload.championName);
-    }
+  onSubmit: async (payload) => {
+    try {
+      const response = await fetch(UNITY_DRAWING_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
 
-    // Later voor sockets:
-    // socket.emit("submitDrawing", payload);
+      if (!response.ok) {
+        console.error("Unity rejected drawing submit:", await response.text());
+      } else {
+        console.log("Sent drawing to Unity:", payload.championName);
+      }
+    } catch (error) {
+      console.error("Could not reach Unity localhost receiver:", error);
+    }
   }
 });
 submitBridge.init();

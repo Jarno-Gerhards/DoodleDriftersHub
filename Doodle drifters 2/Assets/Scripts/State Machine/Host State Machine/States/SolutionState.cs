@@ -20,7 +20,7 @@ public class SolutionState : IState
         solutionItem = scenarioManager.SolutionItem;
         storyUI.rootVisualElement.style.display = DisplayStyle.Flex;
         nextSceneButton.style.display = DisplayStyle.Flex;
-        scenarioManager.GenerateSolution(solutionItem);
+        scenarioManager.GenerateSolution(context.latestTitle);
     }
 
     public void Exit(GameContext context)

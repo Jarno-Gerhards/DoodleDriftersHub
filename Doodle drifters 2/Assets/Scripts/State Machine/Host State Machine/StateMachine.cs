@@ -43,11 +43,13 @@ public class StateMachine : MonoBehaviour
 
     IState currentState;
     private GameContext context;
+    public GameContext Context { get; private set; }
     private GameStateType currentStateType;
 
     void Awake()
     {
         context = new GameContext(this);
+        Context = context;
         InitializeStates();
     }
 
