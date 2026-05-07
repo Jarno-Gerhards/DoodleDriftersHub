@@ -1,5 +1,6 @@
 using UnityEngine;
 using NativeWebSocket;
+using System.Collections;
 
 public class WebSocketClient : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class WebSocketClient : MonoBehaviour
             Debug.Log("Connected to server");
             Debug.Log("WS CLIENT INSTANCE: " + GetInstanceID());
             Send("{\"type\":\"HOST_CONNECT\"}");
+            StartCoroutine(KeepAliveLoop());
         };
 
         websocket.OnMessage += (bytes) =>
@@ -53,5 +55,19 @@ public class WebSocketClient : MonoBehaviour
     {
         websocket.DispatchMessageQueue();
         Debug.Log("WS STATE TICK → " + websocket.State);
+    }
+
+    private IEnumerator KeepAliveLoop()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(10f);
+
+            if (websocket != null && websocket.State == WebSocketState.Open)
+            {
+                Send("{\"type\":\"PING\"}");
+                Debug.Log("PING sent");
+            }
+        }
     }
 }
