@@ -21,7 +21,7 @@ public class HostLobbyScript : MonoBehaviour
     private void Awake()
     {
         document = GetComponent<UIDocument>();
-        StartCoroutine(TestFunc());
+        //StartCoroutine(TestFunc());
     }
 
     private void Start()

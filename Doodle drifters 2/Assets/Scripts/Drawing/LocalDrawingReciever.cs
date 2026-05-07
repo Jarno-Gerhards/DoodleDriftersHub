@@ -31,6 +31,8 @@ public class LocalDrawingReceiver : MonoBehaviour
     private readonly System.Collections.Generic.Queue<PendingDrawing> queue =
         new System.Collections.Generic.Queue<PendingDrawing>();
 
+    public HostLobbyScript lobbyScript;
+
     private void Start()
     {
         StartServer();
@@ -64,6 +66,11 @@ public class LocalDrawingReceiver : MonoBehaviour
                         stateMachine.Context.latestDrawing = texture;
                         stateMachine.Context.latestTitle = item.championName;
                         Debug.Log($"[LocalDrawingReceiver] Set context: '{item.championName}'");
+                    }
+
+                    if (stateMachine.currentStateType == StateMachine.GameStateType.Lobby)
+                    {
+                        lobbyScript.AddPlayer(item.championName, texture);
                     }
                     // If you want the state machine to react:
                     // FindFirstObjectByType<StateMachine>().SwitchState(StateMachine.GameStateType.Voting);

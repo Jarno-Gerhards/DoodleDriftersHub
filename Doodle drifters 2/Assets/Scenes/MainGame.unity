@@ -206,6 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalDrawingReceiver
   port: 8085
+  lobbyScript: {fileID: 1728267775}
 --- !u!4 &304333425
 Transform:
   m_ObjectHideFlags: 0
@@ -754,6 +755,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4446cec8bba4c4f409045db75548f1b3, type: 3}
+--- !u!114 &1728267775 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7174483066277000002, guid: 4446cec8bba4c4f409045db75548f1b3, type: 3}
+  m_PrefabInstance: {fileID: 1728267774}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eabc38366871a1d4089ee263b4f90978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HostLobbyScript
 --- !u!1001 &1897029676
 PrefabInstance:
   m_ObjectHideFlags: 0

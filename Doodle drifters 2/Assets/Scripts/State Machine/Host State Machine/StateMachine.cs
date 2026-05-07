@@ -41,10 +41,10 @@ public class StateMachine : MonoBehaviour
     { GameStateType.Solution, new List<GameStateType> { GameStateType.Lobby } }
     };
 
-    IState currentState;
+    public IState currentState;
     private GameContext context;
     public GameContext Context { get; private set; }
-    private GameStateType currentStateType;
+    public GameStateType currentStateType;
 
     void Awake()
     {
