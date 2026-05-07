@@ -11,6 +11,9 @@ public class StoryScreen : MonoBehaviour
     private Label timer;
     private Button continueButton;
     private Button nextSceneButton;
+    private VisualElement itemDisplay;
+    private Label itemName;
+    private VisualElement itemImage;
     void Awake()
     {
         document = GetComponent<UIDocument>();
@@ -27,6 +30,10 @@ public class StoryScreen : MonoBehaviour
         timer.style.display = DisplayStyle.None;
         continueButton.clicked += OnContinueClick;
         nextSceneButton.clicked += OnNextSceneClick;
+        itemDisplay = document.rootVisualElement.Q<VisualElement>("ItemContainer");
+        itemName = document.rootVisualElement.Q<Label>("ItemName");
+        itemImage = document.rootVisualElement.Q<VisualElement>("ItemImage");
+        itemDisplay.style.display = DisplayStyle.None;
     }
 
     public void SetStoryText(string text)
@@ -55,5 +62,11 @@ public class StoryScreen : MonoBehaviour
     {
         continueButton.clicked -= OnContinueClick;
         nextSceneButton.clicked -= OnNextSceneClick;
+    }
+
+    public void ShowChosenItem(string name, Texture2D image)
+    {
+        itemName.text = name;
+        itemImage.style.backgroundImage = image;
     }
 }

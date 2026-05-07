@@ -56,9 +56,9 @@ public class HostLobbyScript : MonoBehaviour
 
     private void OnStartClick()
     {
-        if (playerCount < 2)
+        if (playerCount < 1)
         {
-            Debug.LogWarning("At least 2 players are required to start the game.");
+            Debug.LogWarning("At least 1 player is required to start the game.");
             return;
         }
         if (string.IsNullOrEmpty(encounters.text))
