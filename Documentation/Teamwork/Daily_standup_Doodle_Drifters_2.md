@@ -152,7 +152,7 @@ Elke dag worden dezelfde 3 vragen gesteld. Wat heb je gisteren gedaan, wat ga je
 | Jarno   | Evaluatie gesprek en gewerkt aan state machine.                                                                                                 | Voorbereiden guild meeting en misschien een begin maken aan de multiplayer. | -                            |
 | Vincent | Playtest gedaan.                                                                                                 | Playtest resultaten uitwerken en voorbereiden op guild meeting en voortgangsgesprek, eventueel ook een begin maken aan UI.      
 
-####04/05/2026
+#### 04/05/2026
 
 |         | Gedaan                                                                                                                            | Doen                                                                                       | Obstakels                                                 |
 | ------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------- |
@@ -162,7 +162,7 @@ Elke dag worden dezelfde 3 vragen gesteld. Wat heb je gisteren gedaan, wat ga je
 | Jarno   | State machine voor de client side en gekeken naar multiplayer.                                                                                                 | Fixen van multiplayer tussen host en client. | -                            |
 | Vincent | Gewerkt aan side quests en UI feature ontworpen.                                                                                                 | Ui feature af maken.                                     | -    
 
-####05/05/2026
+#### 05/05/2026
 
 |         | Gedaan                                                                                                                            | Doen                                                                                       | Obstakels                                                 |
 | ------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------- |
@@ -171,4 +171,14 @@ Elke dag worden dezelfde 3 vragen gesteld. Wat heb je gisteren gedaan, wat ga je
 | Elias                                                                                                                                     |  -                                                                                       | -                                                    | Afwezig
 | Jarno   | Gewerkt aan multiplayer.                                                                                                 | Verder aan multiplayer. | -                            | -
 | Vincent | -                                                                                                 |        -                       |     Afwezig
+
+#### 12/05/2026
+
+|         | Gedaan                                                                                                                            | Doen                                                                                       | Obstakels                                                 |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------- |
+| Bart    | Bezig geweest met de showcase. |   Kijken wat we deze sprint gaan doen.                                                 | - |
+| Daan    | Voortgangsgesprek gehad en daarbij een planning / overzicht gemaakt.                                                | Kijken wat er nog gedaan moet worden deze sprint en dit koppelen met wat hij nog moet aantonen kwa leeruitkomsten.  |                           |
+| Elias                                                                                                                                     |  Gewerkt aan side quests.                                                                                       | Bespreken sprintaanpak.                                                    | -
+| Jarno   | Bezig geweest met side quests.                                                                                                 | Bespreken sprintaanpak. | -                            | -
+| Vincent | -                                                                                                 |        -                       |     Afwezig vanwege guild meeting.
 
