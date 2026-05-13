@@ -182,3 +182,13 @@ Elke dag worden dezelfde 3 vragen gesteld. Wat heb je gisteren gedaan, wat ga je
 | Jarno   | Bezig geweest met side quests.                                                                                                 | Bespreken sprintaanpak. | -                            | -
 | Vincent | -                                                                                                 |        -                       |     Afwezig vanwege guild meeting.
 
+#### 13/05/2026
+
+|         | Gedaan                                                                                                                            | Doen                                                                                       | Obstakels                                                 |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------- |
+| Bart    | Gewerkt aan side quests en gekeken naar de fail condition van de game. |   Vandaag hetzelfde doen.                                                 | - |
+| Daan    | Gewerkt aan de player side van de game (HUD).                                                | Player side pagina van de game (af?)  |   -                        |
+| Elias                                                                                                                                     |  -                                                                                       | - sprintaanpak.                                                    | Afwezig
+| Jarno   | -                                                                                                 | - | -                            | Studio next
+| Vincent | Gewerkt aan de showcase en deze laten zien, feedback hiervan verwerkt.                                                                                                 |        Studio next, hierna eventueel verder met een sidequest en of feedback verwerken                       |     -
+
