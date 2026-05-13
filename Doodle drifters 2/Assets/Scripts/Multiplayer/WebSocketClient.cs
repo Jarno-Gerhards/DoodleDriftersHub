@@ -138,6 +138,14 @@ public class WebSocketClient : MonoBehaviour
         if (hostLobby == null)
         {
             hostLobby = FindFirstObjectByType<HostLobbyScript>();
+            if (hostLobby == null)
+            {
+                HostLobbyScript[] lobbies = FindObjectsByType<HostLobbyScript>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+                if (lobbies.Length > 0)
+                {
+                    hostLobby = lobbies[0];
+                }
+            }
         }
 
         if (hostLobby != null && avatar != null)
@@ -163,6 +171,15 @@ public class WebSocketClient : MonoBehaviour
         }
 
         if (scenarioManager != null)
+        {
+            scenarioManager.SolutionItem = msg.winner.description;
+        }
+
+        if (stateMachine != null && stateMachine.HasState(StateMachine.GameStateType.Solution))
+        {
+            stateMachine.SwitchState(StateMachine.GameStateType.Solution);
+        }
+        else if (scenarioManager != null)
         {
             scenarioManager.GenerateSolution(msg.winner.description);
         }
@@ -249,6 +266,8 @@ public class WebSocketClient : MonoBehaviour
     {
         HostReadyMessage msg = JsonUtility.FromJson<HostReadyMessage>(raw);
         if (msg == null || string.IsNullOrWhiteSpace(msg.roomCode)) return;
+
+        Debug.Log("[WebSocketClient] Host ready, room code: " + msg.roomCode);
 
         if (hostLobby == null)
         {

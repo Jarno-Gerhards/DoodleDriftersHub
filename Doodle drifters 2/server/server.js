@@ -126,11 +126,13 @@ function handleStateChange(ws, data) {
   if (!room || ws !== room.host) return;
   if (typeof data.state !== "string") return;
 
-  if (data.state === "SOLUTION") {
+  const normalizedState = normalizeStateName(data.state);
+
+  if (normalizedState === "Solution") {
     resetRound(room, room.players.size);
   }
 
-  broadcastRoom(room, { type: "STATE", state: data.state });
+  broadcastRoom(room, { type: "STATE", state: normalizedState });
 }
 
 function handleChampionSubmit(ws, data) {
@@ -210,7 +212,7 @@ function openVoting(room) {
 
   const list = Array.from(room.submissions.values());
   broadcastRoom(room, { type: "VOTING_SUBMISSIONS", submissions: list });
-  broadcastRoom(room, { type: "STATE", state: "VOTING" });
+  broadcastRoom(room, { type: "STATE", state: "Voting" });
 
   if (room.host) {
     safeSend(room.host, { type: "SOLUTION_SUBMISSIONS", submissions: list });
@@ -311,6 +313,18 @@ function normalizeRoomCode(value) {
   if (!raw) return "";
   const digits = raw.replace(/[^0-9]/g, "");
   return digits.length === 5 ? digits : "";
+}
+
+function normalizeStateName(value) {
+  const raw = String(value || "").trim();
+  if (!raw) return "";
+
+  const lower = raw.toLowerCase();
+  if (lower === "lobby") return "Lobby";
+  if (lower === "drawing") return "Drawing";
+  if (lower === "solution") return "Solution";
+  if (lower === "voting") return "Voting";
+  return raw;
 }
 
 function createRoom(roomCode) {

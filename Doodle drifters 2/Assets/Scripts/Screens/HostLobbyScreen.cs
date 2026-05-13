@@ -23,6 +23,10 @@ public class HostLobbyScript : MonoBehaviour
     private void Awake()
     {
         document = GetComponent<UIDocument>();
+        if (document == null)
+        {
+            document = GetComponentInChildren<UIDocument>(true);
+        }
         if (networkClient == null)
         {
             networkClient = FindFirstObjectByType<WebSocketClient>();
@@ -33,10 +37,14 @@ public class HostLobbyScript : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        EnsureRoomCodeLabel();
+    }
+
     private void Start()
     {
-        roomCode = document.rootVisualElement.Q<Label>("RoomCode");
-        roomCode.text = $"Room Code: {roomCodeValue}";
+        EnsureRoomCodeLabel();
         encounters = document.rootVisualElement.Q<TextField>("EncounterInput");
         startGameButton = document.rootVisualElement.Q<Button>("StartGame");
         startGameButton.clicked += OnStartClick;
@@ -58,9 +66,55 @@ public class HostLobbyScript : MonoBehaviour
         if (string.IsNullOrWhiteSpace(code)) return;
 
         roomCodeValue = code.Trim();
-        if (roomCode != null)
+        EnsureRoomCodeLabel();
+    }
+
+    private void EnsureRoomCodeLabel()
+    {
+        if (document == null)
         {
-            roomCode.text = $"Room Code: {roomCodeValue}";
+            document = GetComponent<UIDocument>();
+            if (document == null)
+            {
+                document = GetComponentInChildren<UIDocument>(true);
+            }
+        }
+
+        if (roomCode == null)
+        {
+            TryResolveRoomCodeLabel();
+        }
+
+        if (roomCode == null)
+        {
+            Debug.LogWarning("[HostLobbyScript] RoomCode label not found.");
+            return;
+        }
+
+        roomCode.text = $"Room Code: {roomCodeValue}";
+    }
+
+    private void TryResolveRoomCodeLabel()
+    {
+        if (document != null)
+        {
+            roomCode = document.rootVisualElement.Q<Label>("RoomCode");
+            if (roomCode != null) return;
+        }
+
+        UIDocument[] docs = FindObjectsByType<UIDocument>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        for (int i = 0; i < docs.Length; i++)
+        {
+            UIDocument doc = docs[i];
+            if (doc == null) continue;
+
+            Label label = doc.rootVisualElement.Q<Label>("RoomCode");
+            if (label != null)
+            {
+                document = doc;
+                roomCode = label;
+                return;
+            }
         }
     }
 
@@ -89,7 +143,7 @@ public class HostLobbyScript : MonoBehaviour
         stateMachine.SwitchState(StateMachine.GameStateType.NewScene);
         if (networkClient != null)
         {
-            networkClient.SendState("SOLUTION");
+            networkClient.SendState("Solution");
         }
     }
 

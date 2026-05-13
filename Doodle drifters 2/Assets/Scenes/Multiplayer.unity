@@ -597,6 +597,7 @@ MonoBehaviour:
   stateMachine: {fileID: 263847269655218266}
   hostLobby: {fileID: 567875932}
   scenarioManager: {fileID: 567875931}
+  roomCodeOverride: 
 --- !u!4 &567875930
 Transform:
   m_ObjectHideFlags: 0
@@ -689,6 +690,7 @@ MonoBehaviour:
   stateMachine: {fileID: 626507194}
   hostLobby: {fileID: 451697376}
   scenarioManager: {fileID: 955015392}
+  roomCodeOverride: 
 --- !u!4 &626507196
 Transform:
   m_ObjectHideFlags: 0
@@ -1005,6 +1007,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1451389081322994907, guid: 8b886a46a493e26409f91168df5c1d6b, type: 3}
+      propertyPath: _model
+      value: gemma-3-1b-it-Q4_K_M.gguf
+      objectReference: {fileID: 0}
+    - target: {fileID: 1451389081322994907, guid: 8b886a46a493e26409f91168df5c1d6b, type: 3}
+      propertyPath: _embeddingLength
+      value: 1152
+      objectReference: {fileID: 0}
+    - target: {fileID: 1451389081322994907, guid: 8b886a46a493e26409f91168df5c1d6b, type: 3}
+      propertyPath: maxContextLength
+      value: 32768
+      objectReference: {fileID: 0}
     - target: {fileID: 5954352040804943068, guid: 8b886a46a493e26409f91168df5c1d6b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1051,7 +1065,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8492173278969822334, guid: 8b886a46a493e26409f91168df5c1d6b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1127,11 +1141,15 @@ PrefabInstance:
       objectReference: {fileID: 626507195}
     - target: {fileID: 7174483066277000002, guid: 4446cec8bba4c4f409045db75548f1b3, type: 3}
       propertyPath: enableTestPlayers
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9053259442313280406, guid: 4446cec8bba4c4f409045db75548f1b3, type: 3}
       propertyPath: m_Name
       value: HostLobbyScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 9053259442313280406, guid: 4446cec8bba4c4f409045db75548f1b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1152,12 +1170,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5785353397102874485, guid: 020326199033b6c4fa26af719afab5d7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8120949469538701504, guid: 020326199033b6c4fa26af719afab5d7, type: 3}
       propertyPath: _llm
       value: 
       objectReference: {fileID: 987825242}
+    - target: {fileID: 8120949469538701504, guid: 020326199033b6c4fa26af719afab5d7, type: 3}
+      propertyPath: save
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8120949469538701504, guid: 020326199033b6c4fa26af719afab5d7, type: 3}
+      propertyPath: _remote
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8757193168094835411, guid: 020326199033b6c4fa26af719afab5d7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -112,6 +112,11 @@ public class StateMachine : MonoBehaviour
         network = ws;
     }
 
+    public bool HasState(GameStateType state)
+    {
+        return states != null && states.ContainsKey(state);
+    }
+
     private void BroadcastState(GameStateType state)
     {
         if (network == null) return;
