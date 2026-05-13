@@ -1,4 +1,5 @@
 import { startClientStateApp } from "../../Scripts/State Machine/Client State Machine/ClientStateApp.js";
+import { createClientSocket, getClientSession, setClientSession } from "../../Scripts/State Machine/Client State Machine/ClientNetwork.js";
 
 // Always start from a clean state when opening the join screen.
 sessionStorage.removeItem("clientState");
@@ -81,18 +82,62 @@ const status = document.createElement("p");
 status.style.marginTop = "15px";
 joinScreen.appendChild(status);
 
+let socketRef = null;
+
 // Button click
 button.onclick = () => {
   const code = inputs.map(i => i.value).join("");
 
-  if (code.length < CODE_LENGTH || code != "12345") {
+  if (code.length < CODE_LENGTH) {
     status.textContent = "Room code invalid";
     status.style.color = "red";
     return;
   }
 
-  status.textContent = "Joined room successfully!";
-  status.style.color = "lightgreen";
+  const session = getClientSession();
+  const targetUrl = new URL("../../Scripts/DrawingClient/index.html", import.meta.url).toString();
+
+  status.textContent = "Connecting...";
+  status.style.color = "white";
+
+  if (socketRef) {
+    socketRef.close();
+  }
+
+  socketRef = createClientSocket({
+    onOpen: () => {
+      socketRef.send({
+        type: "JOIN",
+        roomCode: code,
+        playerId: session.playerId || ""
+      });
+    },
+    onMessage: (msg) => {
+      if (msg && msg.type === "JOIN_DENIED") {
+        status.textContent = "Room not found";
+        status.style.color = "red";
+        return;
+      }
+      if (!msg || msg.type !== "JOINED") return;
+
+      setClientSession({ playerId: msg.playerId });
+      sessionStorage.setItem("dd-room-code", msg.roomCode || code);
+      sessionStorage.setItem("clientState", "Drawing");
+      status.textContent = "Joined room successfully!";
+      status.style.color = "lightgreen";
+      window.location.href = targetUrl;
+    },
+    onError: () => {
+      status.textContent = "Connection error";
+      status.style.color = "red";
+    },
+    onClose: () => {
+      if (status.textContent === "Connecting...") {
+        status.textContent = "Connection closed";
+        status.style.color = "red";
+      }
+    }
+  });
 };
 
 // Auto focus first input on load

@@ -85,7 +85,13 @@ public class StateMachine : MonoBehaviour
         // } uncomment when state transitions are fleshed out
         Debug.Log(newState);
         currentStateType = newState;
-        SetState(states[newState]);
+        if (!states.TryGetValue(newState, out IState nextState))
+        {
+            Debug.LogWarning("[StateMachine] State not registered: " + newState);
+            return;
+        }
+
+        SetState(nextState);
 
         BroadcastState(newState);
         Debug.Log("NETWORK REF: " + network);

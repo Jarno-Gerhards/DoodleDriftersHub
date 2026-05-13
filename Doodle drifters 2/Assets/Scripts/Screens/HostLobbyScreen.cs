@@ -6,12 +6,14 @@ using UnityEngine.UIElements;
 public class HostLobbyScript : MonoBehaviour
 {
     public StateMachine stateMachine;
+    [SerializeField] private WebSocketClient networkClient;
     private UIDocument document;
     private Label roomCode;
-    private int roomCodeNumber = 12345;
+    private string roomCodeValue = "-----";
     private Label playerName;
     private VisualElement playerAvatar;
     public Texture2D testImage;
+    [SerializeField] private bool enableTestPlayers = false;
     private TextField encounters;
     private EventCallback<ChangeEvent<string>> encounterCallback;
     private char minEncounters = '2';
@@ -21,13 +23,20 @@ public class HostLobbyScript : MonoBehaviour
     private void Awake()
     {
         document = GetComponent<UIDocument>();
-        StartCoroutine(TestFunc());
+        if (networkClient == null)
+        {
+            networkClient = FindFirstObjectByType<WebSocketClient>();
+        }
+        if (enableTestPlayers)
+        {
+            StartCoroutine(TestFunc());
+        }
     }
 
     private void Start()
     {
         roomCode = document.rootVisualElement.Q<Label>("RoomCode");
-        roomCode.text = $"Room Code: {roomCodeNumber}";
+        roomCode.text = $"Room Code: {roomCodeValue}";
         encounters = document.rootVisualElement.Q<TextField>("EncounterInput");
         startGameButton = document.rootVisualElement.Q<Button>("StartGame");
         startGameButton.clicked += OnStartClick;
@@ -42,6 +51,17 @@ public class HostLobbyScript : MonoBehaviour
         playerName.text = name;
         playerAvatar.style.backgroundImage = avatar;
         playerCount++;
+    }
+
+    public void SetRoomCode(string code)
+    {
+        if (string.IsNullOrWhiteSpace(code)) return;
+
+        roomCodeValue = code.Trim();
+        if (roomCode != null)
+        {
+            roomCode.text = $"Room Code: {roomCodeValue}";
+        }
     }
 
     private IEnumerator TestFunc() // Tijdelijke functie om speler toevoegen te laten
@@ -67,6 +87,10 @@ public class HostLobbyScript : MonoBehaviour
             return;
         }
         stateMachine.SwitchState(StateMachine.GameStateType.NewScene);
+        if (networkClient != null)
+        {
+            networkClient.SendState("SOLUTION");
+        }
     }
 
     private void HandleEncounterCount(ChangeEvent<string> evt) // Zorgt er voor dat alleen cijfers tussen min en max encounters kunnen worden ingevoerd
