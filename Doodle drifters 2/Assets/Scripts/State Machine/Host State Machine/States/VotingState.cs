@@ -34,12 +34,27 @@ public class VotingState : IState
         }
         else
         {
-            context.stateMachine.SwitchState(StateMachine.GameStateType.Solution);
+            DecideOutcome(context);
         }
     }
 
     public void FixedUpdate(GameContext context)
     {
         
+    }
+
+    private void DecideOutcome(GameContext context)
+    {
+        int chance = Random.Range(0, 100);
+        if (chance > 30)
+        {
+            Debug.Log("You Passed!");
+            context.stateMachine.SwitchState(StateMachine.GameStateType.Solution);
+        }
+        else
+        {
+            Debug.Log("You Failed!");
+            context.stateMachine.SwitchState(StateMachine.GameStateType.Fail);
+        }
     }
 }

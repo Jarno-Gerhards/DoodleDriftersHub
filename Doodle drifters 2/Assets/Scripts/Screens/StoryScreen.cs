@@ -9,8 +9,9 @@ public class StoryScreen : MonoBehaviour
     private Label storyText;
     private Label drawPrompt;
     private Label timer;
-    private Button continueButton;
+    private Button drawButton;
     private Button nextSceneButton;
+    private Button adjustButton;
     void Awake()
     {
         document = GetComponent<UIDocument>();
@@ -18,15 +19,18 @@ public class StoryScreen : MonoBehaviour
     void Start()
     {
         storyText = document.rootVisualElement.Q<Label>("StoryText");
-        continueButton = document.rootVisualElement.Q<Button>("Continue");
+        drawButton = document.rootVisualElement.Q<Button>("DrawButton");
+        adjustButton = document.rootVisualElement.Q<Button>("AdjustButton");
+        adjustButton.style.display = DisplayStyle.None;
         nextSceneButton = document.rootVisualElement.Q<Button>("NextScene");
         nextSceneButton.style.display = DisplayStyle.None;
         drawPrompt = document.rootVisualElement.Q<Label>("DrawPrompt");
         drawPrompt.style.display = DisplayStyle.None;
         timer = document.rootVisualElement.Q<Label>("Timer");
         timer.style.display = DisplayStyle.None;
-        continueButton.clicked += OnContinueClick;
+        drawButton.clicked += OnDrawClick;
         nextSceneButton.clicked += OnNextSceneClick;
+        adjustButton.clicked += OnAdjustClick;
     }
 
     public void SetStoryText(string text)
@@ -39,9 +43,9 @@ public class StoryScreen : MonoBehaviour
         timer.text = seconds.ToString("F0");
     }
 
-    private void OnContinueClick()
+    private void OnDrawClick()
     {
-        continueButton.style.display = DisplayStyle.None;
+        drawButton.style.display = DisplayStyle.None;
         stateMachine.SwitchState(StateMachine.GameStateType.Think);
     }
 
@@ -51,9 +55,16 @@ public class StoryScreen : MonoBehaviour
         stateMachine.SwitchState(StateMachine.GameStateType.NewScene);
     }
 
+    private void OnAdjustClick()
+    {
+        adjustButton.style.display = DisplayStyle.None;
+        stateMachine.SwitchState(StateMachine.GameStateType.Adjust);
+    }
+
     private void OnDisable()
     {
-        continueButton.clicked -= OnContinueClick;
+        drawButton.clicked -= OnDrawClick;
         nextSceneButton.clicked -= OnNextSceneClick;
+        adjustButton.clicked -= OnAdjustClick;
     }
 }
