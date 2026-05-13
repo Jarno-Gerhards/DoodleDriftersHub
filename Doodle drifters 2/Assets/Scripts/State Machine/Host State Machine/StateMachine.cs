@@ -13,7 +13,9 @@ public class StateMachine : MonoBehaviour
         Voting,
         Solution,
         Fail,
-        Adjust
+        Adjust,
+        Boss,
+        End
         //Add more types as neccesary
     }
 
@@ -30,7 +32,9 @@ public class StateMachine : MonoBehaviour
             { GameStateType.Voting, new VotingState() },
             { GameStateType.Solution, new SolutionState() },
             { GameStateType.Fail, new FailState() },
-            { GameStateType.Adjust, new AdjustState() }
+            { GameStateType.Adjust, new AdjustState() },
+            { GameStateType.Boss, new BossState() },
+            { GameStateType.End, new EndState() }
         };
     }
 

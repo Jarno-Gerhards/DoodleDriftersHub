@@ -18,6 +18,7 @@ public class HostLobbyScript : MonoBehaviour
     private char maxEncounters = '9';
     private Button startGameButton;
     private int playerCount = 0;
+    private StoryScreen storyScreen;
     private void Awake()
     {
         document = GetComponent<UIDocument>();
@@ -26,6 +27,7 @@ public class HostLobbyScript : MonoBehaviour
 
     private void Start()
     {
+        storyScreen = GameObject.Find("StoryPages").GetComponent<StoryScreen>();
         roomCode = document.rootVisualElement.Q<Label>("RoomCode");
         roomCode.text = $"Room Code: {roomCodeNumber}";
         encounters = document.rootVisualElement.Q<TextField>("EncounterInput");
@@ -66,6 +68,8 @@ public class HostLobbyScript : MonoBehaviour
             Debug.LogWarning("Please enter the number of encounters before starting the game.");
             return;
         }
+        int encounterCount = int.Parse(encounters.text);
+        storyScreen.SetGameLength(encounterCount);
         stateMachine.SwitchState(StateMachine.GameStateType.NewScene);
     }
 
