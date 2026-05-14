@@ -192,3 +192,13 @@ Elke dag worden dezelfde 3 vragen gesteld. Wat heb je gisteren gedaan, wat ga je
 | Jarno   | -                                                                                                 | - | -                            | Studio next
 | Vincent | Gewerkt aan de showcase en deze laten zien, feedback hiervan verwerkt.                                                                                                 |        Studio next, hierna eventueel verder met een sidequest en of feedback verwerken                       |     -
 
+#### 14/05/2026
+
+|         | Gedaan                                                                                                                            | Doen                                                                                       | Obstakels                                                 |
+| ------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------- |
+| Bart    | Naar studio next geweest, gewerkt aan side quests en fail condition zo goed als af. Bossfight geimplemeenteerd. |   Werken aan side quests en kijken wat hij voor het project kan doen.                                                 | - |
+| Daan    | Naar studio next geweest en aan player side page gewerkt.                                                | Document aesthetics af maken en kijken wat hij verder kan doen.  |   Na 4 niet meer bereikbaar. Volle repo.                        |
+| Elias                                                                                                                                     |  Studio next en bezig geweest met multiplayer.                                                                                       | Werken aan sidequest.                                                    | Volle repo.
+| Jarno   | Studio next en 3D modeling sidequest.                                                                                                 | Verder aan de 3D modeling sidequest. | -                            |
+| Vincent | Studio next, waiting screen.                                                                                               |        Verder aan de waiting screen en een begin maken aan de 3D modeling sidequest.                       |     -
+
