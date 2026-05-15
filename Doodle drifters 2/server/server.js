@@ -4,6 +4,7 @@ const port = process.env.PORT || 8080;
 const wss = new WebSocket.Server({ port });
 
 const rooms = new Map();
+const FIXED_ROOM_CODE = "12345";
 
 console.log("Server running on port", port);
 
@@ -297,11 +298,7 @@ function safeSend(target, message) {
 }
 
 function generateRoomCode() {
-  let code = "";
-  while (!code || rooms.has(code)) {
-    code = String(Math.floor(10000 + Math.random() * 90000));
-  }
-  return code;
+  return FIXED_ROOM_CODE;
 }
 
 function generatePlayerId() {
