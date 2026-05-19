@@ -11,7 +11,11 @@ public class StateMachine : MonoBehaviour
         Think,
         Drawing,
         Voting,
-        Solution
+        Solution,
+        Fail,
+        Adjust,
+        Boss,
+        End
         //Add more types as neccesary
     }
 
@@ -27,6 +31,10 @@ public class StateMachine : MonoBehaviour
             { GameStateType.Drawing, new DrawingState() },
             { GameStateType.Voting, new VotingState() },
             { GameStateType.Solution, new SolutionState() },
+            { GameStateType.Fail, new FailState() },
+            { GameStateType.Adjust, new AdjustState() },
+            { GameStateType.Boss, new BossState() },
+            { GameStateType.End, new EndState() }
         };
     }
 

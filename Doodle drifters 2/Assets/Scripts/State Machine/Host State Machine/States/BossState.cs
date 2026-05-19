@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class NewSceneState : IState
+public class BossState : IState
 {
     private UIDocument storyUI;
     private ScenarioManager scenarioManager;
     private Button drawButton;
-    public NewSceneState()
+    public BossState()
     {
         storyUI = GameObject.Find("StoryPages").GetComponent<UIDocument>();
         scenarioManager = GameObject.Find("ScenarioManager").GetComponent<ScenarioManager>();
@@ -18,7 +18,8 @@ public class NewSceneState : IState
     {
         storyUI.rootVisualElement.style.display = DisplayStyle.Flex;
         drawButton.style.display = DisplayStyle.Flex;
-        scenarioManager.GenerateNewScene();
+        scenarioManager.GenerateBossScene();
+        Debug.Log("Boss fight has started.");
     }
 
     public void Exit(GameContext context)

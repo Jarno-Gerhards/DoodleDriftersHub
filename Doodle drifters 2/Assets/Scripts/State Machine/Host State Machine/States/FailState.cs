@@ -1,29 +1,30 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class NewSceneState : IState
+public class FailState : IState
 {
     private UIDocument storyUI;
     private ScenarioManager scenarioManager;
-    private Button drawButton;
-    public NewSceneState()
+    private Button adjustButton;
+    private string solutionItem;
+    public FailState()
     {
         storyUI = GameObject.Find("StoryPages").GetComponent<UIDocument>();
         scenarioManager = GameObject.Find("ScenarioManager").GetComponent<ScenarioManager>();
-        storyUI.rootVisualElement.style.display = DisplayStyle.None;
-        drawButton = storyUI.rootVisualElement.Q<Button>("DrawButton");
+        adjustButton = storyUI.rootVisualElement.Q<Button>("AdjustButton");
     }
 
     public void Enter(GameContext context)
     {
+        solutionItem = scenarioManager.SolutionItem;
         storyUI.rootVisualElement.style.display = DisplayStyle.Flex;
-        drawButton.style.display = DisplayStyle.Flex;
-        scenarioManager.GenerateNewScene();
+        adjustButton.style.display = DisplayStyle.Flex;
+        scenarioManager.GenerateFailure(solutionItem);
     }
 
     public void Exit(GameContext context)
     {
-        
+        adjustButton.style.display = DisplayStyle.None;
     }
 
     public void Update(GameContext context)
